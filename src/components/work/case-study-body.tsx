@@ -1,6 +1,6 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { resolveImagePaths } from "@/lib/case-study";
+import { resolveImagePaths, slugify } from "@/lib/case-study";
 
 // A paragraph whose only content is an <em> is one of the source docs'
 // "*Fig. 01 — ...*" captions — style it like a figure caption regardless
@@ -16,12 +16,38 @@ function isCaptionParagraph(children: React.ReactNode): boolean {
   );
 }
 
+function textOf(node: React.ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(textOf).join("");
+  if (node && typeof node === "object" && "props" in node) {
+    return textOf((node as { props: { children?: React.ReactNode } }).props.children);
+  }
+  return "";
+}
+
+// Numbered top-level headings ("1. Discrepancy Resolution ...") are
+// distinct sub-projects bundled into one doc — give them a heavier rule
+// and an anchor id so the "In this case study" contents nav can jump to
+// them, instead of the whole thing reading as one undifferentiated blob.
+const NUMBERED_HEADING = /^\d+\.\s/;
+
 const components: Components = {
-  h2: ({ children }) => (
-    <h2 className="mt-12 font-serif text-2xl italic sm:text-3xl">
-      {children}
-    </h2>
-  ),
+  h2: ({ children }) => {
+    const text = textOf(children);
+    const isPart = NUMBERED_HEADING.test(text);
+    return (
+      <h2
+        id={slugify(text)}
+        className={
+          isPart
+            ? "mt-16 scroll-mt-28 border-t-2 border-primary pt-6 font-serif text-2xl italic sm:text-3xl"
+            : "mt-12 scroll-mt-28 font-serif text-2xl italic sm:text-3xl"
+        }
+      >
+        {children}
+      </h2>
+    );
+  },
   h3: ({ children }) => (
     <h3 className="mt-8 font-serif text-xl">{children}</h3>
   ),

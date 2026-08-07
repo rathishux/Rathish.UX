@@ -46,3 +46,28 @@ export function resolveImagePaths(markdown: string, id: string): string {
   const basePath = `${import.meta.env.BASE_URL}case-studies/${id}/images/`;
   return markdown.split("](images/").join(`](${basePath}`);
 }
+
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+export type CaseStudySection = { title: string; slug: string };
+
+// Some source docs bundle several distinct sub-projects into one file as
+// numbered top-level headings ("## 1. Discrepancy Resolution ..."). Surface
+// those as a contents list so each one is visible and jumpable, instead of
+// disappearing into one long scroll.
+export function extractSections(body: string): CaseStudySection[] {
+  const sections: CaseStudySection[] = [];
+  for (const line of body.split("\n")) {
+    const match = line.match(/^##\s+(\d+)\.\s+(.+)$/);
+    if (match) {
+      const title = `${match[1]}. ${match[2]}`;
+      sections.push({ title, slug: slugify(title) });
+    }
+  }
+  return sections;
+}

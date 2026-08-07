@@ -5,7 +5,7 @@ import { WorkCover } from "@/components/work/work-cover";
 import { CaseStudyBody } from "@/components/work/case-study-body";
 import { experience, projectDisplay } from "@/content/site-data";
 import { caseStudyContent } from "@/content/case-study-content";
-import { parseCaseStudy } from "@/lib/case-study";
+import { extractSections, parseCaseStudy } from "@/lib/case-study";
 
 export function WorkDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -19,6 +19,7 @@ export function WorkDetailPage() {
   const next = experience[(idx + 1) % experience.length];
   const raw = caseStudyContent[item.id];
   const caseStudy = raw ? parseCaseStudy(raw) : null;
+  const sections = caseStudy ? extractSections(caseStudy.body) : [];
   const display = projectDisplay(item);
 
   return (
@@ -55,6 +56,27 @@ export function WorkDetailPage() {
           <h3 className="mt-10 font-serif text-3xl italic leading-snug sm:text-4xl">
             {caseStudy.title}
           </h3>
+
+          {sections.length > 1 && (
+            <nav className="mt-8 rounded-lg border border-border bg-secondary/30 p-5">
+              <p className="font-mono text-[11px] text-shell uppercase text-primary">
+                &#9670; In this case study
+              </p>
+              <ol className="mt-3 space-y-2">
+                {sections.map((s) => (
+                  <li key={s.slug}>
+                    <a
+                      href={`#${s.slug}`}
+                      className="text-sm text-foreground hover:text-primary hover:underline"
+                    >
+                      {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
+
           <CaseStudyBody markdown={caseStudy.body} id={item.id} />
         </>
       ) : (
