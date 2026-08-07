@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { WorkCover } from "@/components/work/work-cover";
 import { experience } from "@/content/site-data";
 
 export function FeaturedWork() {
@@ -28,7 +29,8 @@ export function FeaturedWork() {
               className="group flex flex-col justify-between rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary"
             >
               <div>
-                <div className="flex items-center justify-between gap-2">
+                <WorkCover company={item.company} domain={item.domain} />
+                <div className="mt-4 flex items-center justify-between gap-2">
                   <Badge variant="outline">{item.domain}</Badge>
                   <span className="font-mono text-[11px] text-shell text-muted-foreground">
                     {item.period.split("–")[1]?.trim() || item.period}

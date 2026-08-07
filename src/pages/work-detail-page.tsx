@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { WorkCover } from "@/components/work/work-cover";
 import { experience } from "@/content/site-data";
 
 export function WorkDetailPage() {
@@ -24,7 +25,13 @@ export function WorkDetailPage() {
         Back to work
       </Link>
 
-      <p className="mt-8 font-mono text-[11px] text-shell uppercase text-primary">
+      <WorkCover
+        company={item.company}
+        domain={item.domain}
+        className="mt-8 aspect-[21/9]"
+      />
+
+      <p className="mt-6 font-mono text-[11px] text-shell uppercase text-primary">
         {item.company} &middot; {item.period}
       </p>
       <h2 className="mt-2 font-serif text-4xl italic sm:text-5xl">
