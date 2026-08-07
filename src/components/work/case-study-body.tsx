@@ -18,7 +18,9 @@ function isCaptionParagraph(children: React.ReactNode): boolean {
 
 const components: Components = {
   h2: ({ children }) => (
-    <h2 className="mt-12 font-serif text-2xl sm:text-3xl">{children}</h2>
+    <h2 className="mt-12 font-serif text-2xl italic sm:text-3xl">
+      {children}
+    </h2>
   ),
   h3: ({ children }) => (
     <h3 className="mt-8 font-serif text-xl">{children}</h3>

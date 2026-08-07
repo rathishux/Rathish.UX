@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { WorkCover } from "@/components/work/work-cover";
 import { CaseStudyBody } from "@/components/work/case-study-body";
-import { experience } from "@/content/site-data";
+import { experience, projectDisplay } from "@/content/site-data";
 import { caseStudyContent } from "@/content/case-study-content";
 import { parseCaseStudy } from "@/lib/case-study";
 
@@ -19,6 +19,7 @@ export function WorkDetailPage() {
   const next = experience[(idx + 1) % experience.length];
   const raw = caseStudyContent[item.id];
   const caseStudy = raw ? parseCaseStudy(raw) : null;
+  const display = projectDisplay(item);
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8">
@@ -31,8 +32,8 @@ export function WorkDetailPage() {
       </Link>
 
       <WorkCover
-        company={item.company}
-        domain={item.domain}
+        title={display.title}
+        subtitle={display.subtitle}
         className="mt-8 aspect-[21/9]"
       />
 
@@ -40,7 +41,7 @@ export function WorkDetailPage() {
         {item.company} &middot; {item.period}
       </p>
       <h2 className="mt-2 font-serif text-4xl italic sm:text-5xl">
-        {item.company}
+        {display.title}
       </h2>
       <p className="mt-2 text-lg text-muted-foreground">
         {caseStudy?.meta || item.role}
@@ -77,7 +78,7 @@ export function WorkDetailPage() {
           to={`/work/${next.id}`}
           className="mt-2 block font-serif text-2xl italic text-primary hover:underline"
         >
-          {next.company} &rarr;
+          {projectDisplay(next).title} &rarr;
         </Link>
       </div>
     </div>

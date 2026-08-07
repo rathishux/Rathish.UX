@@ -1,4 +1,4 @@
-import { experience } from "@/content/site-data";
+import { experience, projectDisplay } from "@/content/site-data";
 
 export function Domains() {
   return (
@@ -18,7 +18,7 @@ export function Domains() {
             </p>
             <h4 className="mt-1 font-serif text-xl">{item.domain}</h4>
             <p className="mt-1 text-sm text-muted-foreground">
-              {item.company}
+              {projectDisplay(item).title}
             </p>
           </div>
         ))}

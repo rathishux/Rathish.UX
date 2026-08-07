@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Compass } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { experience, profile } from "@/content/site-data";
+import { experience, profile, projectDisplay } from "@/content/site-data";
 
 const SLIDES = [
   {
     eyebrow: "Most recent",
-    title: experience[0].company,
-    detail: experience[0].role,
+    title: projectDisplay(experience[0]).title,
+    detail: `${experience[0].role} · ${experience[0].company}`,
   },
   {
     eyebrow: "In practice",

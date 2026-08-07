@@ -24,7 +24,22 @@ export type Experience = {
   domain: string;
   summary: string;
   highlights: string[];
+  // The actual product/project worked on — shown as the headline on
+  // Work cards and case study pages instead of the employer's name,
+  // since the work belongs to the project, not any one company.
+  project?: { name: string; subtitle: string };
 };
+
+// Falls back to the employer name for entries with no named project yet.
+export function projectDisplay(item: Experience): {
+  title: string;
+  subtitle: string;
+} {
+  return {
+    title: item.project?.name ?? item.company,
+    subtitle: item.project?.subtitle ?? item.domain,
+  };
+}
 
 export const experience: Experience[] = [
   {
@@ -33,6 +48,7 @@ export const experience: Experience[] = [
     role: "Senior UX Designer",
     period: "Mar 2025 – Dec 2025",
     domain: "Aviation · Enterprise SaaS",
+    project: { name: "Sabre", subtitle: "Aviation GDS" },
     summary:
       "Redesigned an aviation scheduling workflow, simplifying complex slot-allocation processes and improving operational efficiency.",
     highlights: [
@@ -61,6 +77,7 @@ export const experience: Experience[] = [
     role: "Senior UX Designer",
     period: "Nov 2021 – Jan 2024",
     domain: "Telecom · Sourcing & Sales",
+    project: { name: "Lighthouse", subtitle: "Sourcing platform" },
     summary:
       "Led UX for the Light-House platform, reshaping user journeys across sourcing and sales for a global telecom.",
     highlights: [
@@ -89,6 +106,7 @@ export const experience: Experience[] = [
     role: "UX Designer",
     period: "Aug 2015 – Feb 2019",
     domain: "Healthcare · SaaS",
+    project: { name: "TAC Healthcare", subtitle: "EHR application" },
     summary:
       "Designed intuitive interfaces across healthcare and SaaS products early in a 9-year design practice.",
     highlights: [

@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils";
 // so each project gets a masthead-style plate with its name instead.
 
 export function WorkCover({
-  company,
-  domain,
+  title,
+  subtitle,
   className,
 }: {
-  company: string;
-  domain: string;
+  title: string;
+  subtitle: string;
   className?: string;
 }) {
   return (
@@ -21,12 +21,12 @@ export function WorkCover({
       )}
     >
       <span className="font-mono text-[10px] text-shell uppercase text-paper/60">
-        {domain}
+        {subtitle}
       </span>
       <div>
         <span className="mb-2 block h-px w-8 bg-primary" />
         <span className="font-serif text-2xl italic leading-tight text-paper sm:text-3xl">
-          {company}
+          {title}
         </span>
       </div>
     </div>
