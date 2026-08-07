@@ -2,7 +2,10 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { WorkCover } from "@/components/work/work-cover";
+import { CaseStudyBody } from "@/components/work/case-study-body";
 import { experience } from "@/content/site-data";
+import { caseStudyContent } from "@/content/case-study-content";
+import { parseCaseStudy } from "@/lib/case-study";
 
 export function WorkDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -14,6 +17,8 @@ export function WorkDetailPage() {
 
   const idx = experience.findIndex((e) => e.id === id);
   const next = experience[(idx + 1) % experience.length];
+  const raw = caseStudyContent[item.id];
+  const caseStudy = raw ? parseCaseStudy(raw) : null;
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8">
@@ -37,19 +42,32 @@ export function WorkDetailPage() {
       <h2 className="mt-2 font-serif text-4xl italic sm:text-5xl">
         {item.company}
       </h2>
-      <p className="mt-2 text-lg text-muted-foreground">{item.role}</p>
+      <p className="mt-2 text-lg text-muted-foreground">
+        {caseStudy?.meta || item.role}
+      </p>
       <Badge variant="secondary" className="mt-4">
         {item.domain}
       </Badge>
 
-      <p className="mt-8 text-lg leading-relaxed">{item.summary}</p>
+      {caseStudy ? (
+        <>
+          <h3 className="mt-10 font-serif text-3xl italic leading-snug sm:text-4xl">
+            {caseStudy.title}
+          </h3>
+          <CaseStudyBody markdown={caseStudy.body} id={item.id} />
+        </>
+      ) : (
+        <>
+          <p className="mt-8 text-lg leading-relaxed">{item.summary}</p>
 
-      <h3 className="mt-10 font-serif text-2xl">What shipped</h3>
-      <ul className="mt-4 list-inside list-disc space-y-2 text-muted-foreground">
-        {item.highlights.map((h) => (
-          <li key={h}>{h}</li>
-        ))}
-      </ul>
+          <h3 className="mt-10 font-serif text-2xl">What shipped</h3>
+          <ul className="mt-4 list-inside list-disc space-y-2 text-muted-foreground">
+            {item.highlights.map((h) => (
+              <li key={h}>{h}</li>
+            ))}
+          </ul>
+        </>
+      )}
 
       <div className="mt-16 border-t border-border pt-8">
         <p className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
