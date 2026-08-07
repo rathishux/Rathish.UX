@@ -2,7 +2,7 @@ import { experience } from "@/content/site-data";
 
 export function Domains() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+    <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
       <p className="font-mono text-[11px] text-shell uppercase text-primary">
         &#9670; Domains worked in
       </p>

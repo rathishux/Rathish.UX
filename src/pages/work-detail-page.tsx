@@ -16,7 +16,7 @@ export function WorkDetailPage() {
   const next = experience[(idx + 1) % experience.length];
 
   return (
-    <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+    <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8">
       <Link
         to="/work"
         className="inline-flex items-center gap-1 font-mono text-xs text-shell uppercase text-muted-foreground hover:text-primary"

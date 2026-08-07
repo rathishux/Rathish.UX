@@ -37,7 +37,7 @@
   --ink: oklch(0.17 0.012 60);
   --paper: oklch(0.96 0.012 80);
 
-  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+  --font-serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino,
     "Times New Roman", serif;
   --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
     monospace;
@@ -114,6 +114,13 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 }
 

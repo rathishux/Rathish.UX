@@ -8,7 +8,7 @@ import {
 
 export function AboutPage() {
   return (
-    <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+    <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8">
       <p className="font-mono text-[11px] text-shell uppercase text-primary">
         &#9670; The byline
       </p>

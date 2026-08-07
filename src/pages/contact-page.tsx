@@ -13,7 +13,7 @@ export function ContactPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-5 py-16 sm:px-8">
+    <div className="mx-auto max-w-2xl px-6 py-16 sm:px-8">
       <p className="font-mono text-[11px] text-shell uppercase text-primary">
         &#9670; Letters to the editor
       </p>

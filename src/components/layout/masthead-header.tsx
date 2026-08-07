@@ -33,7 +33,7 @@ export function MastheadHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-2 sm:px-8">
+      <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-2 sm:px-8">
         <span className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
           The {profile.nickname} Gazette
         </span>
@@ -58,7 +58,7 @@ export function MastheadHeader() {
 
       <DoubleRule />
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-3 px-5 py-4 sm:px-8 md:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-3 px-6 py-4 sm:px-8 md:grid-cols-3">
         <div className="flex items-center gap-1.5 font-mono text-[11px] text-shell uppercase text-muted-foreground">
           <span>{day}</span>
           <span>&middot;</span>
