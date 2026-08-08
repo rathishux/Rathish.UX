@@ -25,7 +25,7 @@ export function WorkCover({
       </span>
       <div>
         <span className="mb-2 block h-px w-8 bg-primary" />
-        <span className="font-serif text-2xl italic leading-tight text-paper sm:text-3xl">
+        <span className="block pb-1 font-serif text-2xl italic leading-snug text-paper sm:text-3xl">
           {title}
         </span>
       </div>

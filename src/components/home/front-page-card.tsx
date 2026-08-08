@@ -56,7 +56,7 @@ export function FrontPageCard() {
         <p className="mt-6 font-mono text-[10px] text-shell uppercase text-paper/50">
           {slide.eyebrow}
         </p>
-        <h3 className="mt-1 font-serif text-3xl italic leading-tight">
+        <h3 className="mt-1 pb-1 font-serif text-3xl italic leading-snug">
           {slide.title}
         </h3>
         <p className="mt-2 text-sm text-paper/70">{slide.detail}</p>
