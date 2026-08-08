@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { experience, projectDisplay } from "@/content/site-data";
 import { caseStudyContent } from "@/content/case-study-content";
-import { caseStudySections } from "@/content/case-study-nav";
+import { caseStudyImageFolder, caseStudySections } from "@/content/case-study-nav";
 import { extractHeadings, parseCaseStudy, sliceSection } from "@/lib/case-study";
 import { useActiveSection } from "@/hooks/use-active-section";
 
@@ -137,7 +137,10 @@ export function WorkDetailPage() {
               )}
               <div className="mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
                 <CaseStudySidebar headings={headings} activeSlug={activeSlug} />
-                <CaseStudyBody markdown={caseStudy.body} id={item.id} />
+                <CaseStudyBody
+                  markdown={caseStudy.body}
+                  id={caseStudyImageFolder[item.id] ?? item.id}
+                />
               </div>
             </>
           )}

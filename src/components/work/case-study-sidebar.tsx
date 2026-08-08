@@ -6,10 +6,13 @@ import {
   type CaseStudyHeading,
 } from "@/lib/case-study";
 
-// Top-level navigation between a case study's numbered sections lives in
-// the category tabs above the content — this sidebar's only job is to
-// show where the reader is within whichever section is active, so it's
-// just that section's sub-headings, nothing else.
+// Shows the active section's own sub-headings when it has any. Not every
+// case study breaks its sections down that far, though — some are a flat
+// list of numbered sections with no sub-headings at all — so this falls
+// back to the full top-level list rather than going blank, which is what
+// happened before: a doc with zero sub-headings anywhere (NFN Labs) had no
+// sidebar nav at all, and a doc with a mix (Ericsson) had its nav vanish
+// specifically on the sections that lacked them.
 export function CaseStudySidebar({
   headings,
   activeSlug,
@@ -20,13 +23,14 @@ export function CaseStudySidebar({
   const topLevel = topLevelHeadings(headings);
   const activeH2 = activeTopLevel(headings, activeSlug) ?? topLevel[0];
   const subheadings = activeH2 ? subheadingsOf(headings, activeH2.slug) : [];
+  const items = subheadings.length > 0 ? subheadings : topLevel;
 
-  if (subheadings.length === 0) return null;
+  if (items.length === 0) return null;
 
   return (
     <aside className="lg:sticky lg:top-40 lg:h-fit">
       <nav className="space-y-3">
-        {subheadings.map((h) => (
+        {items.map((h) => (
           <SidebarLink key={h.slug} slug={h.slug} title={h.title} active={activeSlug} />
         ))}
       </nav>

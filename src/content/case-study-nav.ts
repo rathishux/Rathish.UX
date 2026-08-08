@@ -11,3 +11,12 @@ export const caseStudySections: Record<string, number[]> = {
   "infogain-admin": [3, 4],
   "infogain-desktop-web": [5],
 };
+
+// Route ids whose images live under a different id's images/ folder — the
+// three split-out Sabre pages above all pull from case-studies/infogain/
+// images/, since they share that one source doc and its screenshots.
+export const caseStudyImageFolder: Record<string, string> = {
+  "infogain-redesign": "infogain",
+  "infogain-admin": "infogain",
+  "infogain-desktop-web": "infogain",
+};
