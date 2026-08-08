@@ -48,10 +48,14 @@ const components: Components = {
       <p className="mt-4 leading-relaxed">{children}</p>
     ),
   img: ({ src, alt }) => (
+    // Not lazy-loaded on purpose: a lazy image collapses to zero height
+    // until it scrolls into view, which shifts every heading below it
+    // downward as later images load in — an anchor jump (sidebar link,
+    // category tab) computed before that settles lands short of its
+    // target once there's enough content above it on the page.
     <img
       src={src}
       alt={alt}
-      loading="lazy"
       className="mt-6 w-full rounded-md border border-border"
     />
   ),

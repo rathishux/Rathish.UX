@@ -54,20 +54,43 @@ export function slugify(text: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-export type CaseStudySection = { title: string; slug: string };
+export type CaseStudySection = {
+  title: string;
+  subtitle?: string;
+  slug: string;
+  // The leading "N." on a numbered heading, if any — lets a case study
+  // group its sections into higher-level category tabs without hardcoding
+  // slugs anywhere else.
+  number?: number;
+};
 
 // Every top-level ("##") heading becomes a sidebar-navigable section —
 // whether the doc bundles several numbered sub-projects (Sabre, TAC
 // Healthcare) or reads as one continuous narrative (Ericsson). Sub-headings
-// ("###") stay out of the sidebar so it doesn't get cluttered.
+// ("###") stay out of the sidebar so it doesn't get cluttered. A trailing
+// "(parenthetical)" on the heading becomes the section's subtitle, e.g.
+// "1. Discrepancy Resolution (main case study)" splits into title
+// "1. Discrepancy Resolution" and subtitle "Main case study" — the slug is
+// still generated from the full original heading so it matches the id
+// CaseStudyBody assigns to the rendered element.
 export function extractSections(body: string): CaseStudySection[] {
   const sections: CaseStudySection[] = [];
   for (const line of body.split("\n")) {
     const match = line.match(/^##\s+(.+)$/);
-    if (match) {
-      const title = match[1].trim();
-      sections.push({ title, slug: slugify(title) });
-    }
+    if (!match) continue;
+
+    const fullTitle = match[1].trim();
+    const slug = slugify(fullTitle);
+    const numberMatch = fullTitle.match(/^(\d+)\./);
+    const number = numberMatch ? Number(numberMatch[1]) : undefined;
+
+    const parenMatch = fullTitle.match(/^(.+?)\s*\(([^)]+)\)$/);
+    const title = parenMatch ? parenMatch[1].trim() : fullTitle;
+    const subtitle = parenMatch
+      ? parenMatch[2].charAt(0).toUpperCase() + parenMatch[2].slice(1)
+      : undefined;
+
+    sections.push({ title, subtitle, slug, number });
   }
   return sections;
 }

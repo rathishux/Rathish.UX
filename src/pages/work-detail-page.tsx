@@ -4,10 +4,12 @@ import { ArrowLeft } from "lucide-react";
 import { CaseStudyBody } from "@/components/work/case-study-body";
 import { CaseStudySidebar } from "@/components/work/case-study-sidebar";
 import { AtAGlance } from "@/components/work/at-a-glance";
+import { CategoryTabs } from "@/components/work/category-tabs";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { experience, projectDisplay } from "@/content/site-data";
 import { caseStudyContent } from "@/content/case-study-content";
+import { caseStudyCategories, subtitleOverrides } from "@/content/case-study-nav";
 import { extractSections, parseCaseStudy } from "@/lib/case-study";
 
 export function WorkDetailPage() {
@@ -23,7 +25,15 @@ export function WorkDetailPage() {
   const next = experience[(idx + 1) % experience.length];
   const raw = caseStudyContent[item.id];
   const caseStudy = raw ? parseCaseStudy(raw) : null;
-  const sections = caseStudy ? extractSections(caseStudy.body) : [];
+  const overrides = subtitleOverrides[item.id];
+  const sections = caseStudy
+    ? extractSections(caseStudy.body).map((s) =>
+        !s.subtitle && s.number !== undefined && overrides?.[s.number]
+          ? { ...s, subtitle: overrides[s.number] }
+          : s,
+      )
+    : [];
+  const categories = caseStudyCategories[item.id];
   const display = projectDisplay(item);
 
   return (
@@ -85,13 +95,18 @@ export function WorkDetailPage() {
               </ul>
             </div>
           ) : (
-            <div className="mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
-              <CaseStudySidebar
-                sections={sections}
-                meta={[item.role, item.domain]}
-              />
-              <CaseStudyBody markdown={caseStudy.body} id={item.id} />
-            </div>
+            <>
+              {categories && (
+                <CategoryTabs categories={categories} sections={sections} />
+              )}
+              <div className="mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
+                <CaseStudySidebar
+                  sections={sections}
+                  meta={[item.role, item.domain]}
+                />
+                <CaseStudyBody markdown={caseStudy.body} id={item.id} />
+              </div>
+            </>
           )}
         </>
       ) : (

@@ -14,10 +14,16 @@ export function CaseStudySidebar({
 
   return (
     <aside className="lg:sticky lg:top-40 lg:h-fit">
-      <nav className="space-y-3">
-        <SidebarLink slug="at-a-glance" label="At a glance" active={active} />
+      <nav className="space-y-4">
+        <SidebarLink slug="at-a-glance" title="At a glance" active={active} />
         {sections.map((s) => (
-          <SidebarLink key={s.slug} slug={s.slug} label={s.title} active={active} />
+          <SidebarLink
+            key={s.slug}
+            slug={s.slug}
+            title={s.title}
+            subtitle={s.subtitle}
+            active={active}
+          />
         ))}
       </nav>
       {meta.length > 0 && (
@@ -33,11 +39,13 @@ export function CaseStudySidebar({
 
 function SidebarLink({
   slug,
-  label,
+  title,
+  subtitle,
   active,
 }: {
   slug: string;
-  label: string;
+  title: string;
+  subtitle?: string;
   active: string | null;
 }) {
   const isActive = active === slug;
@@ -55,7 +63,14 @@ function SidebarLink({
           isActive ? "bg-primary" : "bg-transparent",
         )}
       />
-      {label}
+      <span>
+        {title}
+        {subtitle && (
+          <span className="mt-0.5 block text-xs text-muted-foreground">
+            {subtitle}
+          </span>
+        )}
+      </span>
     </a>
   );
 }
