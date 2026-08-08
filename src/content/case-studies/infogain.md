@@ -70,6 +70,9 @@ The biggest shift in this project wasn't visual — it was realizing that a bett
 ### Send SCR
 An SCR is the formal message an airline sends to an airport slot coordinator when a flight's schedule changes — it's how a change gets registered and approved in the slot system. Previously this lived buried in the workflow; the redesign surfaced it as a direct icon action from the dashboard, letting ops teams trigger a schedule change request without leaving their working view.
 
+![Send SCR, early exploration](images/send-scr-exploration.png)
+*Fig. 03a — An earlier exploration of the Send Pending SCR Message modal.*
+
 ![Send SCR, approved layout](images/send-scr-approved.png)
 *Fig. 03b — "Send Pending SCR Message" modal: slot table, Additional Information fields, and Send SCRs action.*
 
