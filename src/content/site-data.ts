@@ -36,6 +36,10 @@ export type Experience = {
   // headline on Work cards — distinct from `summary`, which is longer
   // and lives on the case study page.
   oneLiner: string;
+  // Shown in the homepage "Handpicked highlights" section. Explicit
+  // rather than "first N in the array" so adding new entries below
+  // doesn't silently change what the homepage features.
+  featured?: boolean;
 };
 
 // Falls back to the employer name for entries with no named project yet.
@@ -51,20 +55,56 @@ export function projectDisplay(item: Experience): {
 
 export const experience: Experience[] = [
   {
-    id: "infogain",
+    id: "infogain-redesign",
     company: "Infogain",
     role: "Senior UX Designer",
     period: "Mar 2025 – Dec 2025",
     domain: "Aviation · Enterprise SaaS",
-    project: { name: "Sabre", subtitle: "Aviation GDS" },
+    project: { name: "Redesigning the legacy application", subtitle: "Sabre" },
     shippedYear: 2025,
-    oneLiner: "Simplifying slot allocation for aviation scheduling",
+    featured: true,
+    oneLiner: "Turning reactive scheduling alerts into resolvable workflows",
     summary:
-      "Redesigned an aviation scheduling workflow, simplifying complex slot-allocation processes and improving operational efficiency.",
+      "Redesigned the legacy discrepancy-resolution flow and built a change generator, replacing a manual reactive alert loop with a fast, guided modal.",
     highlights: [
-      "Redesigned aviation scheduling workflow, simplifying complex slot allocation processes and improving efficiency.",
-      "Introduced bulk-edit and filtering features, reducing manual errors and improving operational accuracy.",
-      "Collaborated with cross-functional teams to accelerate product adoption.",
+      "Replaced a six-step manual discrepancy loop (alert, inbox, cancel, recreate) with an in-context modal resolution flow.",
+      "Built the Send SCR & Change Generator tooling for schedule change requests.",
+      "Reduced reliance on tribal knowledge by surfacing risk directly in the interface.",
+    ],
+  },
+  {
+    id: "infogain-admin",
+    company: "Infogain",
+    role: "Senior UX Designer",
+    period: "Mar 2025 – Dec 2025",
+    domain: "Aviation · Enterprise SaaS",
+    project: { name: "Admin", subtitle: "Sabre" },
+    shippedYear: 2025,
+    oneLiner: "Configurable booking rules and market-driven demand insights",
+    summary:
+      "Designed the admin tooling behind slot booking rules and market demand analysis, giving ops teams configurable rules and clearer demand signals.",
+    highlights: [
+      "Designed the Booking Rules Engine for configuring slot allocation policy.",
+      "Built Market Analysis & Management views for reading and calibrating demand.",
+      "Reduced manual configuration errors through structured, guided admin flows.",
+    ],
+  },
+  {
+    id: "infogain-desktop-web",
+    company: "Infogain",
+    role: "Senior UX Designer",
+    period: "Mar 2025 – Dec 2025",
+    domain: "Aviation · Enterprise SaaS",
+    project: { name: "Desktop application to web app", subtitle: "Sabre" },
+    shippedYear: 2025,
+    featured: true,
+    oneLiner: "Bringing a legacy desktop scheduler into the browser",
+    summary:
+      "Migrated a legacy desktop scheduling tool to the browser, preserving power-user speed while modernizing the underlying experience.",
+    highlights: [
+      "Modernized schedule comparison — standard and three-way compare with conflict detection.",
+      "Rebuilt Merge Express for fast desktop-to-web schedule merging.",
+      "Preserved desktop power-user workflows while moving the tool to the web.",
     ],
   },
   {
@@ -73,6 +113,7 @@ export const experience: Experience[] = [
     role: "UX Designer",
     period: "Jan 2024 – Oct 2024",
     domain: "Data & Analytics · SaaS",
+    featured: true,
     oneLiner: "Turning scattered metrics into same-day decisions",
     summary:
       "Designed data-driven dashboards that turned scattered metrics into decisions teams could act on same-day.",
@@ -90,6 +131,7 @@ export const experience: Experience[] = [
     domain: "Telecom · Sourcing & Sales",
     project: { name: "Lighthouse", subtitle: "Sourcing platform" },
     shippedYear: 2024,
+    featured: true,
     oneLiner: "Reshaping sourcing and sales for a global telecom",
     summary:
       "Led UX for the Light-House platform, reshaping user journeys across sourcing and sales for a global telecom.",
@@ -105,6 +147,7 @@ export const experience: Experience[] = [
     role: "UX Designer",
     period: "May 2019 – Aug 2021",
     domain: "FinTech · Supply Chain",
+    featured: true,
     oneLiner: "Streamlined enterprise workflows for fintech and supply chain",
     summary:
       "Designed enterprise SaaS workflows spanning fintech and supply-chain systems, cutting rework at the handoff.",

@@ -83,7 +83,7 @@ Where Send SCR handles a single flight's change, Change Generator handles change
 
 ---
 
-## 3. Booking Rules Engine
+## 3. Booking Rules Engine (slot policy)
 
 ### What it does
 Analysts can create conditional business rules that govern how bookings and seat capacity behave, without needing engineering involvement. Rules follow an IF → THEN structure:
@@ -121,7 +121,7 @@ Instead of manually overriding seat availability for every individual flight, ma
 
 ---
 
-## 4. Market Analysis & Management
+## 4. Market Analysis & Management (demand insights)
 
 A companion admin tool for demand and revenue analysis, split into two tabs — **Analysis**, for observing patterns, and **Management**, for calibrating the underlying demand model when it doesn't match what analysts are seeing in the market.
 

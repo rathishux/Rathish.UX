@@ -135,3 +135,27 @@ export function subheadingsOf(
   }
   return result;
 }
+
+// Pulls out one numbered top-level section (its "## N. Title" line through
+// its own h3 children) from a shared source doc — lets several work items
+// each render their own slice of one markdown file rather than duplicating
+// it. The h2 line is kept (not stripped) so the existing heading/sidebar
+// logic above needs no special-casing for a doc with no h2 at all.
+export function sliceSection(body: string, number: number): string {
+  const lines = body.split("\n");
+  let start = -1;
+  let end = lines.length;
+  for (let i = 0; i < lines.length; i++) {
+    const h2 = lines[i].match(/^##\s+(\d+)\./);
+    if (h2 && Number(h2[1]) === number) {
+      start = i;
+      continue;
+    }
+    if (start !== -1 && i > start && /^##\s+/.test(lines[i])) {
+      end = i;
+      break;
+    }
+  }
+  if (start === -1) return "";
+  return lines.slice(start, end).join("\n").trim();
+}

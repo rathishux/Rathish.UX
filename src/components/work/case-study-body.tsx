@@ -115,7 +115,11 @@ export function CaseStudyBody({
   id: string;
 }) {
   return (
-    <div className="max-w-3xl text-[17px] text-muted-foreground [&_h2]:text-foreground [&_h3]:text-foreground [&_strong]:text-foreground">
+    // Explicitly pinned to the content column: the sidebar renders nothing
+    // (returns null) for a section with no sub-headings, and without this,
+    // CSS grid auto-placement slides this element into the sidebar's own
+    // 220px track instead, crushing the entire case study into it.
+    <div className="max-w-3xl text-[17px] text-muted-foreground lg:col-start-2 [&_h2]:text-foreground [&_h3]:text-foreground [&_strong]:text-foreground">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {resolveImagePaths(markdown, id)}
       </ReactMarkdown>

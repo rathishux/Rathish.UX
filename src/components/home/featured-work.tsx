@@ -4,7 +4,7 @@ import { WorkThumbnail } from "@/components/work/work-thumbnail";
 import { experience, projectDisplay } from "@/content/site-data";
 
 export function FeaturedWork() {
-  const featured = experience.slice(0, 4);
+  const featured = experience.filter((item) => item.featured);
 
   return (
     <section className="bg-ink text-paper">
