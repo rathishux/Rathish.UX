@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { CaseStudyHeading } from "@/lib/case-study";
 import type { CategoryGroup } from "@/content/case-study-nav";
@@ -20,15 +21,18 @@ export function CategoryTabs({
   activeNumber?: number;
 }) {
   const [openLabel, setOpenLabel] = useState<string | null>(null);
+  // Before the reader has scrolled into any section, default to the
+  // first tab reading as selected rather than showing nothing active.
+  const effectiveActive = activeNumber ?? categories[0]?.numbers[0];
 
   return (
-    <div className="mt-6 flex flex-wrap gap-x-8 border-b border-border">
+    <div className="mt-6 flex w-full border-b border-border">
       {categories.map((cat) => {
         const items = sectionsForCategory(sections, cat.numbers);
-        const isActive = activeNumber !== undefined && cat.numbers.includes(activeNumber);
+        const isActive = effectiveActive !== undefined && cat.numbers.includes(effectiveActive);
 
         const tabClass = cn(
-          "border-b-2 -mb-px px-1 py-3 font-mono text-xs uppercase text-shell transition-colors",
+          "flex flex-1 items-center justify-center gap-1.5 border-b-2 -mb-px px-2 py-3 text-center font-mono text-xs uppercase text-shell transition-colors",
           isActive
             ? "border-primary font-semibold text-primary"
             : "border-transparent text-muted-foreground hover:text-foreground",
@@ -48,7 +52,7 @@ export function CategoryTabs({
         return (
           <div
             key={cat.label}
-            className="relative"
+            className="relative flex flex-1"
             onMouseEnter={() => setOpenLabel(cat.label)}
             onMouseLeave={() => setOpenLabel((l) => (l === cat.label ? null : l))}
           >
@@ -56,13 +60,17 @@ export function CategoryTabs({
               type="button"
               onClick={() => setOpenLabel((l) => (l === cat.label ? null : cat.label))}
               aria-expanded={isOpen}
-              className={tabClass}
+              aria-haspopup="true"
+              className={cn(tabClass, "w-full")}
             >
               {cat.label}
+              <ChevronDown
+                className={cn("size-3 shrink-0 transition-transform", isOpen && "rotate-180")}
+              />
             </button>
             <div
               className={cn(
-                "absolute left-0 top-full z-10 mt-2 w-64 rounded-lg border border-border bg-card py-2 shadow-lg transition-opacity",
+                "absolute left-1/2 top-full z-10 mt-2 w-64 -translate-x-1/2 rounded-lg border border-border bg-card py-2 shadow-lg transition-opacity",
                 isOpen ? "visible opacity-100" : "invisible opacity-0",
               )}
             >

@@ -116,11 +116,7 @@ export function WorkDetailPage() {
                 />
               )}
               <div className="mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
-                <CaseStudySidebar
-                  headings={headings}
-                  activeSlug={activeSlug}
-                  meta={[item.role, item.domain]}
-                />
+                <CaseStudySidebar headings={headings} activeSlug={activeSlug} />
                 <CaseStudyBody markdown={caseStudy.body} id={item.id} />
               </div>
             </>

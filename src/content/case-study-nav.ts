@@ -8,8 +8,8 @@ export type CategoryGroup = { label: string; numbers: number[] };
 
 export const caseStudyCategories: Record<string, CategoryGroup[]> = {
   infogain: [
-    { label: "Redesign", numbers: [1, 2] },
-    { label: "Modernizing", numbers: [5] },
+    { label: "Redesigning the legacy application", numbers: [1, 2] },
+    { label: "Desktop application to web app", numbers: [5] },
     { label: "Admin", numbers: [3, 4] },
   ],
 };
