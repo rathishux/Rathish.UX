@@ -5,11 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/Rathish.UX/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f5f1e8" />
+    <!-- The site is light-only — this stops browsers in OS dark mode from
+         painting their own dark UA background for the split second before
+         the site's CSS loads (a black flash on first paint). -->
+    <meta name="color-scheme" content="light" />
     <meta
       name="description"
       content="Rathish Gandhi — Senior UX/UI Designer. Portfolio of product design work across SaaS, fintech, and enterprise platforms."
     />
     <title>Rathish Gandhi — UX/UI Designer</title>
+    <style>
+      html, body { background-color: #f5f1e8; }
+    </style>
     <script type="text/javascript">
       // GitHub Pages SPA redirect trick — https://github.com/rafgraph/spa-github-pages
       // Lets deep links like /work/kipi-bi survive a hard refresh on a project Pages site.

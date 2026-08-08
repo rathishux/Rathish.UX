@@ -28,6 +28,10 @@ export type Experience = {
   // Work cards and case study pages instead of the employer's name,
   // since the work belongs to the project, not any one company.
   project?: { name: string; subtitle: string };
+  // The year the project actually shipped — not derived from `period`
+  // (that's the employment window, not the release date). Shown as the
+  // "SHIPPED <year>" tag on Work cards; omitted until supplied.
+  shippedYear?: number;
 };
 
 // Falls back to the employer name for entries with no named project yet.
@@ -49,6 +53,7 @@ export const experience: Experience[] = [
     period: "Mar 2025 – Dec 2025",
     domain: "Aviation · Enterprise SaaS",
     project: { name: "Sabre", subtitle: "Aviation GDS" },
+    shippedYear: 2025,
     summary:
       "Redesigned an aviation scheduling workflow, simplifying complex slot-allocation processes and improving operational efficiency.",
     highlights: [
@@ -78,6 +83,7 @@ export const experience: Experience[] = [
     period: "Nov 2021 – Jan 2024",
     domain: "Telecom · Sourcing & Sales",
     project: { name: "Lighthouse", subtitle: "Sourcing platform" },
+    shippedYear: 2024,
     summary:
       "Led UX for the Light-House platform, reshaping user journeys across sourcing and sales for a global telecom.",
     highlights: [
@@ -107,6 +113,7 @@ export const experience: Experience[] = [
     period: "Aug 2015 – Feb 2019",
     domain: "Healthcare · SaaS",
     project: { name: "TAC Healthcare", subtitle: "EHR application" },
+    shippedYear: 2024,
     summary:
       "Designed intuitive interfaces across healthcare and SaaS products early in a 9-year design practice.",
     highlights: [

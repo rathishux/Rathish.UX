@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { WorkCover } from "@/components/work/work-cover";
+import { WorkThumbnail } from "@/components/work/work-thumbnail";
 import { experience, projectDisplay } from "@/content/site-data";
 
 export function WorkPage() {
@@ -16,7 +15,7 @@ export function WorkPage() {
       </p>
 
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
-        {experience.map((item) => {
+        {experience.map((item, index) => {
           const display = projectDisplay(item);
           return (
             <Link
@@ -25,21 +24,21 @@ export function WorkPage() {
               className="group flex flex-col justify-between rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary"
             >
               <div>
-                <WorkCover title={display.title} subtitle={display.subtitle} />
-                <div className="mt-4 flex items-center justify-between gap-2">
-                  <Badge variant="outline">{item.domain}</Badge>
-                  <span className="font-mono text-[11px] text-shell text-muted-foreground">
-                    {item.period}
-                  </span>
+                <WorkThumbnail index={index} />
+                <div className="mt-4">
+                  {item.shippedYear && (
+                    <p className="font-mono text-[11px] text-shell uppercase text-primary">
+                      Shipped {item.shippedYear}
+                    </p>
+                  )}
+                  <h4 className="mt-1 font-serif text-3xl">{display.title}</h4>
+                  <p className="mt-2 font-mono text-[11px] text-shell uppercase text-muted-foreground">
+                    {item.domain}
+                  </p>
+                  <p className="mt-1 font-mono text-[11px] text-shell uppercase text-muted-foreground">
+                    {item.role} &middot; {item.company}
+                  </p>
                 </div>
-                <h4 className="mt-4 font-serif text-2xl">{display.title}</h4>
-                <p className="mt-1 font-mono text-[11px] text-shell uppercase text-muted-foreground">
-                  {item.role}
-                  {display.title !== item.company && ` · ${item.company}`}
-                </p>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  {item.summary}
-                </p>
               </div>
               <div className="mt-6 flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary">
                 Read the case
