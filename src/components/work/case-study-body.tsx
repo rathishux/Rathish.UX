@@ -25,29 +25,17 @@ function textOf(node: React.ReactNode): string {
   return "";
 }
 
-// Numbered top-level headings ("1. Discrepancy Resolution ...") are
-// distinct sub-projects bundled into one doc — give them a heavier rule
-// and an anchor id so the "In this case study" contents nav can jump to
-// them, instead of the whole thing reading as one undifferentiated blob.
-const NUMBERED_HEADING = /^\d+\.\s/;
-
+// Every "##" gets an anchor id matching lib/case-study.ts's extractSections
+// slug, since the sidebar TOC jumps to these directly.
 const components: Components = {
-  h2: ({ children }) => {
-    const text = textOf(children);
-    const isPart = NUMBERED_HEADING.test(text);
-    return (
-      <h2
-        id={slugify(text)}
-        className={
-          isPart
-            ? "mt-16 scroll-mt-28 border-t-2 border-primary pt-6 font-serif text-2xl italic sm:text-3xl"
-            : "mt-12 scroll-mt-28 font-serif text-2xl italic sm:text-3xl"
-        }
-      >
-        {children}
-      </h2>
-    );
-  },
+  h2: ({ children }) => (
+    <h2
+      id={slugify(textOf(children))}
+      className="mt-16 scroll-mt-40 font-serif text-2xl italic sm:text-3xl"
+    >
+      {children}
+    </h2>
+  ),
   h3: ({ children }) => (
     <h3 className="mt-8 font-serif text-xl">{children}</h3>
   ),
@@ -117,7 +105,7 @@ export function CaseStudyBody({
   id: string;
 }) {
   return (
-    <div className="text-muted-foreground [&_h2]:text-foreground [&_h3]:text-foreground [&_strong]:text-foreground">
+    <div className="max-w-3xl text-[17px] text-muted-foreground [&_h2]:text-foreground [&_h3]:text-foreground [&_strong]:text-foreground">
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
         {resolveImagePaths(markdown, id)}
       </ReactMarkdown>

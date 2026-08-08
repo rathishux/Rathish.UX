@@ -56,16 +56,16 @@ export function slugify(text: string): string {
 
 export type CaseStudySection = { title: string; slug: string };
 
-// Some source docs bundle several distinct sub-projects into one file as
-// numbered top-level headings ("## 1. Discrepancy Resolution ..."). Surface
-// those as a contents list so each one is visible and jumpable, instead of
-// disappearing into one long scroll.
+// Every top-level ("##") heading becomes a sidebar-navigable section —
+// whether the doc bundles several numbered sub-projects (Sabre, TAC
+// Healthcare) or reads as one continuous narrative (Ericsson). Sub-headings
+// ("###") stay out of the sidebar so it doesn't get cluttered.
 export function extractSections(body: string): CaseStudySection[] {
   const sections: CaseStudySection[] = [];
   for (const line of body.split("\n")) {
-    const match = line.match(/^##\s+(\d+)\.\s+(.+)$/);
+    const match = line.match(/^##\s+(.+)$/);
     if (match) {
-      const title = `${match[1]}. ${match[2]}`;
+      const title = match[1].trim();
       sections.push({ title, slug: slugify(title) });
     }
   }
