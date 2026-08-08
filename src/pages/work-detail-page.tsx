@@ -10,12 +10,32 @@ import { cn } from "@/lib/utils";
 import { experience, projectDisplay } from "@/content/site-data";
 import { caseStudyContent } from "@/content/case-study-content";
 import { caseStudyCategories, subtitleOverrides } from "@/content/case-study-nav";
-import { extractSections, parseCaseStudy } from "@/lib/case-study";
+import {
+  activeTopLevel,
+  extractHeadings,
+  parseCaseStudy,
+  topLevelHeadings,
+} from "@/lib/case-study";
+import { useActiveSection } from "@/hooks/use-active-section";
 
 export function WorkDetailPage() {
   const { id } = useParams<{ id: string }>();
   const item = experience.find((e) => e.id === id);
   const [view, setView] = useState<"design" | "recruiter">("design");
+
+  // Hooks run unconditionally on every render, so all of this is computed
+  // with safe fallbacks before the early return below for a missing item.
+  const raw = item ? caseStudyContent[item.id] : undefined;
+  const caseStudy = raw ? parseCaseStudy(raw) : null;
+  const overrides = item ? subtitleOverrides[item.id] : undefined;
+  const headings = caseStudy
+    ? extractHeadings(caseStudy.body).map((h) =>
+        h.level === 2 && !h.subtitle && h.number !== undefined && overrides?.[h.number]
+          ? { ...h, subtitle: overrides[h.number] }
+          : h,
+      )
+    : [];
+  const activeSlug = useActiveSection(["at-a-glance", ...headings.map((h) => h.slug)]);
 
   if (!item) {
     return <Navigate to="/work" replace />;
@@ -23,18 +43,10 @@ export function WorkDetailPage() {
 
   const idx = experience.findIndex((e) => e.id === id);
   const next = experience[(idx + 1) % experience.length];
-  const raw = caseStudyContent[item.id];
-  const caseStudy = raw ? parseCaseStudy(raw) : null;
-  const overrides = subtitleOverrides[item.id];
-  const sections = caseStudy
-    ? extractSections(caseStudy.body).map((s) =>
-        !s.subtitle && s.number !== undefined && overrides?.[s.number]
-          ? { ...s, subtitle: overrides[s.number] }
-          : s,
-      )
-    : [];
   const categories = caseStudyCategories[item.id];
   const display = projectDisplay(item);
+  const topLevel = topLevelHeadings(headings);
+  const activeH2 = activeTopLevel(headings, activeSlug);
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
@@ -97,11 +109,16 @@ export function WorkDetailPage() {
           ) : (
             <>
               {categories && (
-                <CategoryTabs categories={categories} sections={sections} />
+                <CategoryTabs
+                  categories={categories}
+                  sections={topLevel}
+                  activeNumber={activeH2?.number}
+                />
               )}
               <div className="mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
                 <CaseStudySidebar
-                  sections={sections}
+                  headings={headings}
+                  activeSlug={activeSlug}
                   meta={[item.role, item.domain]}
                 />
                 <CaseStudyBody markdown={caseStudy.body} id={item.id} />

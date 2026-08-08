@@ -1,38 +1,44 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import type { CaseStudySection } from "@/lib/case-study";
+import type { CaseStudyHeading } from "@/lib/case-study";
 import type { CategoryGroup } from "@/content/case-study-nav";
 
 function sectionsForCategory(
-  sections: CaseStudySection[],
+  sections: CaseStudyHeading[],
   numbers: number[],
-): CaseStudySection[] {
+): CaseStudyHeading[] {
   return sections.filter((s) => s.number !== undefined && numbers.includes(s.number));
 }
 
 export function CategoryTabs({
   categories,
   sections,
+  activeNumber,
 }: {
   categories: CategoryGroup[];
-  sections: CaseStudySection[];
+  sections: CaseStudyHeading[];
+  activeNumber?: number;
 }) {
   const [openLabel, setOpenLabel] = useState<string | null>(null);
 
   return (
-    <div className="mt-6 flex flex-wrap gap-2">
+    <div className="mt-6 flex flex-wrap gap-x-8 border-b border-border">
       {categories.map((cat) => {
         const items = sectionsForCategory(sections, cat.numbers);
+        const isActive = activeNumber !== undefined && cat.numbers.includes(activeNumber);
+
+        const tabClass = cn(
+          "border-b-2 -mb-px px-1 py-3 font-mono text-xs uppercase text-shell transition-colors",
+          isActive
+            ? "border-primary font-semibold text-primary"
+            : "border-transparent text-muted-foreground hover:text-foreground",
+        );
 
         // A single-section category is just a direct jump link — a
         // dropdown with one option is a click and a half for no reason.
         if (items.length <= 1) {
           return (
-            <a
-              key={cat.label}
-              href={items[0] ? `#${items[0].slug}` : undefined}
-              className="rounded-full border border-border px-4 py-2 font-mono text-xs uppercase text-shell text-foreground transition-colors hover:border-primary hover:text-primary"
-            >
+            <a key={cat.label} href={items[0] ? `#${items[0].slug}` : undefined} className={tabClass}>
               {cat.label}
             </a>
           );
@@ -50,12 +56,7 @@ export function CategoryTabs({
               type="button"
               onClick={() => setOpenLabel((l) => (l === cat.label ? null : cat.label))}
               aria-expanded={isOpen}
-              className={cn(
-                "rounded-full border px-4 py-2 font-mono text-xs uppercase text-shell transition-colors",
-                isOpen
-                  ? "border-primary text-primary"
-                  : "border-border text-foreground hover:border-primary hover:text-primary",
-              )}
+              className={tabClass}
             >
               {cat.label}
             </button>

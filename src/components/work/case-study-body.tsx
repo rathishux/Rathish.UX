@@ -25,8 +25,9 @@ function textOf(node: React.ReactNode): string {
   return "";
 }
 
-// Every "##" gets an anchor id matching lib/case-study.ts's extractSections
-// slug, since the sidebar TOC jumps to these directly.
+// Every "##" and "###" gets an anchor id matching lib/case-study.ts's
+// extractHeadings slug, since the sidebar TOC and category tabs jump to
+// these directly.
 const components: Components = {
   h2: ({ children }) => (
     <h2
@@ -37,7 +38,12 @@ const components: Components = {
     </h2>
   ),
   h3: ({ children }) => (
-    <h3 className="mt-8 font-serif text-xl">{children}</h3>
+    <h3
+      id={slugify(textOf(children))}
+      className="mt-8 scroll-mt-40 font-serif text-xl"
+    >
+      {children}
+    </h3>
   ),
   p: ({ children }) =>
     isCaptionParagraph(children) ? (

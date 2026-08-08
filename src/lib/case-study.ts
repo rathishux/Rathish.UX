@@ -54,43 +54,84 @@ export function slugify(text: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-export type CaseStudySection = {
+export type CaseStudyHeading = {
+  level: 2 | 3;
   title: string;
+  // h2 only, from a trailing "(parenthetical)" on the heading.
   subtitle?: string;
   slug: string;
-  // The leading "N." on a numbered heading, if any — lets a case study
-  // group its sections into higher-level category tabs without hardcoding
-  // slugs anywhere else.
+  // h2 only — the leading "N." on a numbered heading, if any. Lets a case
+  // study group its top-level sections into higher-level category tabs
+  // without hardcoding slugs anywhere else.
   number?: number;
 };
 
-// Every top-level ("##") heading becomes a sidebar-navigable section —
-// whether the doc bundles several numbered sub-projects (Sabre, TAC
-// Healthcare) or reads as one continuous narrative (Ericsson). Sub-headings
-// ("###") stay out of the sidebar so it doesn't get cluttered. A trailing
-// "(parenthetical)" on the heading becomes the section's subtitle, e.g.
+// Every "##" and "###" heading in document order, tagged with its level.
+// A trailing "(parenthetical)" on an h2 becomes its subtitle, e.g.
 // "1. Discrepancy Resolution (main case study)" splits into title
 // "1. Discrepancy Resolution" and subtitle "Main case study" — the slug is
 // still generated from the full original heading so it matches the id
 // CaseStudyBody assigns to the rendered element.
-export function extractSections(body: string): CaseStudySection[] {
-  const sections: CaseStudySection[] = [];
+export function extractHeadings(body: string): CaseStudyHeading[] {
+  const headings: CaseStudyHeading[] = [];
   for (const line of body.split("\n")) {
-    const match = line.match(/^##\s+(.+)$/);
-    if (!match) continue;
+    const h2 = line.match(/^##\s+(.+)$/);
+    if (h2) {
+      const fullTitle = h2[1].trim();
+      const slug = slugify(fullTitle);
+      const numberMatch = fullTitle.match(/^(\d+)\./);
+      const number = numberMatch ? Number(numberMatch[1]) : undefined;
 
-    const fullTitle = match[1].trim();
-    const slug = slugify(fullTitle);
-    const numberMatch = fullTitle.match(/^(\d+)\./);
-    const number = numberMatch ? Number(numberMatch[1]) : undefined;
+      const parenMatch = fullTitle.match(/^(.+?)\s*\(([^)]+)\)$/);
+      const title = parenMatch ? parenMatch[1].trim() : fullTitle;
+      const subtitle = parenMatch
+        ? parenMatch[2].charAt(0).toUpperCase() + parenMatch[2].slice(1)
+        : undefined;
 
-    const parenMatch = fullTitle.match(/^(.+?)\s*\(([^)]+)\)$/);
-    const title = parenMatch ? parenMatch[1].trim() : fullTitle;
-    const subtitle = parenMatch
-      ? parenMatch[2].charAt(0).toUpperCase() + parenMatch[2].slice(1)
-      : undefined;
+      headings.push({ level: 2, title, subtitle, slug, number });
+      continue;
+    }
 
-    sections.push({ title, subtitle, slug, number });
+    const h3 = line.match(/^###\s+(.+)$/);
+    if (h3) {
+      const title = h3[1].trim();
+      headings.push({ level: 3, title, slug: slugify(title) });
+    }
   }
-  return sections;
+  return headings;
+}
+
+export function topLevelHeadings(headings: CaseStudyHeading[]): CaseStudyHeading[] {
+  return headings.filter((h) => h.level === 2);
+}
+
+// The nearest h2 at or before the given slug in document order — so an
+// active h3 (or the h2 itself) resolves back to "which top-level section
+// is this reader currently in."
+export function activeTopLevel(
+  headings: CaseStudyHeading[],
+  activeSlug: string | null,
+): CaseStudyHeading | null {
+  const index = headings.findIndex((h) => h.slug === activeSlug);
+  if (index === -1) return null;
+  for (let i = index; i >= 0; i--) {
+    if (headings[i].level === 2) return headings[i];
+  }
+  return null;
+}
+
+// The h3s belonging to one h2 — everything after it in document order,
+// up to (not including) the next h2.
+export function subheadingsOf(
+  headings: CaseStudyHeading[],
+  h2Slug: string,
+): CaseStudyHeading[] {
+  const index = headings.findIndex((h) => h.level === 2 && h.slug === h2Slug);
+  if (index === -1) return [];
+  const result: CaseStudyHeading[] = [];
+  for (let i = index + 1; i < headings.length; i++) {
+    if (headings[i].level === 2) break;
+    result.push(headings[i]);
+  }
+  return result;
 }
