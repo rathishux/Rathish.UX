@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { WorkCover } from "@/components/work/work-cover";
+import { WorkThumbnail } from "@/components/work/work-thumbnail";
 import { experience, projectDisplay } from "@/content/site-data";
 
 export function FeaturedWork() {
@@ -21,34 +20,31 @@ export function FeaturedWork() {
           project.
         </p>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {featured.map((item) => {
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          {featured.map((item, index) => {
             const display = projectDisplay(item);
             return (
               <Link
                 key={item.id}
                 to={`/work/${item.id}`}
-                className="group flex flex-col justify-between rounded-lg border border-paper/15 bg-paper/[0.04] p-6 transition-colors hover:border-primary"
+                className="group flex flex-col overflow-hidden rounded-lg border border-paper/15 bg-paper/[0.04] transition-colors hover:border-primary"
               >
-                <div>
-                  <WorkCover title={display.title} subtitle={display.subtitle} />
-                  <div className="mt-4 flex items-center justify-between gap-2">
-                    <Badge
-                      variant="outline"
-                      className="border-paper/30 bg-transparent text-paper"
-                    >
-                      {item.domain}
-                    </Badge>
-                    <span className="font-mono text-[11px] text-shell text-paper/50">
-                      {item.period.split("–")[1]?.trim() || item.period}
-                    </span>
+                <WorkThumbnail index={index} variant="dark" />
+                <div className="flex flex-1 flex-col justify-between px-5 py-5">
+                  <div>
+                    <p className="font-mono text-[11px] text-shell uppercase text-primary">
+                      {display.title}
+                      {item.shippedYear && ` · Shipped ${item.shippedYear}`}
+                    </p>
+                    <h4 className="mt-2 font-serif text-2xl sm:text-3xl">{item.oneLiner}</h4>
+                    <p className="mt-2 text-sm text-paper/70">
+                      {item.domain} &middot; {item.role}
+                    </p>
                   </div>
-                  <h4 className="mt-4 font-serif text-2xl">{display.title}</h4>
-                  <p className="mt-2 text-sm text-paper/70">{item.summary}</p>
-                </div>
-                <div className="mt-6 flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary">
-                  Take a peek
-                  <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <div className="mt-6 flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary">
+                    Take a peek
+                    <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
                 </div>
               </Link>
             );

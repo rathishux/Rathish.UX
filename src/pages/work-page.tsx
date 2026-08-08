@@ -14,35 +14,31 @@ export function WorkPage() {
         Every stop, in order, with what actually shipped.
       </p>
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-2">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
         {experience.map((item, index) => {
           const display = projectDisplay(item);
           return (
             <Link
               key={item.id}
               to={`/work/${item.id}`}
-              className="group flex flex-col justify-between rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary"
+              className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-primary"
             >
-              <div>
-                <WorkThumbnail index={index} />
-                <div className="mt-4">
-                  {item.shippedYear && (
-                    <p className="font-mono text-[11px] text-shell uppercase text-primary">
-                      Shipped {item.shippedYear}
-                    </p>
-                  )}
-                  <h4 className="mt-1 font-serif text-3xl">{display.title}</h4>
-                  <p className="mt-2 font-mono text-[11px] text-shell uppercase text-muted-foreground">
-                    {item.domain}
+              <WorkThumbnail index={index} />
+              <div className="flex flex-1 flex-col justify-between px-5 py-5">
+                <div>
+                  <p className="font-mono text-[11px] text-shell uppercase text-primary">
+                    {display.title}
+                    {item.shippedYear && ` · Shipped ${item.shippedYear}`}
                   </p>
-                  <p className="mt-1 font-mono text-[11px] text-shell uppercase text-muted-foreground">
-                    {item.role} &middot; {item.company}
+                  <h4 className="mt-2 font-serif text-2xl sm:text-3xl">{item.oneLiner}</h4>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {item.domain} &middot; {item.role}
                   </p>
                 </div>
-              </div>
-              <div className="mt-6 flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary">
-                Read the case
-                <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <div className="mt-6 flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary">
+                  Read the case
+                  <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
               </div>
             </Link>
           );

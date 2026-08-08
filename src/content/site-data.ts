@@ -32,6 +32,10 @@ export type Experience = {
   // (that's the employment window, not the release date). Shown as the
   // "SHIPPED <year>" tag on Work cards; omitted until supplied.
   shippedYear?: number;
+  // A one-line description of what the work was, used as the bold
+  // headline on Work cards — distinct from `summary`, which is longer
+  // and lives on the case study page.
+  oneLiner: string;
 };
 
 // Falls back to the employer name for entries with no named project yet.
@@ -54,6 +58,7 @@ export const experience: Experience[] = [
     domain: "Aviation · Enterprise SaaS",
     project: { name: "Sabre", subtitle: "Aviation GDS" },
     shippedYear: 2025,
+    oneLiner: "Simplifying slot allocation for aviation scheduling",
     summary:
       "Redesigned an aviation scheduling workflow, simplifying complex slot-allocation processes and improving operational efficiency.",
     highlights: [
@@ -68,6 +73,7 @@ export const experience: Experience[] = [
     role: "UX Designer",
     period: "Jan 2024 – Oct 2024",
     domain: "Data & Analytics · SaaS",
+    oneLiner: "Turning scattered metrics into same-day decisions",
     summary:
       "Designed data-driven dashboards that turned scattered metrics into decisions teams could act on same-day.",
     highlights: [
@@ -84,6 +90,7 @@ export const experience: Experience[] = [
     domain: "Telecom · Sourcing & Sales",
     project: { name: "Lighthouse", subtitle: "Sourcing platform" },
     shippedYear: 2024,
+    oneLiner: "Reshaping sourcing and sales for a global telecom",
     summary:
       "Led UX for the Light-House platform, reshaping user journeys across sourcing and sales for a global telecom.",
     highlights: [
@@ -98,6 +105,7 @@ export const experience: Experience[] = [
     role: "UX Designer",
     period: "May 2019 – Aug 2021",
     domain: "FinTech · Supply Chain",
+    oneLiner: "Streamlined enterprise workflows for fintech and supply chain",
     summary:
       "Designed enterprise SaaS workflows spanning fintech and supply-chain systems, cutting rework at the handoff.",
     highlights: [
@@ -114,6 +122,7 @@ export const experience: Experience[] = [
     domain: "Healthcare · SaaS",
     project: { name: "TAC Healthcare", subtitle: "EHR application" },
     shippedYear: 2024,
+    oneLiner: "An intuitive EHR built for everyday clinical work",
     summary:
       "Designed intuitive interfaces across healthcare and SaaS products early in a 9-year design practice.",
     highlights: [
