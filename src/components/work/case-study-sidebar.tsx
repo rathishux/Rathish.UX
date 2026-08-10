@@ -6,13 +6,18 @@ import {
   type CaseStudyHeading,
 } from "@/lib/case-study";
 
-// Shows the active section's own sub-headings when it has any. Not every
-// case study breaks its sections down that far, though — some are a flat
-// list of numbered sections with no sub-headings at all — so this falls
-// back to the full top-level list rather than going blank, which is what
-// happened before: a doc with zero sub-headings anywhere (NFN Labs) had no
-// sidebar nav at all, and a doc with a mix (Ericsson) had its nav vanish
-// specifically on the sections that lacked them.
+// Two shapes, depending on how many top-level sections there are:
+//
+// - Exactly one (a single tab of a split case study, e.g. one Sabre
+//   project page): showing that one heading in the sidebar would just
+//   repeat the page's own title, so this shows its sub-headings directly.
+//
+// - More than one (a full, un-split case study): a stable accordion —
+//   every top-level section stays listed the whole time, nothing appears
+//   or disappears as you scroll. Only the active section's own
+//   sub-headings expand inline beneath it. Swapping the entire visible
+//   list in and out at each section boundary (the previous approach) is
+//   what read as the nav "jumping."
 export function CaseStudySidebar({
   headings,
   activeSlug,
@@ -22,17 +27,40 @@ export function CaseStudySidebar({
 }) {
   const topLevel = topLevelHeadings(headings);
   const activeH2 = activeTopLevel(headings, activeSlug) ?? topLevel[0];
-  const subheadings = activeH2 ? subheadingsOf(headings, activeH2.slug) : [];
-  const items = subheadings.length > 0 ? subheadings : topLevel;
 
-  if (items.length === 0) return null;
+  if (topLevel.length <= 1) {
+    const items = activeH2 ? subheadingsOf(headings, activeH2.slug) : [];
+    if (items.length === 0) return null;
+    return (
+      <aside className="lg:sticky lg:top-40 lg:h-fit">
+        <nav className="space-y-5">
+          {items.map((h) => (
+            <SidebarLink key={h.slug} slug={h.slug} title={h.title} active={activeSlug} />
+          ))}
+        </nav>
+      </aside>
+    );
+  }
 
   return (
     <aside className="lg:sticky lg:top-40 lg:h-fit">
-      <nav className="space-y-3">
-        {items.map((h) => (
-          <SidebarLink key={h.slug} slug={h.slug} title={h.title} active={activeSlug} />
-        ))}
+      <nav className="space-y-5">
+        {topLevel.map((h2) => {
+          const isActiveSection = activeH2?.slug === h2.slug;
+          const children = isActiveSection ? subheadingsOf(headings, h2.slug) : [];
+          return (
+            <div key={h2.slug}>
+              <SidebarLink slug={h2.slug} title={h2.title} active={activeSlug} />
+              {children.length > 0 && (
+                <div className="mt-4 space-y-4 border-l border-border pl-4">
+                  {children.map((h3) => (
+                    <SidebarLink key={h3.slug} slug={h3.slug} title={h3.title} active={activeSlug} />
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </nav>
     </aside>
   );
