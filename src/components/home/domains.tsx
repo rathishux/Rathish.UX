@@ -1,4 +1,4 @@
-import { experience, projectDisplay, type Experience } from "@/content/site-data";
+import { domainStats, experience, projectDisplay, type Experience } from "@/content/site-data";
 
 type DomainGroup = { domain: string; projects: string[] };
 
@@ -32,26 +32,45 @@ export function Domains() {
       </h3>
 
       <div className="mt-10 border-t border-border">
-        {groups.map((group, i) => (
-          <div
-            key={group.domain}
-            className="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-border py-8"
-          >
-            <div className="flex items-baseline gap-4">
-              <span className="font-mono text-xs text-shell text-muted-foreground">
-                / {String(i + 1).padStart(2, "0")}
-              </span>
-              <h4 className="font-serif text-6xl font-bold leading-none transition-colors group-hover:text-primary sm:text-7xl lg:text-8xl">
-                {group.domain}
-              </h4>
+        {groups.map((group, i) => {
+          const stats = domainStats[group.domain];
+          return (
+            <div key={group.domain} className="group border-b border-border py-8">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                <div className="flex items-baseline gap-4">
+                  <span className="font-mono text-xs text-shell text-muted-foreground">
+                    / {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h4 className="font-serif text-6xl font-bold leading-none transition-colors group-hover:text-primary sm:text-7xl lg:text-8xl">
+                    {group.domain}
+                  </h4>
+                </div>
+                <div className="flex flex-col items-end gap-0.5 text-right text-sm text-muted-foreground">
+                  {group.projects.map((project) => (
+                    <span key={project}>{project}</span>
+                  ))}
+                </div>
+              </div>
+
+              {stats && (
+                <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-hover:grid-rows-[1fr]">
+                  <div className="overflow-hidden">
+                    <div className="grid gap-6 pt-8 sm:grid-cols-3">
+                      {stats.map((stat) => (
+                        <div key={stat.label}>
+                          <p className="font-serif text-4xl text-primary">{stat.value}</p>
+                          <p className="mt-1 font-mono text-[10px] text-shell uppercase text-muted-foreground">
+                            {stat.label}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="flex flex-col items-end gap-0.5 text-right text-sm text-muted-foreground">
-              {group.projects.map((project) => (
-                <span key={project}>{project}</span>
-              ))}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

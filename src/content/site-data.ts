@@ -175,6 +175,38 @@ export const experience: Experience[] = [
   },
 ];
 
+// Placeholder metrics shown when a Domains row is hovered — replace with
+// real numbers per domain. Keyed by the same top-level domain string
+// Domains groups on (the bit before the first "·" in an entry's domain).
+export type DomainStat = { value: string; label: string };
+export const domainStats: Record<string, DomainStat[]> = {
+  Aviation: [
+    { value: "XX+", label: "Replace — e.g. slots managed" },
+    { value: "X.X → X.X", label: "Replace — e.g. rating before → after" },
+    { value: "XX%", label: "Replace — e.g. error reduction" },
+  ],
+  "Data & Analytics": [
+    { value: "XX+", label: "Replace — e.g. dashboards shipped" },
+    { value: "XXx", label: "Replace — e.g. faster decisions" },
+    { value: "XX%", label: "Replace — e.g. adoption rate" },
+  ],
+  Telecom: [
+    { value: "XX+", label: "Replace — e.g. suppliers onboarded" },
+    { value: "XX%", label: "Replace — e.g. time saved" },
+    { value: "$XXK+", label: "Replace — e.g. savings identified" },
+  ],
+  FinTech: [
+    { value: "XX+", label: "Replace — e.g. workflows redesigned" },
+    { value: "XXx", label: "Replace — e.g. rework reduced" },
+    { value: "XX%", label: "Replace — e.g. task success rate" },
+  ],
+  Healthcare: [
+    { value: "XX+", label: "Replace — e.g. clinics onboarded" },
+    { value: "XX+", label: "Replace — e.g. screens shipped" },
+    { value: "XX%", label: "Replace — e.g. engagement lift" },
+  ],
+};
+
 export const education = [
   { school: "College of Engineering", credential: "M.Sc, Electronic Media" },
 ];
