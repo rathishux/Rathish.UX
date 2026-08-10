@@ -68,7 +68,7 @@ The biggest shift in this project wasn't visual — it was realizing that a bett
 ## 2. Send SCR & Change Generator (other contributions)
 
 ### Send SCR
-An SCR is the formal message an airline sends to an airport slot coordinator when a flight's schedule changes — it's how a change gets registered and approved in the slot system. Previously this lived buried in the workflow; the redesign surfaced it as a direct icon action from the dashboard, letting ops teams trigger a schedule change request without leaving their working view.
+An SCR is the formal message an airline sends to an airport slot coordinator when a flight's schedule changes — how a change gets registered and approved in the slot system. Previously this lived buried in the workflow; the redesign surfaced it as a direct icon action from the dashboard. The "Send Pending SCR Message" modal lists every pending SCR in one table — aircraft, arrival and departure ports, flight numbers, effective and discontinue dates, days of operation, seats, equipment — with general and supplementary notes fields before sending, so an ops team can review and send a whole batch without leaving their working view.
 
 ![Send SCR, early exploration](images/send-scr-exploration.png)
 *Fig. 03a — An earlier exploration of the Send Pending SCR Message modal.*
@@ -77,12 +77,25 @@ An SCR is the formal message an airline sends to an airport slot coordinator whe
 *Fig. 03b — "Send Pending SCR Message" modal: slot table, Additional Information fields, and Send SCRs action.*
 
 ### Change Generator
-Where Send SCR handles a single flight's change, Change Generator handles changes at scale — applying a schedule change across a filtered set of flights at once (by airport, flight designator range, service type, or equipment type), pulling from master, auxiliary, or prior-season schedules as the source. The final flow lets a user define the scope of a change, preview it as **available vs. selected slots** before committing, and generate the update.
+Where Send SCR handles one flight's change, Change Generator applies a change at scale — and turned out to be a genuinely complex flow to design well: scope the change, configure the rules that govern it, then preview before anything is generated.
 
-> Note: screenshots pending export from Figma (Change Generator modal and preview).
-*Fig. 04 — Filters for Airports/Countries, Flight Designator Ranges, Service Type, Equipment Type, plus schedule source options.*
+**Scoping the change** starts with a slot set and season, then a date range — picked from a calendar that understands airline seasons (IATA vs. standard, current season, peak week) rather than raw dates. From there the change can pull from master, auxiliary, or prior-season schedules, and narrow further by airport, flight designator range, service type, or equipment type — each filterable as all, only, or except.
 
-*Fig. 05 — "Available slots" vs. "Selected slots" tables, letting users review the exact scope of a bulk change before committing.*
+![Change Generator filters](images/change-generator-filters.png)
+*Fig. 04 — Scoping a change: slot set, season, schedule source, and the airport/flight/service/equipment filters.*
+
+![Change Generator date range picker](images/change-generator-date-range.png)
+*Fig. 05 — Picking a date range from a season-aware calendar: IATA vs. standard, current season, peak week.*
+
+**Configuring the rules** is the part that made this hard. Change Generator exposes a long list of business rules — equipment substitution, auto-pairing, rounding, terminal handling, and a dozen more — each defaulting to "Use CSP" (the airline's standing change-source profile) but overridable individually. The design had to work for an expert user who mostly wants the defaults to stay out of the way, with room to override exactly the rule that matters for this one change, without wading through the other twenty to find it.
+
+![Change Generator slot status rules](images/change-generator-slot-status.png)
+*Fig. 06 — Slot Status: the underlying business rules, each defaulting to the airline's change-source profile but overridable per rule.*
+
+**Previewing before committing**: Change Generator splits its results into "available" and "selected" slot tables, so ops can review exactly what will change, hand-pick a subset, and export to Excel or save — before generating anything for real.
+
+![Change Generator preview](images/change-generator-preview.png)
+*Fig. 07 — Change Generator Preview: available vs. selected slots, reviewed and exported before generating.*
 
 ---
 
