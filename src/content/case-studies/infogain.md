@@ -102,20 +102,14 @@ Where Send SCR handles one flight's change, Change Generator applies a change at
 ## 3. Booking Rules Engine (slot policy)
 
 ### What it does
-Analysts can create conditional business rules that govern how bookings and seat capacity behave, without needing engineering involvement. Rules follow an IF → THEN structure:
+Before this, adjusting seat availability meant an analyst manually overriding capacity on every individual flight, market, or cabin it applied to — a rule as simple as "every RUH departure before 10am" had to be typed in by hand, flight by flight. The Booking Rules Engine replaces that with conditional logic an analyst defines once, in an IF → THEN structure, that the system then applies automatically wherever it matches:
 
 ```
 IF Leg Origin is RUH AND Time & Date < 10 THEN Capacity User SET to 140
 ```
 
-Instead of manually overriding seat availability for every individual flight, market, or cabin, analysts define logic once and the system applies it automatically whenever the conditions are met.
-
 ### Key design details
-**Conflict visibility before creation.** A "Rules created for selected level" panel surfaces existing rules that already apply to the same flight/cabin/leg combination before an analyst saves a new one.
-
-**Templates for reuse.** A "Use Template" mode lets an analyst start from a saved rule shape instead of rebuilding the same condition structure from scratch.
-
-**A defined rule lifecycle.** Rules move through clear states — Active, Inactive, Discontinued, Manually Paused — each driven by explicit logic rather than treated as a black box.
+The hard part wasn't the rule syntax — it was making sure an analyst creating a new rule could see what they were about to step on. **Conflict visibility before creation**: a "Rules created for selected level" panel surfaces any existing rule already touching the same flight, cabin, or leg combination, before the new one gets saved. **Templates for reuse** let an analyst start from a saved rule shape instead of rebuilding the same condition structure from scratch every time. And rules move through a **defined lifecycle** — Active, Inactive, Discontinued, Manually Paused — each state driven by explicit logic instead of being a black box an analyst just has to trust.
 
 ![Rules list](images/rules-list.png)
 *Fig. 06 — All created rules with level, priority, strategies, status, effective/discontinue dates, and creator.*
@@ -139,10 +133,10 @@ Instead of manually overriding seat availability for every individual flight, ma
 
 ## 4. Market Analysis & Management (demand insights)
 
-A companion admin tool for demand and revenue analysis, split into two tabs — **Analysis**, for observing patterns, and **Management**, for calibrating the underlying demand model when it doesn't match what analysts are seeing in the market.
+A companion admin tool for demand and revenue analysis, split into two tabs — **Analysis**, for observing patterns, and **Management**, for correcting the underlying demand model when it stops matching what analysts are actually seeing in the market.
 
 ### Analysis — reading demand three ways
-Bookings and revenue can be viewed against three time dimensions: by departure date, by day of week, or by days-to-departure. A departure-date view uses a bar chart with season shading (Low/Mid/High/Peak); a days-to-departure view plots a cumulative booking curve against a "Today" marker, showing how bookings are pacing toward a forecast.
+A flat booking number doesn't tell an analyst whether demand is pacing normally or falling behind, so bookings and revenue can be viewed against three time dimensions instead: by departure date, by day of week, or by days-to-departure. A departure-date view uses a bar chart with season shading (Low/Mid/High/Peak); a days-to-departure view plots a cumulative booking curve against a "Today" marker, showing how bookings are pacing toward a forecast.
 
 ![Departure horizon view](images/market-analysis-base.png)
 *Fig. 12 — Departure horizon view, with the Data output table for the underlying records.*
@@ -150,18 +144,18 @@ Bookings and revenue can be viewed against three time dimensions: by departure d
 ![Booking horizon view](images/market-analysis-booking-horizon.png)
 *Fig. 13 — Cumulative pace toward departure, with a forecast tail past today.*
 
-An **Additional dimensions** panel expands the same data into small-multiple breakdowns — by POS, market, cabin, service, and TPS.
+For when the top-line number looks fine but a specific slice of it isn't, an **Additional dimensions** panel expands the same data into small-multiple breakdowns — by POS, market, cabin, service, and TPS.
 
 ![Additional dimensions expanded](images/market-analysis-dimensions.png)
 *Fig. 14 — The same data sliced by POS, market, cabin, service, and TPS.*
 
 ### Management — calibrating the demand model
-For a specific service and cabin, the Management tab shows a demand curve plotted alongside the system's own curve, a reference curve, and manual adjustments. A demand multiplier table lets an analyst enter a base demand and omega value and see the recalculated demand at every price point immediately.
+Sometimes the system's own demand curve stops matching reality — an analyst sees something in the market the model hasn't caught up to yet. For a specific service and cabin, the Management tab plots the system's curve alongside a reference curve and any manual adjustments, and a demand multiplier table lets the analyst enter a base demand and omega value and see the recalculated demand at every price point immediately, instead of waiting on a batch recalculation.
 
 ![Demand curve](images/market-management-demand-curve.png)
 *Fig. 15 — Demand curve with an editable multiplier table below it.*
 
-Before an adjustment goes live, a preview panel shows the same booking/revenue chart, recalculated with the new demand assumption.
+Before an adjustment goes live, a preview panel replays the same booking/revenue chart under the new demand assumption — so a manual override doesn't just take effect blind.
 
 ![Preview before publish](images/market-management-preview.png)
 *Fig. 16 — Preview of the adjusted demand model before Publish.*
@@ -185,7 +179,7 @@ A schedule manager searches for and selects a schedule from a list, then chooses
 *Fig. 19 — The three compare modes, all one click away from the flight list.*
 
 ### Standard compare
-Standard compare sets a Source and Target schedule side by side, with Advanced Options exposing how flights are matched and what counts as a meaningful difference.
+Standard compare sets a Source and Target schedule side by side. Advanced Options exposes how flights are matched and what counts as a meaningful difference, so the comparison can be tuned to the situation rather than run through one fixed algorithm that's wrong half the time.
 
 ![Compare Standard filled](images/schedule-manager/04-compare-standard-filled.png)
 *Fig. 20 — Source and Target schedules selected, ready to compare.*
@@ -193,7 +187,7 @@ Standard compare sets a Source and Target schedule side by side, with Advanced O
 ![Advanced Options](images/schedule-manager/05-advanced-options.png)
 *Fig. 21 — Match Criteria, Threshold, and Show Options settings.*
 
-Results are categorized by change type — Cancelled, New, Retimes, Block Time, Equipment, Flight Number, and Other.
+Results come back categorized by change type — Cancelled, New, Retimes, Block Time, Equipment, Flight Number, and Other — so a schedule manager can scan straight to the category that matters instead of reading every row.
 
 ![Compare results](images/schedule-manager/06-compare-standard-results.png)
 *Fig. 22 — Compare results, categorized by change type.*
@@ -210,13 +204,13 @@ Three-way compare adds a Base schedule alongside Source and Target — reconcili
 ![Three-way conflicts](images/schedule-manager/09-threeway-conflicts.png)
 *Fig. 25 — A Conflicts tab appears only in three-way compare, where it can actually be detected.*
 
-A conflicting row can't be bulk-selected — the system forces a deliberate choice.
+A conflicting row can't be bulk-selected — the system forces a deliberate choice instead of letting a batch merge quietly overwrite one side of the conflict.
 
 ![Select changes to merge](images/schedule-manager/10-select-changes-to-merge.png)
 *Fig. 26 — A conflict forces a specific choice instead of a blanket selection.*
 
 ### Merge Express
-Merge Express is where a three-way merge lands — pre-selected with everything safe to merge, conflicts already excluded.
+Merge Express is where a three-way merge lands: pre-selected with everything safe to merge, conflicts already excluded and set aside for the schedule manager to resolve by hand.
 
 ![Merge Express](images/schedule-manager/11-merge-express.png)
 *Fig. 27 — Everything safe to merge, pre-selected; conflicts left untouched.*
