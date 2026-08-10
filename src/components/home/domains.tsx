@@ -35,17 +35,17 @@ export function Domains() {
         {groups.map((group, i) => (
           <div
             key={group.domain}
-            className="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-border py-6"
+            className="group flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-border py-8"
           >
             <div className="flex items-baseline gap-4">
               <span className="font-mono text-xs text-shell text-muted-foreground">
                 / {String(i + 1).padStart(2, "0")}
               </span>
-              <h4 className="font-serif text-4xl transition-colors group-hover:text-primary sm:text-5xl">
+              <h4 className="font-serif text-6xl font-bold leading-none transition-colors group-hover:text-primary sm:text-7xl lg:text-8xl">
                 {group.domain}
               </h4>
             </div>
-            <div className="flex flex-col items-end gap-0.5 text-right font-mono text-xs text-shell uppercase text-muted-foreground opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100">
+            <div className="flex flex-col items-end gap-0.5 text-right text-sm text-muted-foreground">
               {group.projects.map((project) => (
                 <span key={project}>{project}</span>
               ))}
