@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   certifications,
@@ -41,7 +43,14 @@ export function AboutPage() {
         handing a spec across a wall &mdash; this site is one example, built
         with Claude, Claude Code, the Figma MCP, and Cursor. I recently
         built <strong className="text-foreground">{sideProject.name}</strong>:{" "}
-        {sideProject.description}
+        {sideProject.description}{" "}
+        <Link
+          to="/nivyou"
+          className="inline-flex items-center gap-1 text-primary hover:underline"
+        >
+          How I built it
+          <ArrowUpRight className="size-3.5" />
+        </Link>
       </p>
 
       <p className="mt-4 text-muted-foreground">

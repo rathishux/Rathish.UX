@@ -241,8 +241,12 @@ export const interests = ["Cycling", "Fitness", "Movies & series", "Space scienc
 
 export const sideProject = {
   name: "NivYou",
+  tagline: "A GLP-1 tracker for dose, weight, food, and progress over time.",
   description:
     "A semaglutide tracker — logging dose, symptoms, and progress for people on a GLP-1 program.",
+  tracks: ["Dose & schedule", "Weight", "Food", "Progress over time"],
+  // Replace with the real Play Store listing URL once ready to link out.
+  playStoreUrl: "#",
 };
 
 export const stats = [
