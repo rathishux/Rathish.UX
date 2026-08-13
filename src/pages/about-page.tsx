@@ -13,7 +13,7 @@ export function AboutPage() {
         &#9670; The byline
       </p>
       <h2 className="mt-2 font-serif text-4xl italic sm:text-5xl">
-        About {profile.name.split(" ")[0]}
+        About <span className="text-primary">{profile.name.split(" ")[0]}</span>
       </h2>
 
       <p className="mt-8 text-lg leading-relaxed">{profile.summary}</p>

@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/hero";
+import { AboutTeaser } from "@/components/home/about-teaser";
 import { FeaturedWork } from "@/components/home/featured-work";
 import { Domains } from "@/components/home/domains";
 import { Timeline } from "@/components/home/timeline";
@@ -12,6 +13,9 @@ export function HomePage() {
       {/* Hero renders immediately — it's the first thing on screen, not
           something a reader scrolls to discover. */}
       <Hero />
+      <Reveal>
+        <AboutTeaser />
+      </Reveal>
       <Reveal>
         <FeaturedWork />
       </Reveal>
