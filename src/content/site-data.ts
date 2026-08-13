@@ -246,7 +246,9 @@ export type BeyondTab = {
   label: string;
   sublabel: string;
   intro: string;
-  items: { title: string; note: string }[];
+  // spotifyUrl is only used by the listening tab — paste a Spotify track,
+  // album, or playlist link and the card grows a "Play on Spotify" link.
+  items: { title: string; note: string; spotifyUrl?: string }[];
 };
 
 export const beyondTheByline: BeyondTab[] = [
@@ -256,9 +258,9 @@ export const beyondTheByline: BeyondTab[] = [
     sublabel: "Currently listening",
     intro: "What's been playing while I work.",
     items: [
-      { title: "Replace me", note: "Artist or album" },
-      { title: "Replace me", note: "Artist or album" },
-      { title: "Replace me", note: "Podcast or playlist" },
+      { title: "Replace me", note: "Artist or album", spotifyUrl: "#" },
+      { title: "Replace me", note: "Artist or album", spotifyUrl: "#" },
+      { title: "Replace me", note: "Podcast or playlist", spotifyUrl: "#" },
     ],
   },
   {
@@ -311,11 +313,22 @@ export const sideProject = {
   name: "NivYou",
   tagline: "A GLP-1 tracker for dose, weight, food, and progress over time.",
   description:
-    "A semaglutide tracker — logging dose, symptoms, and progress for people on a GLP-1 program.",
+    "a semaglutide tracker for dose, weight, food, and progress over time.",
   tracks: ["Dose & schedule", "Weight", "Food", "Progress over time"],
   // Replace with the real Play Store listing URL once ready to link out.
   playStoreUrl: "#",
 };
+
+// The toolkit listed on the Workshop page.
+export const workshopTools = [
+  "Claude",
+  "Claude Code",
+  "Figma MCP",
+  "Cursor",
+  "GitHub",
+  "Vercel",
+  "Higgsfield",
+];
 
 export const stats = [
   { value: "9+", label: "Years in practice" },

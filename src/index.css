@@ -41,6 +41,13 @@
     "Times New Roman", serif;
   --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
     monospace;
+  /* System script faces only — no webfont request. Covers macOS (Snell
+     Roundhand / Apple Chancery), Windows (Segoe Script / Ink Free), and
+     iOS (Bradley Hand); falls back to generic cursive, and the sign-off
+     is styled italic so even a plain fallback still reads as a flourish
+     rather than as body text. */
+  --font-signature: "Snell Roundhand", "Apple Chancery", "Segoe Script",
+    "Ink Free", "Bradley Hand", "Brush Script MT", cursive;
 }
 
 .dark {
@@ -101,6 +108,7 @@
 
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
+  --font-signature: var(--font-signature);
 
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);

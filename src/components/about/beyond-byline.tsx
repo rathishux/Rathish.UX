@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { beyondTheByline } from "@/content/site-data";
+import { SpotifyIcon } from "@/components/about/spotify-icon";
 
 export function BeyondByline() {
   const [activeId, setActiveId] = useState(beyondTheByline[0].id);
@@ -63,6 +64,17 @@ export function BeyondByline() {
             </span>
             <p className="mt-2 font-serif text-xl">{item.title}</p>
             <p className="mt-1 text-sm text-muted-foreground">{item.note}</p>
+            {item.spotifyUrl && (
+              <a
+                href={item.spotifyUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 font-mono text-[10px] text-shell uppercase text-muted-foreground transition-colors hover:text-primary"
+              >
+                <SpotifyIcon className="size-3.5" />
+                Play on Spotify
+              </a>
+            )}
           </div>
         ))}
       </div>

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { DeskIllustration } from "@/components/home/desk-illustration";
 import { BeyondByline } from "@/components/about/beyond-byline";
 import {
@@ -8,7 +7,6 @@ import {
   education,
   profile,
   sideProject,
-  skills,
 } from "@/content/site-data";
 
 export function AboutPage() {
@@ -53,7 +51,7 @@ export function AboutPage() {
             <strong className="text-foreground">{sideProject.name}</strong>,{" "}
             {sideProject.description}{" "}
             <Link
-              to="/nivyou"
+              to="/workshop"
               className="inline-flex items-center gap-1 text-primary hover:underline"
             >
               How I built it
@@ -106,15 +104,13 @@ export function AboutPage() {
             </div>
           </div>
 
-          <h3 className="mt-10 font-mono text-[11px] text-shell uppercase text-muted-foreground">
-            Core skills
-          </h3>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <Badge key={skill} variant="outline">
-                {skill}
-              </Badge>
-            ))}
+          <div className="mt-10">
+            <p className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
+              &#10033; Thanks for reading
+            </p>
+            <p className="mt-2 inline-block border-b-2 border-primary pb-1 font-signature text-3xl italic">
+              {profile.name}
+            </p>
           </div>
         </div>
       </div>
