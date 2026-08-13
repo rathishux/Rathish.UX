@@ -14,7 +14,7 @@ export const profile = {
   openToCities: ["Bangalore", "Chennai", "Hyderabad"],
   resumeUrl: `${import.meta.env.BASE_URL}resume.docx`,
   // Replace with a real scheduling link (Calendly, Cal.com, etc.) once set up.
-  schedulingUrl: "#",
+  schedulingUrl: "https://calendly.com/rathish3/coffee-chat",
   social: {
     linkedin: "https://www.linkedin.com/in/rathish-gandhi/",
     // Placeholders — replace with real profile URLs.
