@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { DeskIllustration } from "@/components/home/desk-illustration";
+import { BeyondByline } from "@/components/about/beyond-byline";
 import {
   certifications,
   education,
-  interests,
   profile,
   sideProject,
   skills,
@@ -12,7 +13,7 @@ import {
 
 export function AboutPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16 sm:px-8">
+    <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
       <p className="font-mono text-[11px] text-shell uppercase text-primary">
         &#9670; The byline
       </p>
@@ -20,89 +21,105 @@ export function AboutPage() {
         About <span className="text-primary">{profile.name.split(" ")[0]}</span>
       </h2>
 
-      <p className="mt-8 text-lg leading-relaxed">
-        I&rsquo;ve spent the last 9+ years designing for the gap between
-        complex systems and the people who have to use them &mdash; aviation
-        slot management, sourcing platforms for a global telecom, healthcare
-        records, fintech and supply-chain workflows. The thread connecting
-        all of it isn&rsquo;t the industry. It&rsquo;s the shape of the
-        problem: a system built by and for domain experts, used every day by
-        people who don&rsquo;t have time to think like one.
-      </p>
-      <p className="mt-4 leading-relaxed text-muted-foreground">
-        I like the unglamorous parts of the job &mdash; sitting with the
-        person who actually uses the tool, watching where they hesitate,
-        finding the workaround they&rsquo;ve quietly built for themselves
-        because the product never asked. Most of the case studies on this
-        site started from exactly that: not a feature request, but a few
-        minutes of watching someone work that reframed the whole problem.
-      </p>
-      <p className="mt-4 leading-relaxed text-muted-foreground">
-        Outside client work, I build my own things. I&rsquo;m interested in
-        closing the gap between design and shipped code myself rather than
-        handing a spec across a wall &mdash; this site is one example, built
-        with Claude, Claude Code, the Figma MCP, and Cursor. I recently
-        built <strong className="text-foreground">{sideProject.name}</strong>:{" "}
-        {sideProject.description}{" "}
-        <Link
-          to="/nivyou"
-          className="inline-flex items-center gap-1 text-primary hover:underline"
-        >
-          How I built it
-          <ArrowUpRight className="size-3.5" />
-        </Link>
-      </p>
+      <div className="mt-10 grid gap-10 lg:grid-cols-[340px_1fr] lg:gap-14">
+        <div>
+          <div className="aspect-[4/5] overflow-hidden rounded-md border border-border bg-secondary/40 p-6">
+            <DeskIllustration />
+          </div>
+          <p className="mt-3 font-serif italic">{profile.name}</p>
+          <p className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
+            &#9670; {profile.title}
+          </p>
+        </div>
 
-      <p className="mt-4 text-muted-foreground">
-        Based in {profile.location}. Reachable at{" "}
-        <a href={`mailto:${profile.email}`} className="text-primary hover:underline">
-          {profile.email}
-        </a>
-        .
-      </p>
+        <div>
+          <p className="text-lg leading-relaxed">
+            I&rsquo;ve spent the last 9+ years designing for the gap between
+            complex systems and the people who have to use them &mdash;
+            aviation slot management, sourcing platforms for a global telecom,
+            healthcare records, fintech and supply-chain workflows. The thread
+            isn&rsquo;t the industry. It&rsquo;s the shape of the problem: a
+            system built by and for domain experts, used every day by people
+            who don&rsquo;t have time to think like one.
+          </p>
+          <p className="mt-5 leading-relaxed text-muted-foreground">
+            I build my own things too, taking ideas from sketch to shipped
+            interface myself with{" "}
+            <strong className="text-foreground">Claude</strong>,{" "}
+            <strong className="text-foreground">Claude Code</strong>, the{" "}
+            <strong className="text-foreground">Figma MCP</strong>, and{" "}
+            <strong className="text-foreground">Cursor</strong>. This site is
+            one example. So is{" "}
+            <strong className="text-foreground">{sideProject.name}</strong>,{" "}
+            {sideProject.description}{" "}
+            <Link
+              to="/nivyou"
+              className="inline-flex items-center gap-1 text-primary hover:underline"
+            >
+              How I built it
+              <ArrowUpRight className="size-3.5" />
+            </Link>
+          </p>
 
-      <h3 className="mt-14 font-serif text-2xl">Core skills</h3>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {skills.map((skill) => (
-          <Badge key={skill} variant="outline">
-            {skill}
-          </Badge>
-        ))}
+          <div className="mt-7 flex flex-wrap gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm">
+              <span className="font-mono text-[10px] text-shell uppercase text-primary">
+                Email
+              </span>
+              <a href={`mailto:${profile.email}`} className="hover:text-primary">
+                {profile.email}
+              </a>
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm">
+              <span className="font-mono text-[10px] text-shell uppercase text-primary">
+                Based in
+              </span>
+              {profile.location} &middot; {profile.openToCities.join(", ")}
+            </span>
+          </div>
+
+          <div className="mt-10 grid gap-8 sm:grid-cols-2">
+            <div>
+              <h3 className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
+                Education
+              </h3>
+              <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+                {education.map((edu) => (
+                  <li key={edu.school}>
+                    {edu.credential} — {edu.school}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
+                Certifications
+              </h3>
+              <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
+                {certifications.map((cert) => (
+                  <li key={cert.name}>
+                    {cert.name}
+                    {cert.issuer ? ` — ${cert.issuer}` : ""}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <h3 className="mt-10 font-mono text-[11px] text-shell uppercase text-muted-foreground">
+            Core skills
+          </h3>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {skills.map((skill) => (
+              <Badge key={skill} variant="outline">
+                {skill}
+              </Badge>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <h3 className="mt-14 font-serif text-2xl">Education</h3>
-      <ul className="mt-4 space-y-2 text-muted-foreground">
-        {education.map((edu) => (
-          <li key={edu.school}>
-            {edu.credential} — {edu.school}
-          </li>
-        ))}
-      </ul>
-
-      <h3 className="mt-14 font-serif text-2xl">Certifications</h3>
-      <ul className="mt-4 space-y-2 text-muted-foreground">
-        {certifications.map((cert) => (
-          <li key={cert.name}>
-            {cert.name}
-            {cert.issuer ? ` — ${cert.issuer}` : ""}
-          </li>
-        ))}
-      </ul>
-
-      <h3 className="mt-14 font-serif text-2xl">Off the clock</h3>
-      <p className="mt-4 leading-relaxed text-muted-foreground">
-        When I&rsquo;m not at a screen: cycling, keeping up a fitness
-        routine, working through a long watchlist of movies and series, and
-        reading more about space science than is probably useful for my day
-        job.
-      </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {interests.map((interest) => (
-          <Badge key={interest} variant="outline">
-            {interest}
-          </Badge>
-        ))}
-      </div>
+      <BeyondByline />
     </div>
   );
 }

@@ -239,6 +239,74 @@ export const skills = [
 
 export const interests = ["Cycling", "Fitness", "Movies & series", "Space science"];
 
+// "Beyond the byline" tabs on the About page. Placeholder entries — swap
+// in real ones freely; each tab just renders whatever list it's given.
+export type BeyondTab = {
+  id: string;
+  label: string;
+  sublabel: string;
+  intro: string;
+  items: { title: string; note: string }[];
+};
+
+export const beyondTheByline: BeyondTab[] = [
+  {
+    id: "listening",
+    label: "On Repeat",
+    sublabel: "Currently listening",
+    intro: "What's been playing while I work.",
+    items: [
+      { title: "Replace me", note: "Artist or album" },
+      { title: "Replace me", note: "Artist or album" },
+      { title: "Replace me", note: "Podcast or playlist" },
+    ],
+  },
+  {
+    id: "watching",
+    label: "The Reel",
+    sublabel: "Movies & series",
+    intro: "Working through a watchlist that never gets shorter.",
+    items: [
+      { title: "Replace me", note: "Film or series" },
+      { title: "Replace me", note: "Film or series" },
+      { title: "Replace me", note: "Currently watching" },
+    ],
+  },
+  {
+    id: "reading",
+    label: "The Shelf",
+    sublabel: "Books & space science",
+    intro: "Design, tech, and more space science than my day job needs.",
+    items: [
+      { title: "Replace me", note: "Book or author" },
+      { title: "Replace me", note: "Book or author" },
+      { title: "Replace me", note: "Currently reading" },
+    ],
+  },
+  {
+    id: "training",
+    label: "The Log",
+    sublabel: "This week's training",
+    intro: "Cycling and gym, logged weekly.",
+    items: [
+      { title: "Replace me", note: "e.g. distance ridden" },
+      { title: "Replace me", note: "e.g. sessions this week" },
+      { title: "Replace me", note: "e.g. current goal" },
+    ],
+  },
+  {
+    id: "hacks",
+    label: "The Hacks",
+    sublabel: "Small wins",
+    intro: "Tools, shortcuts, and workflow tricks worth keeping.",
+    items: [
+      { title: "Replace me", note: "Tool or shortcut" },
+      { title: "Replace me", note: "Tool or shortcut" },
+      { title: "Replace me", note: "Workflow trick" },
+    ],
+  },
+];
+
 export const sideProject = {
   name: "NivYou",
   tagline: "A GLP-1 tracker for dose, weight, food, and progress over time.",
