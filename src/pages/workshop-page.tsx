@@ -12,13 +12,34 @@ export function WorkshopPage() {
         &#9670; The workshop &middot; Built with AI tools
       </p>
       <h2 className="mt-2 font-serif text-4xl italic sm:text-5xl">
-        Things I built <span className="text-primary">myself</span>
+        Designed it. Then <span className="text-primary">shipped it.</span>
       </h2>
-      <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-        Design is my craft, but I don&rsquo;t stop at the handoff. This is
-        where I keep what I&rsquo;ve actually built and shipped &mdash; and
-        what I learned about working with AI tools while doing it.
-      </p>
+      <div className="mt-5 max-w-2xl space-y-4 text-lg text-muted-foreground">
+        <p>
+          Design is my craft, but I&rsquo;ve stopped treating the handoff as
+          the finish line. This is where I keep the things I&rsquo;ve
+          actually built and put in front of real users &mdash; not
+          prototypes, not concept work.
+        </p>
+        <p>
+          Getting there meant learning a new set of tools properly rather
+          than dabbling: <strong className="text-foreground">Claude Code</strong>{" "}
+          for writing and refactoring the actual application,{" "}
+          <strong className="text-foreground">the Figma MCP</strong> for
+          pulling designs straight into code,{" "}
+          <strong className="text-foreground">Cursor</strong> for the
+          day-to-day editing, and{" "}
+          <strong className="text-foreground">GitHub</strong> for version
+          control and deploys &mdash; the part of the stack a designer
+          usually never touches.
+        </p>
+        <p>
+          What I took from it is less about any one tool and more about how
+          the role changes when you can build the thing yourself: the loop
+          between an idea and something running on a device gets short
+          enough that you stop guessing and start checking.
+        </p>
+      </div>
 
       <div className="mt-6 flex flex-wrap gap-2">
         {workshopTools.map((tool) => (
