@@ -10,9 +10,16 @@ export const profile = {
     "Senior UX/UI Designer with 9+ years of experience crafting scalable, data-driven digital products across SaaS, fintech, and enterprise platforms. Known for simplifying complex workflows, improving usability, and driving measurable business impact.",
   email: "rathishuid@gmail.com",
   location: "India",
+  // Cities open to full-time roles in — edit freely.
+  openToCities: ["Bangalore", "Chennai", "Hyderabad"],
   resumeUrl: `${import.meta.env.BASE_URL}resume.docx`,
+  // Replace with a real scheduling link (Calendly, Cal.com, etc.) once set up.
+  schedulingUrl: "#",
   social: {
     linkedin: "https://www.linkedin.com/in/rathish-gandhi/",
+    // Placeholders — replace with real profile URLs.
+    medium: "#",
+    github: "#",
   },
 };
 

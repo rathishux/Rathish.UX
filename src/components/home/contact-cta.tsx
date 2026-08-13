@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { ArrowUpRight, Calendar, Check, Copy } from "lucide-react";
 import { profile } from "@/content/site-data";
 
 export function ContactCta() {
@@ -26,41 +26,89 @@ export function ContactCta() {
         </p>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <button
-            type="button"
-            onClick={copyEmail}
-            className="flex w-full items-center justify-between rounded-lg border border-primary/60 bg-paper/[0.04] px-5 py-4 text-left transition-colors hover:border-primary"
-          >
-            <span>
-              <span className="block font-mono text-[11px] text-shell uppercase text-paper/50">
-                Email
+          <div className="space-y-3">
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="flex w-full items-center justify-between rounded-lg border border-primary/60 bg-paper/[0.04] px-5 py-3 text-left transition-colors hover:border-primary"
+            >
+              <span>
+                <span className="block font-mono text-[11px] text-shell uppercase text-paper/50">
+                  Email
+                </span>
+                <span className="font-serif text-xl italic">{profile.email}</span>
               </span>
-              <span className="font-serif text-xl italic">{profile.email}</span>
-            </span>
-            <span className="flex shrink-0 items-center gap-1.5 pl-4 font-mono text-xs text-shell uppercase text-primary">
-              {copied ? "Copied" : "Click to copy"}
-              {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
-            </span>
-          </button>
+              <span className="flex shrink-0 items-center gap-1.5 pl-4 font-mono text-xs text-shell uppercase text-primary">
+                {copied ? "Copied" : "Click to copy"}
+                {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+              </span>
+            </button>
 
-          <div className="space-y-6">
-            <div>
-              <p className="font-mono text-[11px] text-shell uppercase text-paper/50">
-                Currently in
-              </p>
-              <p className="mt-1">{profile.location}</p>
-            </div>
-            <div>
-              <p className="font-mono text-[11px] text-shell uppercase text-paper/50">
-                Find me also at
-              </p>
+            <div className="border-t border-paper/15" />
+
+            <a
+              href={profile.schedulingUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex w-full items-center gap-3 rounded-lg border border-paper/15 px-5 py-3 transition-colors hover:border-primary"
+            >
+              <Calendar className="size-4 shrink-0 text-paper/50" />
+              <span>
+                <span className="block font-mono text-[11px] text-shell uppercase text-paper/50">
+                  Schedule
+                </span>
+                <span className="text-sm">Book a 30-minute coffee on Calendly</span>
+              </span>
+            </a>
+          </div>
+
+          <div>
+            <p className="font-mono text-[11px] text-shell uppercase text-paper/50">
+              Currently in
+            </p>
+            <p className="mt-1">{profile.location}</p>
+
+            <div className="my-4 border-t border-paper/15" />
+
+            <p className="font-mono text-[11px] text-shell uppercase text-paper/50">
+              Open for full-time roles
+            </p>
+            <p className="mt-1">
+              {profile.location} &middot; {profile.openToCities.join(", ")}
+            </p>
+
+            <div className="my-4 border-t border-paper/15" />
+
+            <p className="font-mono text-[11px] text-shell uppercase text-paper/50">
+              Find me also at
+            </p>
+            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
               <a
                 href={profile.social.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-1 inline-block font-mono text-xs text-shell uppercase text-paper transition-colors hover:text-primary"
+                className="inline-flex items-center gap-1 font-mono text-xs text-shell uppercase text-paper transition-colors hover:text-primary"
               >
-                LinkedIn &nearr;
+                LinkedIn
+                <ArrowUpRight className="size-3" />
+              </a>
+              <a
+                href={profile.social.medium}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 font-mono text-xs text-shell uppercase text-paper transition-colors hover:text-primary"
+              >
+                Medium
+                <ArrowUpRight className="size-3" />
+              </a>
+              <a
+                href={profile.social.github}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 font-mono text-xs text-shell uppercase text-paper transition-colors hover:text-primary"
+              >
+                GitHub
+                <ArrowUpRight className="size-3" />
               </a>
             </div>
           </div>

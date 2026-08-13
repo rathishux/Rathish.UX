@@ -14,10 +14,10 @@ export function HomePage() {
           something a reader scrolls to discover. */}
       <Hero />
       <Reveal>
-        <AboutTeaser />
+        <FeaturedWork />
       </Reveal>
       <Reveal>
-        <FeaturedWork />
+        <AboutTeaser />
       </Reveal>
       <Reveal>
         <Domains />
