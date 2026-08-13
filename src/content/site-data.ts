@@ -237,6 +237,14 @@ export const skills = [
   "Agile / Scrum",
 ];
 
+export const interests = ["Cycling", "Fitness", "Movies & series", "Space science"];
+
+export const sideProject = {
+  name: "NivYou",
+  description:
+    "A semaglutide tracker — logging dose, symptoms, and progress for people on a GLP-1 program.",
+};
+
 export const stats = [
   { value: "9+", label: "Years in practice" },
   { value: String(experience.length), label: "Companies shipped at" },

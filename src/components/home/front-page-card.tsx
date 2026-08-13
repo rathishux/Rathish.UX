@@ -32,7 +32,7 @@ export function FrontPageCard() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 3500);
+    const id = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 5500);
     return () => clearInterval(id);
   }, []);
 
