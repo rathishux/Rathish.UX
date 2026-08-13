@@ -10,7 +10,7 @@ import { OrnamentDivider } from "@/components/layout/ornament-divider";
 const NAV_ITEMS = [
   { to: "/", label: "Home" },
   { to: "/work", label: "Work" },
-  { to: "/workshop", label: "Workshop" },
+  { to: "/shipped", label: "Shipped" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];

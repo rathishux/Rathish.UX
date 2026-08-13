@@ -51,7 +51,7 @@ export function AboutPage() {
             <strong className="text-foreground">{sideProject.name}</strong>,{" "}
             {sideProject.description}{" "}
             <Link
-              to="/workshop"
+              to="/shipped"
               className="inline-flex items-center gap-1 text-primary hover:underline"
             >
               How I built it

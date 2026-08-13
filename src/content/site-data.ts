@@ -319,8 +319,8 @@ export const sideProject = {
   playStoreUrl: "#",
 };
 
-// The toolkit listed on the Workshop page.
-export const workshopTools = [
+// The toolkit listed on the Shipped page.
+export const shippedTools = [
   "Claude",
   "Claude Code",
   "Figma MCP",

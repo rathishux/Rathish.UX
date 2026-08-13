@@ -10,7 +10,7 @@ import { WorkPage } from "@/pages/work-page";
 import { WorkDetailPage } from "@/pages/work-detail-page";
 import { AboutPage } from "@/pages/about-page";
 import { ContactPage } from "@/pages/contact-page";
-import { WorkshopPage } from "@/pages/workshop-page";
+import { ShippedPage } from "@/pages/shipped-page";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
               <Route path="/work" element={<WorkPage />} />
               <Route path="/work/:id" element={<WorkDetailPage />} />
               <Route path="/about" element={<AboutPage />} />
-              <Route path="/workshop" element={<WorkshopPage />} />
+              <Route path="/shipped" element={<ShippedPage />} />
               <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </main>

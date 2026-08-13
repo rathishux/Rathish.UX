@@ -1,25 +1,24 @@
 import { ArrowUpRight } from "lucide-react";
-import { sideProject, workshopTools } from "@/content/site-data";
+import { sideProject, shippedTools } from "@/content/site-data";
 
 // Screenshot slots — swap the placeholder blocks below for real
 // screenshots once they're supplied.
 const SCREENSHOT_PLACEHOLDERS = ["Dashboard", "Dose log", "Weight & food", "Progress over time"];
 
-export function WorkshopPage() {
+export function ShippedPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-16 sm:px-8">
       <p className="font-mono text-[11px] text-shell uppercase text-primary">
-        &#9670; The workshop &middot; Built with AI tools
+        &#9670; Shipped &middot; Built with AI tools
       </p>
       <h2 className="mt-2 font-serif text-4xl italic sm:text-5xl">
-        Designed it. Then <span className="text-primary">shipped it.</span>
+        Built it. Then <span className="text-primary">shipped it.</span>
       </h2>
       <div className="mt-5 max-w-2xl space-y-4 text-lg text-muted-foreground">
         <p>
-          Design is my craft, but I&rsquo;ve stopped treating the handoff as
-          the finish line. This is where I keep the things I&rsquo;ve
-          actually built and put in front of real users &mdash; not
-          prototypes, not concept work.
+          This is where I keep the things I&rsquo;ve built and actually put
+          in front of real users &mdash; not prototypes, not concept work.
+          Real apps, on a real store, with real people using them.
         </p>
         <p>
           Getting there meant learning a new set of tools properly rather
@@ -30,19 +29,19 @@ export function WorkshopPage() {
           <strong className="text-foreground">Cursor</strong> for the
           day-to-day editing, and{" "}
           <strong className="text-foreground">GitHub</strong> for version
-          control and deploys &mdash; the part of the stack a designer
-          usually never touches.
+          control and deploys.
         </p>
         <p>
-          What I took from it is less about any one tool and more about how
-          the role changes when you can build the thing yourself: the loop
-          between an idea and something running on a device gets short
-          enough that you stop guessing and start checking.
+          Honestly, I never expected to be working on a backend, wiring up
+          third-party integrations, or sitting inside the Play Store console
+          figuring out release tracks and store listings &mdash; that&rsquo;s
+          all developer territory, and it was the steepest part of the
+          learning curve. It also turned out to be the most useful.
         </p>
       </div>
 
       <div className="mt-6 flex flex-wrap gap-2">
-        {workshopTools.map((tool) => (
+        {shippedTools.map((tool) => (
           <span
             key={tool}
             className="rounded-full border border-border px-3 py-1 font-mono text-[11px] text-shell uppercase text-muted-foreground"
