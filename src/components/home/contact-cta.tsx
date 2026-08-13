@@ -44,21 +44,22 @@ export function ContactCta() {
               </span>
             </button>
 
-            <div className="border-t border-paper/15" />
-
             <a
               href={profile.schedulingUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex w-full items-center gap-3 rounded-lg border border-paper/15 px-5 py-3 transition-colors hover:border-primary"
+              className="flex w-full items-center justify-between gap-3 rounded-lg border border-paper/15 px-5 py-3 transition-colors hover:border-primary"
             >
-              <Calendar className="size-4 shrink-0 text-paper/50" />
-              <span>
-                <span className="block font-mono text-[11px] text-shell uppercase text-paper/50">
-                  Schedule
+              <span className="flex items-center gap-3">
+                <Calendar className="size-4 shrink-0 text-paper/50" />
+                <span>
+                  <span className="block font-mono text-[11px] text-shell uppercase text-paper/50">
+                    Schedule
+                  </span>
+                  <span className="text-sm">Book a 30-minute coffee on Calendly</span>
                 </span>
-                <span className="text-sm">Book a 30-minute coffee on Calendly</span>
               </span>
+              <ArrowUpRight className="size-4 shrink-0 text-paper/50" />
             </a>
           </div>
 

@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MastheadHeader } from "@/components/layout/masthead-header";
 import { Footer } from "@/components/layout/footer";
+import { ScrollToTop } from "@/components/layout/scroll-to-top";
+import { BackToTop } from "@/components/layout/back-to-top";
 import { FaqWidget } from "@/components/chat/faq-widget";
 import { ChatProvider } from "@/lib/chat-context";
 import { HomePage } from "@/pages/home-page";
@@ -13,6 +15,7 @@ function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ChatProvider>
+        <ScrollToTop />
         <div className="flex min-h-screen flex-col">
           <MastheadHeader />
           <main className="flex-1">
@@ -26,6 +29,7 @@ function App() {
           </main>
           <Footer />
           <FaqWidget />
+          <BackToTop />
         </div>
       </ChatProvider>
     </BrowserRouter>
