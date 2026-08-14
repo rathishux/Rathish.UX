@@ -309,12 +309,12 @@ export const beyondTheByline: BeyondTab[] = [
   {
     id: "training",
     label: "The Log",
-    sublabel: "This week's training",
-    intro: "Cycling and gym, logged weekly.",
+    sublabel: "Training",
+    intro: "Cycling and gym — where things stand right now.",
     items: [
-      { title: "Replace me", note: "e.g. distance ridden this week" },
-      { title: "Replace me", note: "e.g. gym sessions this week" },
-      { title: "Replace me", note: "e.g. what I'm working toward" },
+      { title: "42 km", note: "Ridden this week — mostly the shopping commute" },
+      { title: "4 sessions", note: "Strength, gym" },
+      { title: "Under 22% body fat", note: "Current goal", tag: "In progress" },
     ],
   },
   {
