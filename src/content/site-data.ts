@@ -258,9 +258,21 @@ export const beyondTheByline: BeyondTab[] = [
     sublabel: "Currently listening",
     intro: "What's been playing while I work.",
     items: [
-      { title: "Replace me", note: "Artist or album", spotifyUrl: "#" },
-      { title: "Replace me", note: "Artist or album", spotifyUrl: "#" },
-      { title: "Replace me", note: "Podcast or playlist", spotifyUrl: "#" },
+      {
+        title: "Time",
+        note: "Hans Zimmer",
+        spotifyUrl: "https://open.spotify.com/track/6ZFbXIJkuI1dVNWvzJzown",
+      },
+      {
+        title: "Wonderwall",
+        note: "Oasis",
+        spotifyUrl: "https://open.spotify.com/track/35EfXlRKogBr1RvrkFBMHr",
+      },
+      {
+        title: "The Rose — Instrumental",
+        note: "Anirudh Ravichander",
+        spotifyUrl: "https://open.spotify.com/track/7FDcB7pALXFWow9RZul1DP",
+      },
     ],
   },
   {
