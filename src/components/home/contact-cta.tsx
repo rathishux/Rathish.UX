@@ -13,7 +13,7 @@ export function ContactCta() {
 
   return (
     <section className="bg-ink text-paper">
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
+      <div className="mx-auto max-w-[1800px] px-6 py-16 sm:px-8 lg:px-12 sm:py-20">
         <p className="font-mono text-[11px] text-shell uppercase text-primary">
           &#9670; Letters to the editor &middot; Get in touch
         </p>

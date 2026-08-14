@@ -15,7 +15,7 @@ const FOCUS_WORDS = [
 
 export function Hero() {
   return (
-    <section className="relative mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
+    <section className="relative mx-auto max-w-[1800px] px-6 py-16 sm:px-8 lg:px-12 sm:py-20">
       <WaxSeal label="UX" className="left-[40%] top-0" rotate={-8} />
       <WaxSeal label="AI" className="right-4 top-2" rotate={10} />
       <WaxSeal label="9Y" className="-left-2 top-1/2" rotate={-6} />

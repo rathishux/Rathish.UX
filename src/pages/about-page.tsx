@@ -11,7 +11,7 @@ import {
 
 export function AboutPage() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
+    <div className="mx-auto max-w-[1800px] px-6 py-16 sm:px-8 lg:px-12">
       <p className="font-mono text-[11px] text-shell uppercase text-primary">
         &#9670; The byline
       </p>
@@ -30,7 +30,9 @@ export function AboutPage() {
           </p>
         </div>
 
-        <div>
+        {/* Prose is capped well short of the column so lines stay at a
+            readable length now that the page container is much wider. */}
+        <div className="max-w-[75ch]">
           <p className="text-lg leading-relaxed">
             I&rsquo;ve spent the last 9+ years designing for the gap between
             complex systems and the people who have to use them &mdash;

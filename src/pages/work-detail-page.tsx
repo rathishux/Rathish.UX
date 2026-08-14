@@ -67,7 +67,7 @@ export function WorkDetailPage() {
   const metaText = sectionNumbers ? item.role : caseStudy?.meta || item.role;
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
+    <div className="mx-auto max-w-[1800px] px-6 py-16 sm:px-8 lg:px-12">
       <Link
         to="/work"
         className="inline-flex items-center gap-1 font-mono text-xs text-shell uppercase text-muted-foreground hover:text-primary"

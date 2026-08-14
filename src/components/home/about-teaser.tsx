@@ -7,7 +7,7 @@ export function AboutTeaser() {
   const [firstName] = profile.name.split(" ");
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8">
+    <section className="mx-auto max-w-[1800px] px-6 py-16 sm:px-8 lg:px-12">
       <p className="font-mono text-[11px] text-shell uppercase text-primary">
         &#9670; The byline
       </p>
