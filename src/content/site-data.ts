@@ -279,11 +279,12 @@ export const beyondTheByline: BeyondTab[] = [
     id: "watching",
     label: "The Reel",
     sublabel: "Movies & series",
-    intro: "Working through a watchlist that never gets shorter.",
+    intro:
+      "Slow-burn character work, tense thrillers, and something mindless for when the day's been long.",
     items: [
-      { title: "Replace me", note: "Film or series" },
-      { title: "Replace me", note: "Film or series" },
-      { title: "Replace me", note: "Currently watching" },
+      { title: "Better Call Saul", note: "Vince Gilligan · 2015–2022" },
+      { title: "Sicario", note: "Denis Villeneuve · 2015" },
+      { title: "Family Guy", note: "Seth MacFarlane · 1999" },
     ],
   },
   {
