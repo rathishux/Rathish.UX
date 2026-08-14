@@ -246,9 +246,15 @@ export type BeyondTab = {
   label: string;
   sublabel: string;
   intro: string;
-  // spotifyUrl is only used by the listening tab — paste a Spotify track,
-  // album, or playlist link and the card grows a "Play on Spotify" link.
-  items: { title: string; note: string; spotifyUrl?: string }[];
+  items: {
+    title: string;
+    note: string;
+    // Optional small badge above the title, e.g. "Currently watching".
+    tag?: string;
+    // Outbound links — each renders its own labelled link on the card.
+    spotifyUrl?: string;
+    imdbUrl?: string;
+  }[];
 };
 
 export const beyondTheByline: BeyondTab[] = [
@@ -282,20 +288,22 @@ export const beyondTheByline: BeyondTab[] = [
     intro:
       "Slow-burn character work, tense thrillers, and something mindless for when the day's been long.",
     items: [
-      { title: "Better Call Saul", note: "Vince Gilligan · 2015–2022" },
-      { title: "Sicario", note: "Denis Villeneuve · 2015" },
-      { title: "Family Guy", note: "Seth MacFarlane · 1999" },
-    ],
-  },
-  {
-    id: "reading",
-    label: "The Shelf",
-    sublabel: "Books & space science",
-    intro: "Design, tech, and more space science than my day job needs.",
-    items: [
-      { title: "Replace me", note: "Book or author" },
-      { title: "Replace me", note: "Book or author" },
-      { title: "Replace me", note: "Currently reading" },
+      {
+        title: "Better Call Saul",
+        note: "Vince Gilligan · 2015–2022",
+        imdbUrl: "https://www.imdb.com/title/tt3032476/",
+      },
+      {
+        title: "Sicario",
+        note: "Denis Villeneuve · 2015",
+        imdbUrl: "https://www.imdb.com/title/tt3397884/",
+      },
+      {
+        title: "Family Guy",
+        note: "Seth MacFarlane · 1999",
+        tag: "Currently watching",
+        imdbUrl: "https://www.imdb.com/title/tt0182576/",
+      },
     ],
   },
   {
@@ -304,20 +312,29 @@ export const beyondTheByline: BeyondTab[] = [
     sublabel: "This week's training",
     intro: "Cycling and gym, logged weekly.",
     items: [
-      { title: "Replace me", note: "e.g. distance ridden" },
-      { title: "Replace me", note: "e.g. sessions this week" },
-      { title: "Replace me", note: "e.g. current goal" },
+      { title: "Replace me", note: "e.g. distance ridden this week" },
+      { title: "Replace me", note: "e.g. gym sessions this week" },
+      { title: "Replace me", note: "e.g. what I'm working toward" },
     ],
   },
   {
     id: "hacks",
     label: "The Hacks",
     sublabel: "Small wins",
-    intro: "Tools, shortcuts, and workflow tricks worth keeping.",
+    intro: "Small things that saved me more time than they should have.",
     items: [
-      { title: "Replace me", note: "Tool or shortcut" },
-      { title: "Replace me", note: "Tool or shortcut" },
-      { title: "Replace me", note: "Workflow trick" },
+      {
+        title: "Check it in the browser early",
+        note: "A Figma frame a real device will contradict in five minutes isn't worth polishing first.",
+      },
+      {
+        title: "Sunday batch cook",
+        note: "Three days of lunches done before Monday, so the 8pm what-do-I-eat decision never happens.",
+      },
+      {
+        title: "Name the file properly the first time",
+        note: "Ten seconds now beats twenty minutes hunting for final-v3-actual-FINAL later.",
+      },
     ],
   },
 ];

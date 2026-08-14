@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { beyondTheByline } from "@/content/site-data";
 import { SpotifyIcon } from "@/components/about/spotify-icon";
@@ -59,9 +60,16 @@ export function BeyondByline() {
             key={`${active.id}-${i}`}
             className="rounded-lg border border-border bg-card p-5"
           >
-            <span className="font-mono text-[10px] text-shell uppercase text-primary">
-              {String(i + 1).padStart(2, "0")}
-            </span>
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-mono text-[10px] text-shell uppercase text-primary">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              {item.tag && (
+                <span className="rounded-full border border-primary/40 px-2 py-0.5 font-mono text-[9px] text-shell uppercase text-primary">
+                  {item.tag}
+                </span>
+              )}
+            </div>
             <p className="mt-2 font-serif text-xl">{item.title}</p>
             <p className="mt-1 text-sm text-muted-foreground">{item.note}</p>
             {item.spotifyUrl && (
@@ -73,6 +81,17 @@ export function BeyondByline() {
               >
                 <SpotifyIcon className="size-3.5" />
                 Play on Spotify
+              </a>
+            )}
+            {item.imdbUrl && (
+              <a
+                href={item.imdbUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 font-mono text-[10px] text-shell uppercase text-muted-foreground transition-colors hover:text-primary"
+              >
+                View on IMDb
+                <ArrowUpRight className="size-3" />
               </a>
             )}
           </div>
