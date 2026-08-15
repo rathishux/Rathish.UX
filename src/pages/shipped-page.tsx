@@ -1,9 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
 import { sideProject, shippedTools } from "@/content/site-data";
 
-// Screenshot slots — swap the placeholder blocks below for real
-// screenshots once they're supplied.
-const SCREENSHOT_PLACEHOLDERS = ["Dashboard", "Dose log", "Weight & food", "Progress over time"];
+const SCREENSHOTS = [
+  { file: "nivyou-dashboard.webp", label: "Dashboard" },
+  { file: "nivyou-log-dose.webp", label: "Dose log" },
+  { file: "nivyou-log-weight.webp", label: "Weight & glucose" },
+  { file: "nivyou-progress.webp", label: "Progress over time" },
+];
 
 export function ShippedPage() {
   return (
@@ -139,16 +142,18 @@ export function ShippedPage() {
         </div>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {SCREENSHOT_PLACEHOLDERS.map((label) => (
-            <div
-              key={label}
-              className="flex aspect-[9/16] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-secondary/30 text-center"
-            >
-              <span className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
-                Screenshot
-              </span>
-              <span className="text-sm text-muted-foreground">{label}</span>
-            </div>
+          {SCREENSHOTS.map((shot) => (
+            <figure key={shot.file}>
+              <img
+                src={`${import.meta.env.BASE_URL}nivyou/${shot.file}`}
+                alt={`NivYou — ${shot.label}`}
+                loading="lazy"
+                className="aspect-[9/16] w-full rounded-lg border border-border object-cover"
+              />
+              <figcaption className="mt-2 font-mono text-[11px] text-shell uppercase text-muted-foreground">
+                {shot.label}
+              </figcaption>
+            </figure>
           ))}
         </div>
       </section>

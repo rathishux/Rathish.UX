@@ -18,8 +18,8 @@ export const profile = {
   social: {
     linkedin: "https://www.linkedin.com/in/rathish-gandhi/",
     // Placeholders — replace with real profile URLs.
-    medium: "#",
-    github: "#",
+    medium: "https://medium.com/@rathishuid",
+    github: "https://github.com/rathishux",
   },
 };
 
@@ -122,6 +122,7 @@ export const experience: Experience[] = [
   },
   {
     id: "kipi-bi",
+    thumbnail: "kipi.webp",
     company: "Kipi.bi",
     role: "UX Designer",
     period: "Jan 2024 – Oct 2024",
