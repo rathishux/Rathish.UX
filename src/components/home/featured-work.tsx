@@ -29,7 +29,7 @@ export function FeaturedWork() {
                 to={`/work/${item.id}`}
                 className="group flex flex-col overflow-hidden rounded-lg border border-paper/15 bg-paper/[0.04] transition-colors hover:border-primary"
               >
-                <WorkThumbnail index={index} variant="dark" />
+                <WorkThumbnail index={index} src={item.thumbnail} alt={display.title} variant="dark" />
                 <div className="flex flex-1 flex-col justify-between px-5 py-5">
                   <div>
                     <p className="font-mono text-[11px] text-shell uppercase text-primary">

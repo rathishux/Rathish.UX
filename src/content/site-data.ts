@@ -47,6 +47,9 @@ export type Experience = {
   // rather than "first N in the array" so adding new entries below
   // doesn't silently change what the homepage features.
   featured?: boolean;
+  // Filename inside public/work-thumbs/ used as the card thumbnail.
+  // Entries without one fall back to a flat colour block.
+  thumbnail?: string;
 };
 
 // Falls back to the employer name for entries with no named project yet.
@@ -63,6 +66,7 @@ export function projectDisplay(item: Experience): {
 export const experience: Experience[] = [
   {
     id: "infogain-redesign",
+    thumbnail: "sabre.webp",
     company: "Infogain",
     role: "Senior UX Designer",
     period: "Mar 2025 – Dec 2025",
@@ -81,6 +85,7 @@ export const experience: Experience[] = [
   },
   {
     id: "infogain-admin",
+    thumbnail: "sabre.webp",
     company: "Infogain",
     role: "Senior UX Designer",
     period: "Mar 2025 – Dec 2025",
@@ -98,6 +103,7 @@ export const experience: Experience[] = [
   },
   {
     id: "infogain-desktop-web",
+    thumbnail: "sabre.webp",
     company: "Infogain",
     role: "Senior UX Designer",
     period: "Mar 2025 – Dec 2025",
@@ -132,6 +138,7 @@ export const experience: Experience[] = [
   },
   {
     id: "ericsson",
+    thumbnail: "ericsson.webp",
     company: "Ericsson Global",
     role: "Senior UX Designer",
     period: "Nov 2021 – Jan 2024",
@@ -150,6 +157,7 @@ export const experience: Experience[] = [
   },
   {
     id: "infosys",
+    thumbnail: "finlocker.webp",
     company: "Infosys Limited",
     role: "UX Designer",
     period: "May 2019 – Aug 2021",
@@ -166,6 +174,7 @@ export const experience: Experience[] = [
   },
   {
     id: "nfn-labs",
+    thumbnail: "tac-healthcare.webp",
     company: "NFN Labs",
     role: "UX Designer",
     period: "Aug 2015 – Feb 2019",

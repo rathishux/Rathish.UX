@@ -23,7 +23,7 @@ export function WorkPage() {
               to={`/work/${item.id}`}
               className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-primary"
             >
-              <WorkThumbnail index={index} />
+              <WorkThumbnail index={index} src={item.thumbnail} alt={display.title} />
               <div className="flex flex-1 flex-col justify-between px-5 py-5">
                 <div>
                   <p className="font-mono text-[11px] text-shell uppercase text-primary">
