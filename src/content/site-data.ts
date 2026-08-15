@@ -164,7 +164,7 @@ export const experience: Experience[] = [
     domain: "FinTech · Supply Chain",
     project: { name: "FinLocker", subtitle: "Financial fitness app" },
     featured: true,
-    oneLiner: "Streamlined enterprise workflows for fintech and supply chain",
+    oneLiner: "Helping consumers build credit and get mortgage-ready",
     summary:
       "Designed enterprise SaaS workflows spanning fintech and supply-chain systems, cutting rework at the handoff.",
     highlights: [
