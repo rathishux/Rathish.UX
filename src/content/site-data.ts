@@ -187,6 +187,13 @@ export const experience: Experience[] = [
 // entry's domain). A domain with no entry here simply shows no stats
 // block on hover — only list one where there are real numbers to stand
 // behind, since these read as impact claims to anyone scanning the page.
+// Projects that belong to a domain on the homepage Domains list but don't
+// have their own Work entry or case study — listed so a domain's stats
+// have visible attribution without creating an empty Work card for them.
+export const extraDomainProjects: Record<string, string[]> = {
+  Healthcare: ["SlashDR"],
+};
+
 export type DomainStat = { value: string; label: string };
 export const domainStats: Record<string, DomainStat[]> = {
   Aviation: [

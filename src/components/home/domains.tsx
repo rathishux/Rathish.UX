@@ -1,4 +1,10 @@
-import { domainStats, experience, projectDisplay, type Experience } from "@/content/site-data";
+import {
+  domainStats,
+  experience,
+  extraDomainProjects,
+  projectDisplay,
+  type Experience,
+} from "@/content/site-data";
 
 type DomainGroup = { domain: string; projects: string[] };
 
@@ -16,7 +22,10 @@ function groupByDomain(items: Experience[]): DomainGroup[] {
     }
     projectsByDomain.get(domain)!.push(projectDisplay(item).title);
   }
-  return order.map((domain) => ({ domain, projects: projectsByDomain.get(domain)! }));
+  return order.map((domain) => ({
+    domain,
+    projects: [...projectsByDomain.get(domain)!, ...(extraDomainProjects[domain] ?? [])],
+  }));
 }
 
 export function Domains() {
