@@ -14,7 +14,7 @@ export function WorkPage() {
         Every stop, in order, with what actually shipped.
       </p>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
         {experience.map((item, index) => {
           const display = projectDisplay(item);
           return (
