@@ -20,7 +20,7 @@ export function FeaturedWork() {
           project.
         </p>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {featured.map((item, index) => {
             const display = projectDisplay(item);
             return (
