@@ -162,6 +162,7 @@ export const experience: Experience[] = [
     role: "UX Designer",
     period: "May 2019 – Aug 2021",
     domain: "FinTech · Supply Chain",
+    project: { name: "FinLocker", subtitle: "Financial fitness app" },
     featured: true,
     oneLiner: "Streamlined enterprise workflows for fintech and supply chain",
     summary:
