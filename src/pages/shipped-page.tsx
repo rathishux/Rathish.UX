@@ -65,15 +65,11 @@ export function ShippedPage() {
         </h3>
         <p className="mt-3 text-lg text-muted-foreground">{sideProject.tagline}</p>
 
-        {/* Banner — replace with a real app banner image. */}
-        <div className="mt-8 flex aspect-[21/9] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-secondary/30 text-center">
-          <span className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
-            Banner
-          </span>
-          <span className="text-sm text-muted-foreground">
-            App banner image goes here
-          </span>
-        </div>
+        <img
+          src={`${import.meta.env.BASE_URL}nivyou/nivyou-banner.webp`}
+          alt={`${sideProject.name} — ${sideProject.tagline}`}
+          className="mt-8 aspect-[16/9] w-full max-w-5xl rounded-lg border border-border object-cover"
+        />
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
           {sideProject.tracks.map((track) => (
