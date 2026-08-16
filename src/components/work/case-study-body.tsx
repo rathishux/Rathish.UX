@@ -1,6 +1,15 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { resolveImagePaths, slugify } from "@/lib/case-study";
+import { caseStudyImageSizes } from "@/content/case-study-images";
+
+// resolveImagePaths has already turned "images/foo.webp" into a full
+// "<base>/case-studies/<folder>/images/foo.webp" — the manifest is keyed by
+// everything after "case-studies/".
+function intrinsicSize(src: string): [number, number] | undefined {
+  const key = src.split("case-studies/")[1];
+  return key ? caseStudyImageSizes[key] : undefined;
+}
 
 // A paragraph whose only content is an <em> is one of the source docs'
 // "*Fig. 01 — ...*" captions — style it like a figure caption regardless
@@ -53,18 +62,26 @@ const components: Components = {
     ) : (
       <p className="mt-4 leading-relaxed">{children}</p>
     ),
-  img: ({ src, alt }) => (
-    // Not lazy-loaded on purpose: a lazy image collapses to zero height
-    // until it scrolls into view, which shifts every heading below it
-    // downward as later images load in — an anchor jump (sidebar link,
-    // category tab) computed before that settles lands short of its
-    // target once there's enough content above it on the page.
-    <img
-      src={src}
-      alt={alt}
-      className="mt-6 w-full rounded-md border border-border"
-    />
-  ),
+  img: ({ src, alt }) => {
+    // Lazy-loading is only safe here because of the width/height below: a
+    // lazy image with no intrinsic size collapses to zero height until it
+    // scrolls into view, which shifts every heading below it downward as
+    // later images load in — an anchor jump (sidebar link, category tab)
+    // computed before that settles lands short of its target. With the
+    // dimensions declared the browser reserves the full box up front, so
+    // the layout never moves and the bytes still arrive on demand.
+    const size = typeof src === "string" ? intrinsicSize(src) : undefined;
+    return (
+      <img
+        src={src}
+        alt={alt}
+        loading={size ? "lazy" : undefined}
+        width={size?.[0]}
+        height={size?.[1]}
+        className="mt-6 h-auto w-full rounded-md border border-border"
+      />
+    );
+  },
   blockquote: ({ children }) => (
     <blockquote className="my-8 border-l-2 border-primary pl-5 font-serif text-xl italic leading-snug">
       {children}

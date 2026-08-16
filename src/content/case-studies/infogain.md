@@ -23,7 +23,7 @@ Ops teams managed slot sets in a dense, table-heavy interface. On the surface it
 - Users relied on tribal knowledge and manual double-checking rather than the system surfacing risk
 - The result: a high risk of conflicts, overlaps, and invalid schedules in a domain where errors are expensive
 
-![Slot table view](images/dashboard-spreadsheet.png)
+![Slot table view](images/dashboard-spreadsheet.webp)
 *Fig. 01 — Dense grid of arrival/departure slot data, narrow columns, no visual hierarchy. This is the "table-heavy interface."*
 
 **The legacy discrepancy flow** made this worse. When a discrepancy occurred, a user got a generic alert, opened their inbox, read through unstructured text to understand what was actually wrong, replied, then had to cancel the existing request and recreate it from scratch — every single time. This loop repeated in full for every discrepancy: Alert received → Open inbox → Read message → Reply to sender → Cancel request → Create new request.
@@ -41,13 +41,13 @@ Two ways to surface discrepancies directly in context were prototyped, each show
 **Option A — Accordion cards on the dashboard**
 Discrepancy summaries embedded alongside existing dashboard data.
 
-![Accordion option](images/discrepancy-accordion.png)
+![Accordion option](images/discrepancy-accordion.webp)
 *Fig. 02 — Row of summary cards (Schedule/Slot Time, Equipment, Seat Numbers), each with the discrepancy value and an inline action.*
 
 **Option B — Modal (shipped)**
 A dedicated, expandable view triggered from an alert on the dashboard.
 
-![Modal option, shipped](images/discrepancy-modal.png)
+![Modal option, shipped](images/discrepancy-modal.webp)
 *Fig. 03 — "List of discrepancies" modal with grouped sections, a Select All checkbox, and a SEND SCR/SMA action.*
 
 ### The decision: modal
@@ -70,10 +70,10 @@ The biggest shift in this project wasn't visual — it was realizing that a bett
 ### Send SCR
 An SCR is the formal message an airline sends to an airport slot coordinator when a flight's schedule changes — how a change gets registered and approved in the slot system. Previously this lived buried in the workflow; the redesign surfaced it as a direct icon action from the dashboard. The "Send Pending SCR Message" modal lists every pending SCR in one table — aircraft, arrival and departure ports, flight numbers, effective and discontinue dates, days of operation, seats, equipment — with general and supplementary notes fields before sending, so an ops team can review and send a whole batch without leaving their working view.
 
-![Send SCR, early exploration](images/send-scr-exploration.png)
+![Send SCR, early exploration](images/send-scr-exploration.webp)
 *Fig. 03a — An earlier exploration of the Send Pending SCR Message modal.*
 
-![Send SCR, approved layout](images/send-scr-approved.png)
+![Send SCR, approved layout](images/send-scr-approved.webp)
 *Fig. 03b — "Send Pending SCR Message" modal: slot table, Additional Information fields, and Send SCRs action.*
 
 ### Change Generator
@@ -81,20 +81,20 @@ Where Send SCR handles one flight's change, Change Generator applies a change at
 
 **Scoping the change** starts with a slot set and season, then a date range — picked from a calendar that understands airline seasons (IATA vs. standard, current season, peak week) rather than raw dates. From there the change can pull from master, auxiliary, or prior-season schedules, and narrow further by airport, flight designator range, service type, or equipment type — each filterable as all, only, or except.
 
-![Change Generator filters](images/change-generator-filters.png)
+![Change Generator filters](images/change-generator-filters.webp)
 *Fig. 04 — Scoping a change: slot set, season, schedule source, and the airport/flight/service/equipment filters.*
 
-![Change Generator date range picker](images/change-generator-date-range.png)
+![Change Generator date range picker](images/change-generator-date-range.webp)
 *Fig. 05 — Picking a date range from a season-aware calendar: IATA vs. standard, current season, peak week.*
 
 **Configuring the rules** is the part that made this hard. Change Generator exposes a long list of business rules — equipment substitution, auto-pairing, rounding, terminal handling, and a dozen more — each defaulting to "Use CSP" (the airline's standing change-source profile) but overridable individually. The design had to work for an expert user who mostly wants the defaults to stay out of the way, with room to override exactly the rule that matters for this one change, without wading through the other twenty to find it.
 
-![Change Generator slot status rules](images/change-generator-slot-status.png)
+![Change Generator slot status rules](images/change-generator-slot-status.webp)
 *Fig. 06 — Slot Status: the underlying business rules, each defaulting to the airline's change-source profile but overridable per rule.*
 
 **Previewing before committing**: Change Generator splits its results into "available" and "selected" slot tables, so ops can review exactly what will change, hand-pick a subset, and export to Excel or save — before generating anything for real.
 
-![Change Generator preview](images/change-generator-preview.png)
+![Change Generator preview](images/change-generator-preview.webp)
 *Fig. 07 — Change Generator Preview: available vs. selected slots, reviewed and exported before generating.*
 
 ---
@@ -111,22 +111,22 @@ IF Leg Origin is RUH AND Time & Date < 10 THEN Capacity User SET to 140
 ### Key design details
 The hard part wasn't the rule syntax — it was making sure an analyst creating a new rule could see what they were about to step on. **Conflict visibility before creation**: a "Rules created for selected level" panel surfaces any existing rule already touching the same flight, cabin, or leg combination, before the new one gets saved. **Templates for reuse** let an analyst start from a saved rule shape instead of rebuilding the same condition structure from scratch every time. And rules move through a **defined lifecycle** — Active, Inactive, Discontinued, Manually Paused — each state driven by explicit logic instead of being a black box an analyst just has to trust.
 
-![Rules list](images/rules-list.png)
+![Rules list](images/rules-list.webp)
 *Fig. 06 — All created rules with level, priority, strategies, status, effective/discontinue dates, and creator.*
 
-![Create new rule](images/create-rule.png)
+![Create new rule](images/create-rule.webp)
 *Fig. 07 — Specify Level mode: rule structure fields, existing-rules-for-this-level panel, and condition/action rule blocks.*
 
-![Existing rules expanded](images/create-rule-expanded.png)
+![Existing rules expanded](images/create-rule-expanded.webp)
 *Fig. 08 — Existing rules for the selected level, expanded — surfacing conflicts before save.*
 
-![Use Template mode](images/create-rule-template.png)
+![Use Template mode](images/create-rule-template.webp)
 *Fig. 09 — Starting from a saved template instead of building conditions from scratch.*
 
-![Rule detail panel](images/rule-details.png)
+![Rule detail panel](images/rule-details.webp)
 *Fig. 10 — Selecting a rule shows its full IF/THEN definition alongside general information.*
 
-![Rule status reference](images/rule-status-reference.png)
+![Rule status reference](images/rule-status-reference.webp)
 *Fig. 11 — Active, Inactive, Discontinued, and Manually Paused, each with the logic that determines it.*
 
 ---
@@ -138,26 +138,26 @@ A companion admin tool for demand and revenue analysis, split into two tabs — 
 ### Analysis — reading demand three ways
 A flat booking number doesn't tell an analyst whether demand is pacing normally or falling behind, so bookings and revenue can be viewed against three time dimensions instead: by departure date, by day of week, or by days-to-departure. A departure-date view uses a bar chart with season shading (Low/Mid/High/Peak); a days-to-departure view plots a cumulative booking curve against a "Today" marker, showing how bookings are pacing toward a forecast.
 
-![Departure horizon view](images/market-analysis-base.png)
+![Departure horizon view](images/market-analysis-base.webp)
 *Fig. 12 — Departure horizon view, with the Data output table for the underlying records.*
 
-![Booking horizon view](images/market-analysis-booking-horizon.png)
+![Booking horizon view](images/market-analysis-booking-horizon.webp)
 *Fig. 13 — Cumulative pace toward departure, with a forecast tail past today.*
 
 For when the top-line number looks fine but a specific slice of it isn't, an **Additional dimensions** panel expands the same data into small-multiple breakdowns — by POS, market, cabin, service, and TPS.
 
-![Additional dimensions expanded](images/market-analysis-dimensions.png)
+![Additional dimensions expanded](images/market-analysis-dimensions.webp)
 *Fig. 14 — The same data sliced by POS, market, cabin, service, and TPS.*
 
 ### Management — calibrating the demand model
 Sometimes the system's own demand curve stops matching reality — an analyst sees something in the market the model hasn't caught up to yet. For a specific service and cabin, the Management tab plots the system's curve alongside a reference curve and any manual adjustments, and a demand multiplier table lets the analyst enter a base demand and omega value and see the recalculated demand at every price point immediately, instead of waiting on a batch recalculation.
 
-![Demand curve](images/market-management-demand-curve.png)
+![Demand curve](images/market-management-demand-curve.webp)
 *Fig. 15 — Demand curve with an editable multiplier table below it.*
 
 Before an adjustment goes live, a preview panel replays the same booking/revenue chart under the new demand assumption — so a manual override doesn't just take effect blind.
 
-![Preview before publish](images/market-management-preview.png)
+![Preview before publish](images/market-management-preview.webp)
 *Fig. 16 — Preview of the adjusted demand model before Publish.*
 
 ---
@@ -169,50 +169,50 @@ Not every project here is a redesign. Schedule Manager is a long-running, separa
 ### Finding and comparing a schedule
 A schedule manager searches for and selects a schedule from a list, then chooses how to compare it — Standard (two-way), Three-way, or Merge Express, all from one Compare menu.
 
-![Flight Display before selection](images/schedule-manager/01-flight-display.png)
+![Flight Display before selection](images/schedule-manager/01-flight-display.webp)
 *Fig. 17 — Flight Display, before a schedule is selected.*
 
-![Select Schedule modal](images/schedule-manager/02-select-schedule.png)
+![Select Schedule modal](images/schedule-manager/02-select-schedule.webp)
 *Fig. 18 — Select Schedule modal.*
 
-![Compare mode menu](images/schedule-manager/03-compare-mode-menu.png)
+![Compare mode menu](images/schedule-manager/03-compare-mode-menu.webp)
 *Fig. 19 — The three compare modes, all one click away from the flight list.*
 
 ### Standard compare
 Standard compare sets a Source and Target schedule side by side. Advanced Options exposes how flights are matched and what counts as a meaningful difference, so the comparison can be tuned to the situation rather than run through one fixed algorithm that's wrong half the time.
 
-![Compare Standard filled](images/schedule-manager/04-compare-standard-filled.png)
+![Compare Standard filled](images/schedule-manager/04-compare-standard-filled.webp)
 *Fig. 20 — Source and Target schedules selected, ready to compare.*
 
-![Advanced Options](images/schedule-manager/05-advanced-options.png)
+![Advanced Options](images/schedule-manager/05-advanced-options.webp)
 *Fig. 21 — Match Criteria, Threshold, and Show Options settings.*
 
 Results come back categorized by change type — Cancelled, New, Retimes, Block Time, Equipment, Flight Number, and Other — so a schedule manager can scan straight to the category that matters instead of reading every row.
 
-![Compare results](images/schedule-manager/06-compare-standard-results.png)
+![Compare results](images/schedule-manager/06-compare-standard-results.webp)
 *Fig. 22 — Compare results, categorized by change type.*
 
-![Merge success](images/schedule-manager/07-merge-success.png)
+![Merge success](images/schedule-manager/07-merge-success.webp)
 *Fig. 23 — Confirmation after a standard merge.*
 
 ### Three-way compare and Conflicts
 Three-way compare adds a Base schedule alongside Source and Target — reconciling three versions at once surfaces something a two-way diff structurally can't: a flight with more than one clashing change landing on it simultaneously. Those get their own **Conflicts** category.
 
-![Three-way compare filled](images/schedule-manager/08-threeway-filled.png)
+![Three-way compare filled](images/schedule-manager/08-threeway-filled.webp)
 *Fig. 24 — Base, Source, and Target all selected.*
 
-![Three-way conflicts](images/schedule-manager/09-threeway-conflicts.png)
+![Three-way conflicts](images/schedule-manager/09-threeway-conflicts.webp)
 *Fig. 25 — A Conflicts tab appears only in three-way compare, where it can actually be detected.*
 
 A conflicting row can't be bulk-selected — the system forces a deliberate choice instead of letting a batch merge quietly overwrite one side of the conflict.
 
-![Select changes to merge](images/schedule-manager/10-select-changes-to-merge.png)
+![Select changes to merge](images/schedule-manager/10-select-changes-to-merge.webp)
 *Fig. 26 — A conflict forces a specific choice instead of a blanket selection.*
 
 ### Merge Express
 Merge Express is where a three-way merge lands: pre-selected with everything safe to merge, conflicts already excluded and set aside for the schedule manager to resolve by hand.
 
-![Merge Express](images/schedule-manager/11-merge-express.png)
+![Merge Express](images/schedule-manager/11-merge-express.webp)
 *Fig. 27 — Everything safe to merge, pre-selected; conflicts left untouched.*
 
 > Note: This flow replicates the existing desktop application's behavior rather than introducing new UX — the goal was a faithful, modern web translation of a tool schedule managers already know, not a redesign.
