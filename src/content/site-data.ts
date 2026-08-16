@@ -441,7 +441,7 @@ export const faq: FaqEntry[] = [
     keywords: ["total experience", "total years", "how many years", "how long have you", "yoe"],
     priority: true,
     answer:
-      "Just over nine and a half years — I started at NFN Labs in August 2015 and have been designing ever since, most recently at Infogain through December 2025.",
+      "Just over nine and a half years, all of it in design. Happy to walk through any part of it.",
   },
   {
     id: "relevant-experience",
@@ -538,7 +538,7 @@ export const faq: FaqEntry[] = [
     question: "Experience with data-driven UX?",
     keywords: ["data", "analytics", "data-driven", "metrics", "dashboard", "insight"],
     answer:
-      "Yes — it's a thread through most of my work. At Kipi.bi I designed Kipi 360, an analytics dashboard tracking account health, use-case pipelines, and employee activity in one place. At Ericsson the Sourcing Pricebook work was built around helping buyers compare suppliers and read price history rather than guess. Data-driven design is one of my listed core skills, not an add-on.",
+      "Yes. At Ericsson I led UX for the Lighthouse Sourcing Pricebook, where the whole point was letting buyers read the data instead of guessing — suppliers compared side by side, and price history over time rather than a single quoted number. It saved $20K+ in subscription costs and cut 60% off the time to complete a sourcing task.",
   },
   {
     id: "relocation",
@@ -599,8 +599,19 @@ export const faq: FaqEntry[] = [
   },
   {
     id: "current",
-    question: "What have you worked on lately?",
-    keywords: ["recent", "latest", "lately", "last role", "most recent"],
+    question: "What was your last company?",
+    keywords: [
+      "recent",
+      "latest",
+      "lately",
+      "last role",
+      "most recent",
+      "last company",
+      "previous company",
+      "which company",
+      "last organisation",
+      "last organization",
+    ],
     answer: `Most recently ${experience[0].company} as ${experience[0].role} (${experience[0].period}) — ${experience[0].summary}`,
   },
   {

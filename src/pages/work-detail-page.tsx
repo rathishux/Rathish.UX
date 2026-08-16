@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { CaseStudyBody } from "@/components/work/case-study-body";
 import { CaseStudySidebar } from "@/components/work/case-study-sidebar";
 import { AtAGlance } from "@/components/work/at-a-glance";
+import { SectionTabs } from "@/components/work/section-tabs";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { experience, projectDisplay } from "@/content/site-data";
@@ -122,19 +123,11 @@ export function WorkDetailPage() {
             </div>
           ) : (
             <>
-              {sectionTabs.length > 1 && (
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {sectionTabs.map((h) => (
-                    <ViewTab
-                      key={h.slug}
-                      active={activeNumber === h.number}
-                      onClick={() => setActiveNumber(h.number)}
-                      label={h.title.replace(/^\d+\.\s*/, "")}
-                      detail={h.subtitle ?? ""}
-                    />
-                  ))}
-                </div>
-              )}
+              <SectionTabs
+                sections={sectionTabs}
+                activeNumber={activeNumber}
+                onSelect={setActiveNumber}
+              />
               <div className="mt-10 grid gap-10 lg:grid-cols-[220px_1fr]">
                 <CaseStudySidebar headings={headings} activeSlug={activeSlug} />
                 <CaseStudyBody

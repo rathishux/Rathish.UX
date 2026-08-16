@@ -1,6 +1,6 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { resolveImagePaths, slugify } from "@/lib/case-study";
+import { resolveImagePaths, slugify, stripHeadingNumber } from "@/lib/case-study";
 import { caseStudyImageSizes } from "@/content/case-study-images";
 
 // resolveImagePaths has already turned "images/foo.webp" into a full
@@ -38,14 +38,20 @@ function textOf(node: React.ReactNode): string {
 // extractHeadings slug, since the sidebar TOC and category tabs jump to
 // these directly.
 const components: Components = {
-  h2: ({ children }) => (
-    <h2
-      id={slugify(textOf(children))}
-      className="mt-16 scroll-mt-40 font-serif text-2xl italic sm:text-3xl"
-    >
-      {children}
-    </h2>
-  ),
+  h2: ({ children }) => {
+    // Slug from the raw heading (numbering included) so it still matches the
+    // anchor extractHeadings computes; display without it, since the number
+    // only orders sections inside the shared source doc.
+    const raw = textOf(children);
+    return (
+      <h2
+        id={slugify(raw)}
+        className="mt-16 scroll-mt-40 font-serif text-2xl italic sm:text-3xl"
+      >
+        {stripHeadingNumber(raw)}
+      </h2>
+    );
+  },
   h3: ({ children }) => (
     <h3
       id={slugify(textOf(children))}

@@ -66,12 +66,24 @@ export type CaseStudyHeading = {
   number?: number;
 };
 
+// Strips the leading "N." off a heading. The numbering exists to slice one
+// shared source doc across several pages — it means nothing to someone
+// reading a single split-out page, where "3. Booking Rules Engine" just
+// looks like a section 1 and 2 are missing.
+export function stripHeadingNumber(title: string): string {
+  return title.replace(/^\d+\.\s*/, "");
+}
+
 // Every "##" and "###" heading in document order, tagged with its level.
-// A trailing "(parenthetical)" on an h2 becomes its subtitle, e.g.
-// "1. Discrepancy Resolution (main case study)" splits into title
-// "1. Discrepancy Resolution" and subtitle "Main case study" — the slug is
-// still generated from the full original heading so it matches the id
-// CaseStudyBody assigns to the rendered element.
+// A trailing "(parenthetical)" on an h2 becomes its subtitle and a leading
+// "N." is pulled out into `number`, so "3. Booking Rules Engine (slot
+// policy)" gives title "Booking Rules Engine", subtitle "Slot policy",
+// number 3.
+//
+// The slug is still built from the full original heading — numbering and
+// parenthetical included — so it matches the id CaseStudyBody assigns to the
+// rendered element. Strip anything from the slug and every sidebar anchor
+// stops resolving.
 export function extractHeadings(body: string): CaseStudyHeading[] {
   const headings: CaseStudyHeading[] = [];
   for (const line of body.split("\n")) {
@@ -83,7 +95,9 @@ export function extractHeadings(body: string): CaseStudyHeading[] {
       const number = numberMatch ? Number(numberMatch[1]) : undefined;
 
       const parenMatch = fullTitle.match(/^(.+?)\s*\(([^)]+)\)$/);
-      const title = parenMatch ? parenMatch[1].trim() : fullTitle;
+      const title = stripHeadingNumber(
+        parenMatch ? parenMatch[1].trim() : fullTitle,
+      );
       const subtitle = parenMatch
         ? parenMatch[2].charAt(0).toUpperCase() + parenMatch[2].slice(1)
         : undefined;
