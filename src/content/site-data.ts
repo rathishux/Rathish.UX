@@ -17,7 +17,6 @@ export const profile = {
   schedulingUrl: "https://calendly.com/rathish3/coffee-chat",
   social: {
     linkedin: "https://www.linkedin.com/in/rathish-gandhi/",
-    // Placeholders — replace with real profile URLs.
     medium: "https://medium.com/@rathishuid",
     github: "https://github.com/rathishux",
   },
