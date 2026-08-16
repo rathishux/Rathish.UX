@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { faq, fallbackFaqAnswer, profile } from "@/content/site-data";
+import { faq, fallbackFaqAnswer, profile, type FaqEntry } from "@/content/site-data";
 import { useChat } from "@/lib/chat-context";
 
 type ChatMessage = {
@@ -14,42 +14,68 @@ type ChatMessage = {
 const GREETING: ChatMessage = {
   id: "greeting",
   from: "bot",
-  text: `Hi, I'm a scripted assistant — ask me about ${profile.name}'s experience, skills, or how to get in touch. Pick a question below or type your own.`,
+  text: `Hi — I'm a scripted assistant answering on ${profile.name}'s behalf. Ask about experience, location, or how he works. Pick a question below or type your own.`,
 };
 
-function findAnswer(input: string): string {
+// Longer keywords are more specific, so a match on one is worth more than a
+// match on a short common word. Without this, "experience" alone pulls the
+// generic entry ahead of "relevant ux experience".
+function score(entry: FaqEntry, normalized: string): number {
+  return entry.keywords.reduce(
+    (acc, kw) => (normalized.includes(kw) ? acc + kw.length : acc),
+    0,
+  );
+}
+
+function findEntry(input: string): FaqEntry | undefined {
   const normalized = input.toLowerCase();
-  let best: { score: number; answer: string } | null = null;
+  let best: { score: number; entry: FaqEntry } | undefined;
 
   for (const entry of faq) {
-    const score = entry.keywords.reduce(
-      (acc, kw) => acc + (normalized.includes(kw) ? 1 : 0),
-      0,
-    );
-    if (score > 0 && (!best || score > best.score)) {
-      best = { score, answer: entry.answer };
-    }
+    const s = score(entry, normalized);
+    if (s > 0 && (!best || s > best.score)) best = { score: s, entry };
   }
 
-  return best?.answer ?? fallbackFaqAnswer;
+  return best?.entry;
 }
+
+const CHIP_COUNT = 4;
 
 export function FaqWidget() {
   const { open, setOpen } = useChat();
   const [messages, setMessages] = useState<ChatMessage[]>([GREETING]);
+  const [answered, setAnswered] = useState<string[]>([]);
   const [input, setInput] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Priority questions lead, and anything already answered drops out so the
+  // suggestions keep moving rather than repeating what's on screen.
+  const suggestions = useMemo(() => {
+    const remaining = faq.filter((entry) => !answered.includes(entry.id));
+    return [
+      ...remaining.filter((e) => e.priority),
+      ...remaining.filter((e) => !e.priority),
+    ].slice(0, CHIP_COUNT);
+  }, [answered]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [messages]);
 
   function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed) return;
 
-    const userMsg: ChatMessage = { id: crypto.randomUUID(), from: "user", text: trimmed };
-    const botMsg: ChatMessage = {
-      id: crypto.randomUUID(),
-      from: "bot",
-      text: findAnswer(trimmed),
-    };
-    setMessages((prev) => [...prev, userMsg, botMsg]);
+    const entry = findEntry(trimmed);
+    setMessages((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), from: "user", text: trimmed },
+      { id: crypto.randomUUID(), from: "bot", text: entry?.answer ?? fallbackFaqAnswer },
+    ]);
+    if (entry) setAnswered((prev) => (prev.includes(entry.id) ? prev : [...prev, entry.id]));
     setInput("");
   }
 
@@ -57,7 +83,7 @@ export function FaqWidget() {
 
   return (
     <div className="fixed bottom-5 right-5 z-50">
-      <div className="flex h-[28rem] w-[22rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-lg border border-border bg-card shadow-xl">
+      <div className="flex h-[32rem] max-h-[calc(100vh-2.5rem)] w-[23rem] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-lg border border-border bg-card shadow-xl">
         <div className="flex items-center justify-between border-b border-border bg-secondary/50 px-4 py-3">
           <div>
             <p className="font-serif text-lg italic">Ask {profile.nickname}</p>
@@ -75,12 +101,16 @@ export function FaqWidget() {
           </button>
         </div>
 
-        <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+        <div
+          ref={scrollRef}
+          className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
+          aria-live="polite"
+        >
           {messages.map((m) => (
             <div
               key={m.id}
               className={cn(
-                "max-w-[85%] rounded-lg px-3 py-2 text-sm",
+                "max-w-[85%] rounded-lg px-3 py-2 text-sm leading-relaxed",
                 m.from === "bot"
                   ? "bg-secondary text-secondary-foreground"
                   : "ml-auto bg-primary text-primary-foreground",
@@ -91,18 +121,20 @@ export function FaqWidget() {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-1.5 border-t border-border px-3 py-2">
-          {faq.slice(0, 4).map((entry) => (
-            <button
-              key={entry.id}
-              type="button"
-              onClick={() => send(entry.question)}
-              className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-            >
-              {entry.question}
-            </button>
-          ))}
-        </div>
+        {suggestions.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 border-t border-border px-3 py-2">
+            {suggestions.map((entry) => (
+              <button
+                key={entry.id}
+                type="button"
+                onClick={() => send(entry.question)}
+                className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+              >
+                {entry.question}
+              </button>
+            ))}
+          </div>
+        )}
 
         <form
           onSubmit={(e) => {

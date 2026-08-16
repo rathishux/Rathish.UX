@@ -16,7 +16,9 @@ const SLIDES = [
   },
   {
     eyebrow: "Reach",
-    title: `${experience.length} Industries`,
+    // Count the distinct industries actually listed below, not the number of
+    // experience entries — several entries share a domain.
+    title: `${new Set(experience.map((e) => e.domain.split(" · ")[0])).size} Industries`,
     detail: Array.from(new Set(experience.map((e) => e.domain.split(" · ")[0]))).join(
       ", ",
     ),

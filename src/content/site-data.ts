@@ -402,7 +402,12 @@ export const shippedTools = [
 
 export const stats = [
   { value: "9+", label: "Years in practice" },
-  { value: String(experience.length), label: "Companies shipped at" },
+  {
+    // Distinct employers, not entries — the three Sabre projects all sit
+    // under Infogain, so experience.length counts it three times.
+    value: String(new Set(experience.map((e) => e.company)).size),
+    label: "Companies shipped at",
+  },
   {
     value: String(new Set(experience.map((e) => e.domain.split(" · ")[0])).size),
     label: "Industries",
@@ -411,67 +416,153 @@ export const stats = [
 
 export type FaqEntry = {
   id: string;
+  // Chip label. Keep it short — these render as pills in a 22rem panel.
   question: string;
   keywords: string[];
   answer: string;
+  // Surfaced first when the widget opens. These are the questions a hiring
+  // manager opens with, so they shouldn't be buried under the general ones.
+  priority?: boolean;
 };
 
+// Answers are written in Rathish's own voice — the widget is "Ask Ratz", so
+// a visitor is addressing him directly.
+//
+// Every figure here traces back to the dates in `experience` above. Nothing
+// is estimated: the totals are 42 + 27 + 26 + 9 + 9 = 113 months.
 export const faq: FaqEntry[] = [
   {
+    id: "total-experience",
+    question: "Total years of experience?",
+    keywords: ["total experience", "years", "how long", "experience do you", "yoe"],
+    priority: true,
+    answer:
+      "Just over nine and a half years — I started at NFN Labs in August 2015 and have been designing ever since, most recently at Infogain through December 2025.",
+  },
+  {
+    id: "relevant-experience",
+    question: "Relevant UX/UI experience?",
+    keywords: ["relevant", "ux experience", "ui experience", "design experience", "relevant experience"],
+    priority: true,
+    answer:
+      "All of it. Every role I've held has been a UX/UI design role — none of the total is padded with unrelated work. I've been at Senior UX Designer level since November 2021, so roughly four and a half years of that is senior.",
+  },
+  {
+    id: "preferred-location",
+    question: "Preferred location?",
+    keywords: ["preferred location", "prefer", "which city", "where do you want"],
+    priority: true,
+    answer: `I'm actively looking in ${profile.openToCities.join(", ")} — happy with any of the three.`,
+  },
+  {
+    id: "data-driven",
+    question: "Experience with data-driven UX?",
+    keywords: ["data", "analytics", "data-driven", "metrics", "dashboard", "insight"],
+    answer:
+      "Yes — it's a thread through most of my work. At Kipi.bi I designed Kipi 360, an analytics dashboard tracking account health, use-case pipelines, and employee activity in one place. At Ericsson the Sourcing Pricebook work was built around helping buyers compare suppliers and read price history rather than guess. Data-driven design is one of my listed core skills, not an add-on.",
+  },
+  {
+    id: "relocation",
+    question: "Open to relocation?",
+    keywords: ["relocate", "relocation", "move", "shift"],
+    answer: `Yes. I'm open to relocating for the right role — ${profile.openToCities.join(", ")} are the three I'm targeting.`,
+  },
+  {
+    id: "hybrid",
+    question: "Comfortable with office/hybrid?",
+    keywords: ["hybrid", "office", "wfo", "onsite", "on-site", "work from office", "remote"],
+    answer:
+      "Yes, completely. I'm looking for full-time roles on-site or hybrid and I'll work to whatever rhythm the team already has — I'd rather be in the room for the messy early parts of a project anyway.",
+  },
+  {
+    id: "agile",
+    question: "Comfortable with Agile/Scrum?",
+    keywords: ["agile", "scrum", "sprint", "ceremonies", "standup"],
+    answer:
+      "Yes — Agile/Scrum is one of my core skills and it's how I've worked throughout. At Infosys I collaborated in Agile teams delivering enterprise SaaS workflows, and the enterprise work since has run on the same cadence, with design staying a step ahead of development.",
+  },
+  {
+    id: "stakeholders",
+    question: "Client-facing / stakeholder work?",
+    keywords: ["client", "stakeholder", "facing", "workshop", "presentation", "communication"],
+    answer:
+      "Yes, and it's some of the work I like most. At Ericsson I ran the workshops that decided the scope of the Sourcing Pricebook rebuild — two of them — and built personas and journey maps specifically to get stakeholders aligned before a single screen was designed. The Ericsson case study walks through how those sessions went.",
+  },
+  {
+    id: "domains",
+    question: "Open to different domains?",
+    keywords: ["domain", "domains", "industry", "industries", "different project", "vertical"],
+    answer:
+      "Yes — I've moved across them deliberately: aviation at Infogain, telecom at Ericsson, healthcare at NFN Labs and SlashDR, fintech at Infosys, and data & analytics at Kipi.bi. Getting productive in an unfamiliar domain quickly is a large part of what I actually do.",
+  },
+  {
+    id: "assessment",
+    question: "Open to a design assessment?",
+    keywords: ["assessment", "assignment", "test", "task", "take home", "interview process", "portfolio review"],
+    answer:
+      "Yes, happy to. Whatever your process looks like — portfolio walkthrough, design exercise, or a take-home — I'm glad to go through it.",
+  },
+  {
     id: "who",
-    question: "Who is Rathish?",
-    keywords: ["who", "about", "yourself", "bio"],
-    answer: `${profile.name} — ${profile.title}. ${profile.summary}`,
+    question: "Who are you?",
+    keywords: ["who", "about", "yourself", "bio", "introduce"],
+    answer: `I'm ${profile.name}, a ${profile.title}. ${profile.summary}`,
   },
   {
     id: "experience",
-    question: "Where has he worked?",
-    keywords: ["experience", "work", "company", "companies", "career", "history"],
-    answer: `Across ${experience.length} companies over 9+ years: ${experience
+    question: "Where have you worked?",
+    keywords: ["where have you worked", "company", "companies", "career", "history", "employer"],
+    answer: `Five companies over nine and a half years: ${Array.from(
+      new Map(experience.map((e) => [e.company, e])).values(),
+    )
       .map((e) => `${e.company} (${e.role}, ${e.period})`)
       .join("; ")}.`,
   },
   {
     id: "current",
-    question: "What's he doing right now?",
-    keywords: ["current", "now", "recent", "latest", "today"],
-    answer: `Most recently at ${experience[0].company} as ${experience[0].role} (${experience[0].period}): ${experience[0].summary}`,
+    question: "What have you worked on lately?",
+    keywords: ["recent", "latest", "lately", "last role", "most recent"],
+    answer: `Most recently ${experience[0].company} as ${experience[0].role} (${experience[0].period}) — ${experience[0].summary}`,
   },
   {
     id: "projects",
-    question: "What kind of projects has he shipped?",
-    keywords: ["project", "projects", "shipped", "portfolio", "case study", "work on"],
-    answer: `Product design work spanning ${Array.from(new Set(experience.map((e) => e.domain))).join(", ")} — see the Work section for details on each.`,
+    question: "What have you shipped?",
+    keywords: ["project", "projects", "shipped", "portfolio", "case study", "work on", "built"],
+    answer:
+      "Sabre's scheduling and admin tools in aviation, Ericsson's Sourcing Pricebook in telecom, Kipi 360 in data analytics, FinLocker in fintech, and TAC Healthcare's EHR. I also built and shipped NivYou, a GLP-1 tracker, to the Play Store myself — the Shipped page covers that one.",
   },
   {
     id: "skills",
-    question: "What are his skills?",
-    keywords: ["skill", "skills", "good at", "expertise", "tools"],
+    question: "What are your skills?",
+    keywords: ["skill", "skills", "good at", "expertise", "tools", "software"],
     answer: `Core skills: ${skills.join(", ")}.`,
   },
   {
     id: "education",
-    question: "What's his education?",
-    keywords: ["education", "degree", "study", "school", "college", "university"],
+    question: "What's your education?",
+    keywords: ["education", "degree", "study", "school", "college", "university", "qualification"],
     answer: `${education.map((e) => `${e.credential} — ${e.school}`).join(", ")}. Certifications: ${certifications
       .map((c) => (c.issuer ? `${c.name} (${c.issuer})` : c.name))
       .join(", ")}.`,
   },
   {
     id: "contact",
-    question: "How can I get in touch?",
-    keywords: ["contact", "email", "reach", "hire", "talk", "connect"],
-    answer: `Email ${profile.email}, or connect on LinkedIn — links are on the Contact page.`,
+    question: "How can I reach you?",
+    keywords: ["contact", "email", "reach", "hire", "talk", "connect", "call", "schedule"],
+    answer: `Email me at ${profile.email}, or book a 30-minute coffee chat — both are on the Contact page, along with LinkedIn.`,
   },
   {
     id: "location",
-    question: "Where is he based?",
-    keywords: ["location", "based", "where", "live", "remote"],
-    answer: `Based in ${profile.location}.`,
+    question: "Where are you based?",
+    keywords: ["based", "live", "current location", "where are you"],
+    answer: `I'm in ${profile.location}, and open to full-time roles in ${profile.openToCities.join(", ")}.`,
   },
 ];
 
+// Availability, notice period, and compensation are deliberately not scripted
+// here — they change month to month, and a stale answer on a public page is
+// worse than no answer. The widget points those to a direct conversation.
 export const fallbackFaqAnswer =
-  "That's not something I've got a scripted answer for yet — try one of the questions below, or email " +
+  "I don't have a scripted answer for that one. For anything on availability, notice period, or compensation — or anything else not covered here — email me at " +
   profile.email +
-  " directly.";
+  " and I'll answer properly. You can also pick one of the suggested questions below.";
