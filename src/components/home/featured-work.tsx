@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { WorkThumbnail } from "@/components/work/work-thumbnail";
-import { experience, projectDisplay } from "@/content/site-data";
+import { WorkCard } from "@/components/work/work-card";
+import { experience, externalProjects, projectDisplay } from "@/content/site-data";
 
 export function FeaturedWork() {
   const featured = experience.filter((item) => item.featured);
+  const featuredExternal = externalProjects.filter((item) => item.featured);
 
   return (
     <section className="bg-ink text-paper">
@@ -24,31 +25,36 @@ export function FeaturedWork() {
           {featured.map((item, index) => {
             const display = projectDisplay(item);
             return (
-              <Link
+              <WorkCard
                 key={item.id}
-                to={`/work/${item.id}`}
-                className="group flex flex-col overflow-hidden rounded-lg border border-paper/15 bg-paper/[0.04] transition-colors hover:border-primary"
-              >
-                <WorkThumbnail index={index} src={item.thumbnail} alt={display.title} variant="dark" />
-                <div className="flex flex-1 flex-col justify-between px-5 py-5">
-                  <div>
-                    <p className="font-mono text-[11px] text-shell uppercase text-primary">
-                      {display.title}
-                      {item.shippedYear && ` · Shipped ${item.shippedYear}`}
-                    </p>
-                    <h4 className="mt-2 font-serif text-2xl sm:text-3xl">{item.oneLiner}</h4>
-                    <p className="mt-2 text-sm text-paper/70">
-                      {item.domain} &middot; {item.role}
-                    </p>
-                  </div>
-                  <div className="mt-6 flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary">
-                    Take a peek
-                    <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </div>
-                </div>
-              </Link>
+                index={index}
+                variant="dark"
+                thumbnail={item.thumbnail}
+                eyebrow={
+                  display.title +
+                  (item.shippedYear ? ` · Shipped ${item.shippedYear}` : "")
+                }
+                headline={item.oneLiner}
+                meta={`${item.domain} · ${item.role}`}
+                cta={item.externalUrl ? "Visit the site" : "Take a peek"}
+                to={item.externalUrl ? undefined : `/work/${item.id}`}
+                href={item.externalUrl}
+              />
             );
           })}
+          {featuredExternal.map((item, index) => (
+            <WorkCard
+              key={item.id}
+              index={featured.length + index}
+              variant="dark"
+              thumbnail={item.thumbnail}
+              eyebrow={item.name}
+              headline={item.headline}
+              meta={`${item.domain} · ${item.subhead}`}
+              cta="Visit the site"
+              href={item.url}
+            />
+          ))}
         </div>
 
         <Link

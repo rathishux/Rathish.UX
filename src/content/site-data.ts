@@ -49,7 +49,38 @@ export type Experience = {
   // Filename inside public/work-thumbs/ used as the card thumbnail.
   // Entries without one fall back to a flat colour block.
   thumbnail?: string;
+  // Set when the work has no case study here and the card should open the
+  // live product instead of a detail page.
+  externalUrl?: string;
 };
+
+// Shipped products that aren't tied to an employment entry and have no case
+// study of their own — they sit alongside the work cards and link straight
+// out to the live site. Kept separate from `experience` so they don't turn up
+// in the résumé timeline, which is specifically employment history.
+export type ExternalProject = {
+  id: string;
+  name: string;
+  headline: string;
+  subhead: string;
+  domain: string;
+  url: string;
+  thumbnail?: string;
+  featured?: boolean;
+};
+
+export const externalProjects: ExternalProject[] = [
+  {
+    id: "slashdr",
+    name: "SlashDR",
+    headline: "Unified health interface apps for India",
+    subhead: "Your one place for digital health records",
+    domain: "Healthcare",
+    url: "https://www.slashdr.com/",
+    thumbnail: "slashdr.webp",
+    featured: true,
+  },
+];
 
 // Falls back to the employer name for entries with no named project yet.
 export function projectDisplay(item: Experience): {
@@ -163,6 +194,7 @@ export const experience: Experience[] = [
     period: "May 2019 – Aug 2021",
     domain: "FinTech · Supply Chain",
     project: { name: "FinLocker", subtitle: "Financial fitness app" },
+    externalUrl: "https://finlocker.com/",
     featured: true,
     oneLiner: "Helping consumers build credit and get mortgage-ready",
     summary:
