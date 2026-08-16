@@ -12,7 +12,9 @@ export const profile = {
   location: "Bangalore, India",
   // Cities open to full-time roles in — edit freely.
   openToCities: ["Bangalore", "Chennai", "Hyderabad"],
-  resumeUrl: `${import.meta.env.BASE_URL}resume.docx`,
+  // Named for the download, not for the repo — this filename is what lands in
+  // a recruiter's downloads folder.
+  resumeUrl: `${import.meta.env.BASE_URL}Rathish-Gandhi-Resume.pdf`,
   // Replace with a real scheduling link (Calendly, Cal.com, etc.) once set up.
   schedulingUrl: "https://calendly.com/rathish3/coffee-chat",
   social: {

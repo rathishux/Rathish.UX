@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @page { size: A4; margin: 12mm 13mm; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
+        font-size: 9.3pt;
+        line-height: 1.47;
+        color: #1c1c1c;
+      }
+      a { color: inherit; text-decoration: none; }
+
+      /* ---------- header ---------- */
+      header { border-bottom: 1.2pt solid #1c1c1c; padding-bottom: 6pt; }
+      h1 {
+        font-size: 23.5pt;
+        font-weight: 700;
+        letter-spacing: -0.4pt;
+        line-height: 1.05;
+      }
+      .title {
+        margin-top: 3pt;
+        font-size: 10.5pt;
+        font-weight: 600;
+        color: #b0342a;
+      }
+      .contact {
+        margin-top: 4.5pt;
+        font-size: 8.5pt;
+        color: #4a4a4a;
+      }
+      .contact span { white-space: nowrap; }
+      .sep { color: #b9b9b9; padding: 0 3.5pt; }
+
+      .profile {
+        margin-top: 7pt;
+        font-size: 9.4pt;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      /* ---------- columns ---------- */
+      .cols {
+        display: grid;
+        grid-template-columns: 33.5% 1fr;
+        gap: 0 8mm;
+        margin-top: 9pt;
+      }
+      .col > section + section { margin-top: 12.5pt; }
+
+      h2 {
+        font-size: 8.2pt;
+        font-weight: 700;
+        letter-spacing: 0.9pt;
+        text-transform: uppercase;
+        color: #1c1c1c;
+        padding-bottom: 2.5pt;
+        border-bottom: 0.6pt solid #cfcfcf;
+        margin-bottom: 5.5pt;
+      }
+
+      /* ---------- entries ---------- */
+      .entry + .entry { margin-top: 9.5pt; }
+      .role {
+        font-size: 10.1pt;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+      .org {
+        font-size: 9pt;
+        font-weight: 600;
+        color: #b0342a;
+        margin-top: 0.5pt;
+      }
+      .meta {
+        font-size: 8.2pt;
+        color: #6a6a6a;
+        margin-top: 1pt;
+      }
+      /* Markers stay in normal flow on purpose. An earlier version used
+         position:absolute ::before squares, which pushed every bullet into a
+         later paint pass — the PDF then extracted all five job headers first
+         and all the bullets afterwards, so an ATS would attach the wrong
+         achievements to the wrong roles. ::marker keeps document order. */
+      ul {
+        list-style: square outside;
+        margin-top: 3.5pt;
+        padding-left: 9.5pt;
+      }
+      li { margin-top: 3.2pt; padding-left: 1pt; }
+      li::marker { color: #b0342a; font-size: 7.5pt; }
+      b { font-weight: 700; }
+
+      /* ---------- left column bits ---------- */
+      .proj + .proj { margin-top: 8.5pt; }
+      .proj .name { font-size: 9.6pt; font-weight: 700; }
+      .proj .kind { font-size: 8.1pt; color: #6a6a6a; margin-top: 0.5pt; }
+      .proj p { margin-top: 2.5pt; }
+
+      .skillgroup + .skillgroup { margin-top: 7pt; }
+      .skillgroup .label {
+        font-size: 8.4pt;
+        font-weight: 700;
+        margin-bottom: 1pt;
+      }
+      .skillgroup .items { color: #3a3a3a; }
+
+      .cert { margin-top: 3.2pt; }
+      .cert .n { font-weight: 600; }
+      .cert .i { color: #6a6a6a; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Rathish Gandhi</h1>
+      <div class="title">
+        Senior UX/UI Designer &nbsp;|&nbsp; Enterprise SaaS, Aviation &amp;
+        Telecom &nbsp;|&nbsp; 9+ Years
+      </div>
+      <div class="contact">
+        <span>Bangalore, India (open to relocation)</span><span class="sep"
+          >|</span
+        ><span>+91 99443 88814</span><span class="sep">|</span
+        ><span>rathishuid@gmail.com</span><span class="sep">|</span
+        ><span>rathishux.github.io/Rathish.UX</span><span class="sep">|</span
+        ><span>linkedin.com/in/rathish-gandhi</span>
+      </div>
+    </header>
+
+    <p class="profile">
+      Senior UX/UI designer with <b>9+ years</b> spent on the complicated end of
+      software &mdash; airline scheduling, telecom sourcing, clinical records,
+      analytics. I take workflows people currently survive rather than use, and
+      make them legible. Recently designed and shipped my own product end to end
+      using AI tooling.
+    </p>
+
+    <div class="cols">
+      <!-- ================= LEFT ================= -->
+      <div class="col">
+        <section>
+          <h2>Selected Projects</h2>
+
+          <div class="proj">
+            <div class="name">NivYou &mdash; GLP-1 Tracker</div>
+            <div class="kind">Designer and Developer | Dec 2025 to Present</div>
+            <p>
+              An Android app for people on GLP-1 medication to log dose, weight,
+              glucose and food, and watch the trend over time. Designed and
+              built end to end &mdash; interface, backend, integrations and the
+              Play Store release. In closed testing ahead of launch.
+            </p>
+          </div>
+
+          <div class="proj">
+            <div class="name">SlashDR &mdash; Digital Health Records</div>
+            <div class="kind">Product Design | Healthcare, India</div>
+            <p>
+              Unified health interface apps giving Indian clinics and patients
+              one place for digital health records.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Skills</h2>
+
+          <div class="skillgroup">
+            <div class="label">Design and Prototyping</div>
+            <div class="items">
+              Figma, FigJam, Adobe XD, Wireframing, Prototyping, Interaction
+              Design, Design Systems, Information Architecture, design to code
+              handoff
+            </div>
+          </div>
+
+          <div class="skillgroup">
+            <div class="label">AI and Agentic Workflows</div>
+            <div class="items">
+              Claude, Claude Code, Figma MCP, Cursor, GitHub, Vercel,
+              Higgsfield, AI assisted product build
+            </div>
+          </div>
+
+          <div class="skillgroup">
+            <div class="label">Research and Methods</div>
+            <div class="items">
+              UX Research, Usability Testing, Personas, Journey Mapping,
+              Stakeholder Workshops, Data-Driven Design, Enterprise SaaS,
+              Agile / Scrum
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Education</h2>
+          <div class="proj">
+            <div class="name">College of Engineering</div>
+            <div class="kind">M.Sc, Electronic Media</div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Certifications</h2>
+          <div class="cert">
+            <span class="n">Design System Bootcamp</span
+            ><span class="i"> &mdash; Molly Hellmuth</span>
+          </div>
+          <div class="cert">
+            <span class="n">Design for Complex Problems</span
+            ><span class="i"> &mdash; RISD</span>
+          </div>
+          <div class="cert"><span class="n">Adobe XD Essentials</span></div>
+        </section>
+      </div>
+
+      <!-- ================= RIGHT ================= -->
+      <div class="col">
+        <section>
+          <h2>Experience</h2>
+
+          <div class="entry">
+            <div class="role">Senior UX Designer</div>
+            <div class="org">Infogain &mdash; Sabre</div>
+            <div class="meta">
+              Mar 2025 to Dec 2025 &nbsp;·&nbsp; Aviation, Enterprise SaaS
+              &nbsp;·&nbsp; India
+            </div>
+            <ul>
+              <li>
+                Redesigned Sabre's airline scheduling suite, rebuilding
+                <b>06+ core flows</b> and moving <b>90%</b> of a legacy desktop
+                product to the web across <b>2 versions released to clients</b>.
+              </li>
+              <li>
+                Turned reactive scheduling alerts into resolvable workflows, so
+                planners could act on a conflict in place instead of tracking it
+                somewhere else.
+              </li>
+              <li>
+                Designed the admin side: configurable booking rules and
+                market-driven demand insights, plus bulk edit and filtering that
+                cut manual error in slot allocation.
+              </li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <div class="role">UX Designer</div>
+            <div class="org">Kipi.bi &mdash; Kipi 360</div>
+            <div class="meta">
+              Jan 2024 to Oct 2024 &nbsp;·&nbsp; Data and Analytics, SaaS
+              &nbsp;·&nbsp; India
+            </div>
+            <ul>
+              <li>
+                Designed Kipi 360, an analytics dashboard tracking account
+                health, use-case pipelines and employee activity in one place,
+                turning scattered metrics into same-day decisions.
+              </li>
+              <li>
+                Reduced cognitive load on dense reporting screens by resolving
+                complex data workflows into a small set of repeatable UI
+                patterns.
+              </li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <div class="role">Senior UX Designer</div>
+            <div class="org">Ericsson Global &mdash; Lighthouse</div>
+            <div class="meta">
+              Nov 2021 to Jan 2024 &nbsp;·&nbsp; Telecom, Sourcing and Sales
+              &nbsp;·&nbsp; India
+            </div>
+            <ul>
+              <li>
+                Led UX for the Lighthouse Sourcing Pricebook, saving
+                <b>$20K+ in subscription costs</b> and cutting
+                <b>60% of the time</b> to complete a sourcing task.
+              </li>
+              <li>
+                Ran <b>2 stakeholder workshops</b> that set the scope of the
+                rebuild, and mapped the source-to-agreement journey to show
+                where it actually broke.
+              </li>
+              <li>
+                Shipped supplier comparison, search and filtering, and price
+                history, so buyers could read a trend rather than guess at one.
+              </li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <div class="role">UX Designer</div>
+            <div class="org">Infosys Limited &mdash; FinLocker</div>
+            <div class="meta">
+              May 2019 to Aug 2021 &nbsp;·&nbsp; FinTech, Supply Chain
+              &nbsp;·&nbsp; India
+            </div>
+            <ul>
+              <li>
+                Designed FinLocker, a financial fitness app helping consumers
+                build credit and get mortgage-ready.
+              </li>
+              <li>
+                Built enterprise SaaS workflows across fintech and supply chain
+                systems, with high-fidelity prototypes that cut development
+                rework at handoff.
+              </li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <div class="role">UX Designer</div>
+            <div class="org">NFN Labs &mdash; TAC Healthcare</div>
+            <div class="meta">
+              Aug 2015 to Feb 2019 &nbsp;·&nbsp; Healthcare, SaaS
+              &nbsp;·&nbsp; India
+            </div>
+            <ul>
+              <li>
+                Designed TAC Healthcare's EHR platform and shipped the
+                <b>first version of the patient flow</b>, supporting
+                <b>100+ new clinics onboarded</b> and a <b>10% engagement
+                lift</b>.
+              </li>
+              <li>
+                Covered appointments and booking, patient records, clinical
+                notes, and admin and access control &mdash; an intuitive EHR
+                built for everyday clinical work rather than for demos.
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
