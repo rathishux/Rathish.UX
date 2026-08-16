@@ -21,7 +21,12 @@ export function RotatingWord({
   }, [words.length, intervalMs]);
 
   return (
-    <span className="inline-grid overflow-hidden align-bottom">
+    // Deliberately not overflow-hidden: the incoming word starts 60% below
+    // the line, and a mask here clips the descender off "quiet" for the
+    // length of the slide, which reads as a misspelling. slide-up-in fades
+    // from opacity 0, so the word is still invisible while it sits low
+    // enough to overlap what's beneath it.
+    <span className="inline-grid align-bottom">
       <span
         key={index}
         className={className}

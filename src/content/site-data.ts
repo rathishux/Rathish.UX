@@ -9,7 +9,7 @@ export const profile = {
   summary:
     "Senior UX/UI Designer with 9+ years of experience crafting scalable, data-driven digital products across SaaS, fintech, and enterprise platforms. Known for simplifying complex workflows, improving usability, and driving measurable business impact.",
   email: "rathishuid@gmail.com",
-  location: "India",
+  location: "Bangalore, India",
   // Cities open to full-time roles in — edit freely.
   openToCities: ["Bangalore", "Chennai", "Hyderabad"],
   resumeUrl: `${import.meta.env.BASE_URL}resume.docx`,
@@ -434,7 +434,9 @@ export const faq: FaqEntry[] = [
   {
     id: "total-experience",
     question: "Total years of experience?",
-    keywords: ["total experience", "years", "how long", "experience do you", "yoe"],
+    // Deliberately narrow: a broad "experience" keyword here outscores the
+    // relevant-experience entry on "how many years of relevant UX experience".
+    keywords: ["total experience", "total years", "how many years", "how long have you", "yoe"],
     priority: true,
     answer:
       "Just over nine and a half years — I started at NFN Labs in August 2015 and have been designing ever since, most recently at Infogain through December 2025.",
@@ -442,7 +444,14 @@ export const faq: FaqEntry[] = [
   {
     id: "relevant-experience",
     question: "Relevant UX/UI experience?",
-    keywords: ["relevant", "ux experience", "ui experience", "design experience", "relevant experience"],
+    keywords: [
+      "relevant",
+      "relevant experience",
+      "relevant ux experience",
+      "ux experience",
+      "ui experience",
+      "design experience",
+    ],
     priority: true,
     answer:
       "All of it. Every role I've held has been a UX/UI design role — none of the total is padded with unrelated work. I've been at Senior UX Designer level since November 2021, so roughly four and a half years of that is senior.",
@@ -453,6 +462,74 @@ export const faq: FaqEntry[] = [
     keywords: ["preferred location", "prefer", "which city", "where do you want"],
     priority: true,
     answer: `I'm actively looking in ${profile.openToCities.join(", ")} — happy with any of the three.`,
+  },
+  {
+    id: "location",
+    question: "Current location?",
+    keywords: ["current location", "based", "live", "where are you", "which city"],
+    priority: true,
+    answer: `I'm in ${profile.location}, and open to full-time roles in ${profile.openToCities.join(", ")}.`,
+  },
+  {
+    id: "last-ctc",
+    question: "Current / last CTC?",
+    keywords: ["current ctc", "last ctc", "current salary", "last salary", "drawing", "current package"],
+    priority: true,
+    answer: "My last drawn CTC was ₹24 LPA.",
+  },
+  {
+    id: "expected-ctc",
+    question: "Expected CTC?",
+    keywords: ["expected", "expectation", "expectations", "expected ctc", "looking for", "budget"],
+    priority: true,
+    answer:
+      "I'm looking at ₹25 LPA, and I'm happy to discuss it for the right role and team.",
+  },
+  {
+    id: "negotiable",
+    question: "Is that negotiable?",
+    keywords: ["negotiable", "negotiate", "flexible on", "room on the"],
+    answer:
+      "Yes. The scope of the role and the team I'd be joining matter more to me than the last decimal — happy to talk it through.",
+  },
+  {
+    id: "employment-status",
+    question: "Current employment status?",
+    keywords: ["employment status", "currently working", "are you working", "employed", "still working"],
+    answer:
+      "I'm between roles at the moment — my last was Senior UX Designer at Infogain, through December 2025. Since then I've been building NivYou, a GLP-1 tracking app I designed and developed end to end, now in closed testing ahead of its Play Store release.",
+  },
+  {
+    id: "last-working-day",
+    question: "When did you leave your last role?",
+    keywords: ["leave", "left", "last working day", "lwd", "when did you leave"],
+    answer: "December 2025, at the end of my engagement with Infogain.",
+  },
+  {
+    id: "notice-period",
+    question: "Notice period?",
+    keywords: ["notice", "notice period", "serving notice"],
+    answer:
+      "None to serve — I'm not currently employed, so there's nothing holding up a start date.",
+  },
+  {
+    id: "joining",
+    question: "How soon can you join?",
+    keywords: ["join", "joining", "how soon", "immediately", "available from", "onboard", "start date"],
+    answer:
+      "Immediately. With no notice period to work through, I can start as soon as it suits you.",
+  },
+  {
+    id: "offers",
+    question: "Holding any offers?",
+    keywords: ["offer", "offers", "offer in hand"],
+    answer: "No — I'm not holding any offers at the moment.",
+  },
+  {
+    id: "interviewing",
+    question: "Interviewing elsewhere?",
+    keywords: ["interviewing", "other companies", "elsewhere", "other processes", "in process"],
+    answer: "No, there are no other processes running right now.",
   },
   {
     id: "data-driven",
@@ -550,12 +627,6 @@ export const faq: FaqEntry[] = [
     question: "How can I reach you?",
     keywords: ["contact", "email", "reach", "hire", "talk", "connect", "call", "schedule"],
     answer: `Email me at ${profile.email}, or book a 30-minute coffee chat — both are on the Contact page, along with LinkedIn.`,
-  },
-  {
-    id: "location",
-    question: "Where are you based?",
-    keywords: ["based", "live", "current location", "where are you"],
-    answer: `I'm in ${profile.location}, and open to full-time roles in ${profile.openToCities.join(", ")}.`,
   },
 ];
 
