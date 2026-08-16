@@ -157,7 +157,6 @@ export const experience: Experience[] = [
     role: "UX Designer",
     period: "Jan 2024 – Oct 2024",
     domain: "Data & Analytics · SaaS",
-    featured: true,
     oneLiner: "Turning scattered metrics into same-day decisions",
     summary:
       "Designed data-driven dashboards that turned scattered metrics into decisions teams could act on same-day.",
