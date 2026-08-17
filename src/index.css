@@ -37,8 +37,11 @@
   --ink: oklch(0.17 0.012 60);
   --paper: oklch(0.96 0.012 80);
 
-  --font-serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino,
-    "Times New Roman", serif;
+  /* Playfair Display carries real 800/900 weights; Georgia tops out at 700,
+     which is why the headings never looked heavy enough. Georgia stays as the
+     fallback so nothing shifts shape badly before the webfont lands. */
+  --font-serif: "Playfair Display", Georgia, "Iowan Old Style",
+    "Palatino Linotype", Palatino, "Times New Roman", serif;
   --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
     monospace;
   /* System script faces only — no webfont request. Covers macOS (Snell
@@ -127,7 +130,7 @@
   h2,
   h3,
   h4 {
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.01em;
   }
 }

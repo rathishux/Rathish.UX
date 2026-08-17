@@ -75,7 +75,7 @@ export function ContactCta() {
               Open for full-time roles
             </p>
             <p className="mt-1">
-              {profile.location} &middot; {profile.openToCities.join(", ")}
+              {profile.openToCities.join(", ")}
             </p>
 
             <div className="my-4 border-t border-paper/15" />

@@ -59,7 +59,7 @@ export function MastheadHeader() {
 
       <DoubleRule />
 
-      <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-3 px-6 py-4 sm:px-8 lg:px-12 md:grid-cols-3">
+      <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-3 px-6 py-6 sm:px-8 lg:px-12 md:grid-cols-3">
         <div className="flex items-center gap-1.5 font-mono text-[11px] text-shell uppercase text-muted-foreground">
           <span>{day}</span>
           <span>&middot;</span>
@@ -69,7 +69,7 @@ export function MastheadHeader() {
         </div>
 
         <NavLink to="/" className="text-center">
-          <h1 className="font-serif text-3xl tracking-tight text-ink sm:text-4xl">
+          <h1 className="font-serif text-4xl tracking-tight text-ink sm:text-5xl lg:text-6xl">
             The {profile.nickname} Gazette
           </h1>
         </NavLink>
@@ -80,15 +80,15 @@ export function MastheadHeader() {
           </span>
           <a
             href={profile.resumeUrl}
-            className="inline-flex items-center gap-1.5 rounded-full border border-primary px-3 py-1.5 font-mono text-[10px] text-shell uppercase text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="inline-flex items-center gap-2 rounded-full border border-primary px-4 py-2.5 font-mono text-xs text-shell uppercase text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
-            <Download className="size-3" />
-            Resume
+            <Download className="size-3.5" />
+            Download resume
           </a>
           <button
             type="button"
             onClick={toggle}
-            className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 font-mono text-[10px] text-shell uppercase text-paper transition-opacity hover:opacity-85"
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 font-mono text-xs text-shell uppercase text-paper transition-opacity hover:opacity-85"
           >
             <span className="text-primary">&#9670;</span>
             Ask {profile.nickname}

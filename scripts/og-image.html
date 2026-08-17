@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--
+  Source for public/og-image.png, the social share card. Render with:
+    npx playwright screenshot --viewport-size=1200,630 scripts/og-image.html public/og-image.png
+  Keep it visually in step with the site masthead.
+-->
+    <style>
+      :root {
+        --paper: oklch(0.96 0.012 80);
+        --ink: oklch(0.17 0.012 60);
+        --primary: oklch(0.5 0.2 27);
+        --muted: oklch(0.46 0.015 60);
+        --border: oklch(0.85 0.015 75);
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        src: url("../node_modules/@fontsource/playfair-display/files/playfair-display-latin-800-normal.woff2") format("woff2");
+        font-weight: 800;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        src: url("../node_modules/@fontsource/playfair-display/files/playfair-display-latin-800-italic.woff2") format("woff2");
+        font-weight: 800;
+        font-style: italic;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        width: 1200px;
+        height: 630px;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Playfair Display", Georgia, serif;
+        display: flex;
+        flex-direction: column;
+        padding: 56px 72px;
+      }
+      .mono {
+        font-family: ui-monospace, "DejaVu Sans Mono", Menlo, monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+      }
+
+      /* Masthead — mirrors the site header: kicker row, double rule with a
+         centred ornament, wordmark, second double rule. */
+      .kicker {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .rule {
+        position: relative;
+        border-top: 2px solid var(--ink);
+        border-bottom: 1px solid var(--ink);
+        height: 5px;
+        margin: 16px 0;
+      }
+      .rule::after {
+        content: "\273B";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--paper);
+        padding: 0 14px;
+        color: var(--primary);
+        font-size: 20px;
+        line-height: 1;
+      }
+      .wordmark {
+        text-align: center;
+        font-size: 76px;
+        font-weight: 800;
+        letter-spacing: -0.015em;
+        padding: 6px 0 14px;
+      }
+      .dotted {
+        border-top: 1px solid var(--ink);
+        border-bottom: 2px dotted var(--ink);
+        height: 5px;
+        margin-top: 4px;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+      }
+      .eyebrow { font-size: 15px; color: var(--primary); }
+      h1 {
+        font-size: 62px;
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+      }
+      h1 em { font-style: italic; color: var(--primary); }
+      .role { font-size: 27px; color: var(--muted); line-height: 1.4; }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid var(--border);
+        padding-top: 22px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .domains { display: flex; gap: 26px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="kicker mono">
+        <span>The Ratz Gazette</span>
+        <span>General Edition</span>
+      </div>
+      <div class="rule"></div>
+      <div class="wordmark">The Ratz Gazette</div>
+      <div class="dotted"></div>
+    </header>
+
+    <main>
+      <div class="eyebrow mono">&#9670; Portfolio &middot; 9+ years</div>
+      <h1>Rathish Gandhi &mdash;<br /><em>Senior UX/UI Designer</em></h1>
+      <div class="role">
+        Designing for the gap between complex systems<br />and the people who
+        have to use them.
+      </div>
+    </main>
+
+    <footer>
+      <div class="domains mono">
+        <span>Aviation</span><span>Telecom</span><span>Healthcare</span
+        ><span>Fintech</span>
+      </div>
+      <span class="mono">rathishux.github.io/Rathish.UX</span>
+    </footer>
+  </body>
+</html>

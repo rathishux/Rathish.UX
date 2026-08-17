@@ -6,7 +6,7 @@ import {
   certifications,
   education,
   profile,
-  sideProject,
+  sideProject,  relocationCities,
 } from "@/content/site-data";
 
 export function AboutPage() {
@@ -43,15 +43,26 @@ export function AboutPage() {
             who don&rsquo;t have time to think like one.
           </p>
           <p className="mt-5 leading-relaxed text-muted-foreground">
-            I build my own things too, taking ideas from sketch to shipped
-            interface myself with{" "}
+            What that looks like in practice: a lot of sitting with people
+            while they work, watching them reach for the one screen they
+            actually trust and quietly ignore the other eleven. Most of my
+            best decisions started as someone muttering &ldquo;yeah, we just
+            know not to click that.&rdquo;
+          </p>
+          <p className="mt-5 leading-relaxed text-muted-foreground">
+            Away from the screen I&rsquo;m usually on a bicycle, in the gym,
+            or losing an evening to something about deep space that I will
+            absolutely bring up in conversation later. I&rsquo;m a hard sell
+            on trends and an easy sell on a good title sequence.
+          </p>
+          <p className="mt-5 leading-relaxed text-muted-foreground">
+            I also build. I vibe coded and released{" "}
+            <strong className="text-foreground">{sideProject.name}</strong>,
+            and this site, using{" "}
             <strong className="text-foreground">Claude</strong>,{" "}
             <strong className="text-foreground">Claude Code</strong>, the{" "}
-            <strong className="text-foreground">Figma MCP</strong>, and{" "}
-            <strong className="text-foreground">Cursor</strong>. This site is
-            one example. So is{" "}
-            <strong className="text-foreground">{sideProject.name}</strong>,{" "}
-            {sideProject.description}{" "}
+            <strong className="text-foreground">Figma MCP</strong> and{" "}
+            <strong className="text-foreground">Cursor</strong>.{" "}
             <Link
               to="/shipped"
               className="inline-flex items-center gap-1 text-primary hover:underline"
@@ -74,7 +85,7 @@ export function AboutPage() {
               <span className="font-mono text-[10px] text-shell uppercase text-primary">
                 Based in
               </span>
-              {profile.location} &middot; {profile.openToCities.join(", ")}
+              {profile.location} &middot; Open to {relocationCities.join(", ")}
             </span>
           </div>
 

@@ -76,6 +76,12 @@ export type ExternalProject = {
 // to surface a product with no employment entry behind it.
 export const externalProjects: ExternalProject[] = [];
 
+// "Bangalore, Chennai, Hyderabad" reads badly directly after "Bangalore,
+// India", so drop whichever city the location already names.
+export const relocationCities = profile.openToCities.filter(
+  (city) => !profile.location.includes(city),
+);
+
 // Falls back to the employer name for entries with no named project yet.
 export function projectDisplay(item: Experience): {
   title: string;
@@ -433,6 +439,20 @@ export const stats = [
     label: "Industries",
   },
 ];
+
+// Home-page writing section. Deliberately empty: there is nothing published
+// on Medium yet, and a "Things I've written" heading over an empty list reads
+// worse than no section at all — so Writing renders nothing until this has
+// entries. Add real posts here and the section appears on its own.
+export type Article = {
+  title: string;
+  category: string;
+  excerpt: string;
+  date: string;
+  url: string;
+};
+
+export const articles: Article[] = [];
 
 export type FaqEntry = {
   id: string;

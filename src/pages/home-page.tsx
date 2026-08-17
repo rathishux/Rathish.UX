@@ -4,6 +4,7 @@ import { FeaturedWork } from "@/components/home/featured-work";
 import { Domains } from "@/components/home/domains";
 import { Timeline } from "@/components/home/timeline";
 import { CritGenerator } from "@/components/home/crit-generator";
+import { Writing } from "@/components/home/writing";
 import { ContactCta } from "@/components/home/contact-cta";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -27,6 +28,10 @@ export function HomePage() {
       </Reveal>
       <Reveal>
         <CritGenerator />
+      </Reveal>
+      {/* Renders nothing while `articles` is empty. */}
+      <Reveal>
+        <Writing />
       </Reveal>
       <Reveal>
         <ContactCta />
