@@ -71,16 +71,31 @@ export type ExternalProject = {
   featured?: boolean;
 };
 
-// Empty for now: SlashDR was the only entry, and it's credited under NFN Labs
-// where it was actually built. The mechanism stays because it's the only way
-// to surface a product with no employment entry behind it.
-export const externalProjects: ExternalProject[] = [];
+// SlashDR is the NFN Labs-era project, and it's the card that stands in for
+// that stretch — the employer itself never gets one.
+export const externalProjects: ExternalProject[] = [
+  {
+    id: "slashdr",
+    name: "SlashDR",
+    headline: "Unified health interface apps for India",
+    subhead: "Your one place for digital health records",
+    domain: "Healthcare",
+    url: "https://www.slashdr.com/",
+    thumbnail: "slashdr.webp",
+    featured: true,
+  },
+];
 
 // "Bangalore, Chennai, Hyderabad" reads badly directly after "Bangalore,
 // India", so drop whichever city the location already names.
 export const relocationCities = profile.openToCities.filter(
   (city) => !profile.location.includes(city),
 );
+
+// A work card stands for a project, never for an employer. Entries with no
+// named project (NFN Labs, which is represented by SlashDR instead) stay in
+// the resume timeline but never get a card.
+export const projectEntries = () => experience.filter((item) => item.project);
 
 // Falls back to the employer name for entries with no named project yet.
 export function projectDisplay(item: Experience): {

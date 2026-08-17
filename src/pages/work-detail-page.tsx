@@ -7,7 +7,7 @@ import { AtAGlance } from "@/components/work/at-a-glance";
 import { SectionTabs } from "@/components/work/section-tabs";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { articles, experience, projectDisplay } from "@/content/site-data";
+import { articles, experience, projectDisplay, projectEntries } from "@/content/site-data";
 import { caseStudyContent } from "@/content/case-study-content";
 import { caseStudyImageFolder, caseStudySections } from "@/content/case-study-nav";
 import { extractHeadings, parseCaseStudy, sliceSection } from "@/lib/case-study";
@@ -58,8 +58,11 @@ export function WorkDetailPage() {
     return <Navigate to="/work" replace />;
   }
 
-  const idx = experience.findIndex((e) => e.id === id);
-  const next = experience[(idx + 1) % experience.length];
+  // Cycle only through items that have a card, so "Read next" never lands on
+  // an employer-only entry.
+  const cards = projectEntries();
+  const idx = Math.max(cards.findIndex((e) => e.id === id), 0);
+  const next = cards[(idx + 1) % cards.length];
   const display = projectDisplay(item);
   const relatedArticles = articles.filter((a) => a.relatedWorkIds?.includes(item.id));
   // A split-out item (sectionNumbers set) always uses its own project

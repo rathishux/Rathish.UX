@@ -1,6 +1,6 @@
 import {
   domainStats,
-  experience,
+  projectEntries,
   extraDomainProjects,
   projectDisplay,
   type Experience,
@@ -38,7 +38,7 @@ function groupByDomain(items: Experience[]): DomainGroup[] {
 }
 
 export function Domains() {
-  const groups = groupByDomain(experience);
+  const groups = groupByDomain(projectEntries());
 
   return (
     <section className="mx-auto max-w-[1800px] px-6 py-16 sm:px-8 lg:px-12">

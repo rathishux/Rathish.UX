@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { WorkCard } from "@/components/work/work-card";
-import { experience, externalProjects, projectDisplay } from "@/content/site-data";
+import { externalProjects, projectDisplay, projectEntries } from "@/content/site-data";
 
 export function FeaturedWork() {
-  const featured = experience.filter((item) => item.featured);
+  const featured = projectEntries().filter((item) => item.featured);
   const featuredExternal = externalProjects.filter((item) => item.featured);
 
   return (

@@ -1,5 +1,5 @@
 import { WorkCard } from "@/components/work/work-card";
-import { experience, externalProjects, projectDisplay } from "@/content/site-data";
+import { externalProjects, projectDisplay, projectEntries } from "@/content/site-data";
 
 export function WorkPage() {
   return (
@@ -13,7 +13,7 @@ export function WorkPage() {
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        {experience.map((item, index) => {
+        {projectEntries().map((item, index) => {
           const display = projectDisplay(item);
           return (
             <WorkCard
@@ -35,7 +35,7 @@ export function WorkPage() {
         {externalProjects.map((item, index) => (
           <WorkCard
             key={item.id}
-            index={experience.length + index}
+            index={projectEntries().length + index}
             thumbnail={item.thumbnail}
             eyebrow={item.name}
             headline={item.headline}
