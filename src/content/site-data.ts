@@ -449,6 +449,10 @@ export type Article = {
   excerpt: string;
   date: string;
   url: string;
+  // Work ids this piece is about. The case study pages read this to offer the
+  // article as related reading, so the link lives in one place rather than
+  // being duplicated onto each work item.
+  relatedWorkIds?: string[];
 };
 
 export const articles: Article[] = [
@@ -460,6 +464,9 @@ export const articles: Article[] = [
       "What years of building software for airport operations taught me about clarity, precision, and not panicking at 3 a.m.",
     date: "Aug 2026",
     url: "https://medium.com/@rathishuid/designing-for-the-3-a-m-decision-7672bb982a0a",
+    // Covers the discrepancy-resolution redesign and the "Merge" relabel from
+    // the desktop-to-web migration.
+    relatedWorkIds: ["infogain-redesign", "infogain-desktop-web"],
   },
 ];
 

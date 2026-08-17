@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { CaseStudyBody } from "@/components/work/case-study-body";
 import { CaseStudySidebar } from "@/components/work/case-study-sidebar";
 import { AtAGlance } from "@/components/work/at-a-glance";
 import { SectionTabs } from "@/components/work/section-tabs";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { experience, projectDisplay } from "@/content/site-data";
+import { articles, experience, projectDisplay } from "@/content/site-data";
 import { caseStudyContent } from "@/content/case-study-content";
 import { caseStudyImageFolder, caseStudySections } from "@/content/case-study-nav";
 import { extractHeadings, parseCaseStudy, sliceSection } from "@/lib/case-study";
@@ -61,6 +61,7 @@ export function WorkDetailPage() {
   const idx = experience.findIndex((e) => e.id === id);
   const next = experience[(idx + 1) % experience.length];
   const display = projectDisplay(item);
+  const relatedArticles = articles.filter((a) => a.relatedWorkIds?.includes(item.id));
   // A split-out item (sectionNumbers set) always uses its own project
   // title/role — the shared doc's own H1 describes the whole original
   // project, not this one slice of it.
@@ -152,6 +153,31 @@ export function WorkDetailPage() {
             ))}
           </ul>
         </>
+      )}
+
+      {relatedArticles.length > 0 && (
+        <div className="mt-16 border-t border-border pt-8">
+          <p className="font-mono text-[11px] text-shell uppercase text-primary">
+            &#9670; Related reading
+          </p>
+          {relatedArticles.map((article) => (
+            <a
+              key={article.url}
+              href={article.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1"
+            >
+              <span className="font-serif text-2xl italic transition-colors group-hover:text-primary">
+                {article.title}
+              </span>
+              <span className="inline-flex items-center gap-1 font-mono text-[11px] text-shell uppercase text-muted-foreground">
+                {article.category} &middot; {article.date}
+                <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </a>
+          ))}
+        </div>
       )}
 
       <div className="mt-16 border-t border-border pt-8">
