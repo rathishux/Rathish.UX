@@ -60,12 +60,14 @@ export function MastheadHeader() {
       <DoubleRule />
 
       <div className="mx-auto grid max-w-[1800px] grid-cols-1 items-center gap-3 px-6 py-3 sm:px-8 lg:px-12 md:grid-cols-3">
-        <div className="flex items-center gap-1.5 font-mono text-[11px] text-shell uppercase text-muted-foreground">
-          <span>{day}</span>
-          <span>&middot;</span>
-          <span>{date}</span>
-          <span>&middot;</span>
-          <span>{time}</span>
+        {/* Date sits at masthead weight; the clock is incidental, so it drops
+            back a step rather than competing with it. */}
+        <div className="flex items-center gap-1.5 font-mono text-[11px] text-shell uppercase">
+          <span className="text-foreground/75">{day}</span>
+          <span className="text-foreground/40">&middot;</span>
+          <span className="text-foreground/75">{date}</span>
+          <span className="text-muted-foreground/50">&middot;</span>
+          <span className="text-muted-foreground/70">{time}</span>
         </div>
 
         <NavLink to="/" className="text-center">
