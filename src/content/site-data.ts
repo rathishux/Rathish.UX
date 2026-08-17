@@ -440,10 +440,9 @@ export const stats = [
   },
 ];
 
-// Home-page writing section. Deliberately empty: there is nothing published
-// on Medium yet, and a "Things I've written" heading over an empty list reads
-// worse than no section at all — so Writing renders nothing until this has
-// entries. Add real posts here and the section appears on its own.
+// Home-page writing section. Writing renders nothing while this is empty — a
+// "Things I've written" heading over an empty list reads worse than no section
+// at all. Newest first; the numbering is generated from the order here.
 export type Article = {
   title: string;
   category: string;
@@ -452,7 +451,17 @@ export type Article = {
   url: string;
 };
 
-export const articles: Article[] = [];
+export const articles: Article[] = [
+  {
+    title: "Designing for the 3 A.M. Decision",
+    category: "Aviation UX",
+    // The article's own deck, verbatim.
+    excerpt:
+      "What years of building software for airport operations taught me about clarity, precision, and not panicking at 3 a.m.",
+    date: "Aug 2026",
+    url: "https://medium.com/@rathishuid/designing-for-the-3-a-m-decision-7672bb982a0a",
+  },
+];
 
 export type FaqEntry = {
   id: string;
