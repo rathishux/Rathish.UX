@@ -7,37 +7,37 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
         font-family: "Liberation Sans", Arial, Helvetica, sans-serif;
-        font-size: 9.3pt;
+        font-size: 8.16pt;
         line-height: 1.47;
         color: #1c1c1c;
       }
       a { color: inherit; text-decoration: none; }
 
       /* ---------- header ---------- */
-      header { border-bottom: 1.2pt solid #1c1c1c; padding-bottom: 6pt; }
+      header { border-bottom: 1.05pt solid #1c1c1c; padding-bottom: 5.26pt; }
       h1 {
-        font-size: 23.5pt;
+        font-size: 20.60pt;
         font-weight: 700;
-        letter-spacing: -0.4pt;
+        letter-spacing: -0.35pt;
         line-height: 1.05;
       }
       .title {
-        margin-top: 3pt;
-        font-size: 10.5pt;
+        margin-top: 2.63pt;
+        font-size: 9.21pt;
         font-weight: 600;
         color: #b0342a;
       }
       .contact {
-        margin-top: 4.5pt;
-        font-size: 8.5pt;
+        margin-top: 3.94pt;
+        font-size: 7.46pt;
         color: #4a4a4a;
       }
       .contact span { white-space: nowrap; }
-      .sep { color: #b9b9b9; padding: 0 3.5pt; }
+      .sep { color: #b9b9b9; padding: 0 3.07pt; }
 
       .profile {
-        margin-top: 7pt;
-        font-size: 9.4pt;
+        margin-top: 6.14pt;
+        font-size: 8.24pt;
         line-height: 1.5;
         color: #333;
       }
@@ -47,38 +47,38 @@
         display: grid;
         grid-template-columns: 33.5% 1fr;
         gap: 0 8mm;
-        margin-top: 9pt;
+        margin-top: 7.89pt;
       }
-      .col > section + section { margin-top: 12.5pt; }
+      .col > section + section { margin-top: 10.95pt; }
 
       h2 {
-        font-size: 8.2pt;
+        font-size: 7.19pt;
         font-weight: 700;
-        letter-spacing: 0.9pt;
+        letter-spacing: 0.79pt;
         text-transform: uppercase;
         color: #1c1c1c;
-        padding-bottom: 2.5pt;
-        border-bottom: 0.6pt solid #cfcfcf;
-        margin-bottom: 5.5pt;
+        padding-bottom: 2.20pt;
+        border-bottom: 0.52pt solid #cfcfcf;
+        margin-bottom: 4.83pt;
       }
 
       /* ---------- entries ---------- */
-      .entry + .entry { margin-top: 9.5pt; }
+      .entry + .entry { margin-top: 8.33pt; }
       .role {
-        font-size: 10.1pt;
+        font-size: 8.86pt;
         font-weight: 700;
         line-height: 1.25;
       }
       .org {
-        font-size: 9pt;
+        font-size: 7.89pt;
         font-weight: 600;
         color: #b0342a;
-        margin-top: 0.5pt;
+        margin-top: 0.44pt;
       }
       .meta {
-        font-size: 8.2pt;
+        font-size: 7.19pt;
         color: #6a6a6a;
-        margin-top: 1pt;
+        margin-top: 0.88pt;
       }
       /* Markers stay in normal flow on purpose. An earlier version used
          position:absolute ::before squares, which pushed every bullet into a
@@ -87,28 +87,36 @@
          achievements to the wrong roles. ::marker keeps document order. */
       ul {
         list-style: square outside;
-        margin-top: 3.5pt;
-        padding-left: 9.5pt;
+        margin-top: 3.07pt;
+        padding-left: 8.33pt;
       }
-      li { margin-top: 3.2pt; padding-left: 1pt; }
-      li::marker { color: #b0342a; font-size: 7.5pt; }
+      li { margin-top: 2.81pt; padding-left: 0.88pt; }
+      li::marker { color: #b0342a; font-size: 6.57pt; }
       b { font-weight: 700; }
 
       /* ---------- left column bits ---------- */
-      .proj + .proj { margin-top: 8.5pt; }
-      .proj .name { font-size: 9.6pt; font-weight: 700; }
-      .proj .kind { font-size: 8.1pt; color: #6a6a6a; margin-top: 0.5pt; }
-      .proj p { margin-top: 2.5pt; }
+      .proj + .proj { margin-top: 7.46pt; }
+      .proj .name { font-size: 8.41pt; font-weight: 700; }
+      .proj .kind { font-size: 7.10pt; color: #6a6a6a; margin-top: 0.44pt; }
+      .proj p { margin-top: 2.20pt; }
 
-      .skillgroup + .skillgroup { margin-top: 7pt; }
+      .skillgroup + .skillgroup { margin-top: 6.14pt; }
       .skillgroup .label {
-        font-size: 8.4pt;
+        font-size: 7.37pt;
         font-weight: 700;
-        margin-bottom: 1pt;
+        margin-bottom: 0.88pt;
       }
       .skillgroup .items { color: #3a3a3a; }
 
-      .cert { margin-top: 3.2pt; }
+      .keyproj {
+        margin-top: 3.07pt;
+        font-size: 7.46pt;
+        color: #4a4a4a;
+      }
+      .keyproj b { color: #1c1c1c; }
+      .keyproj i { font-style: italic; }
+
+      .cert { margin-top: 2.81pt; }
       .cert .n { font-weight: 600; }
       .cert .i { color: #6a6a6a; }
     </style>
@@ -130,14 +138,6 @@
       </div>
     </header>
 
-    <p class="profile">
-      Senior UX/UI designer with <b>9+ years</b> spent on the complicated end of
-      software &mdash; airline scheduling, telecom sourcing, clinical records,
-      analytics. I take workflows people currently survive rather than use, and
-      make them legible. Recently designed and shipped my own product end to end
-      using AI tooling.
-    </p>
-
     <div class="cols">
       <!-- ================= LEFT ================= -->
       <div class="col">
@@ -145,26 +145,33 @@
           <h2>Selected Projects</h2>
 
           <div class="proj">
-            <div class="name">NivYou &mdash; GLP-1 Tracker</div>
-            <div class="kind">Designer and Developer | Dec 2025 to Present</div>
+            <div class="name">NivYou</div>
+            <div class="kind">GLP-1 tracker &middot; Designed and built solo</div>
             <p>
-              An Android app for people on GLP-1 medication to log dose, weight,
-              glucose and food, and watch the trend over time. Designed and
-              built end to end &mdash; interface, backend, integrations and the
-              Play Store release. In closed testing ahead of launch.
+              A personal product taken from idea to store listing &mdash;
+              interface, backend, integrations and release. In closed testing
+              ahead of launch.
             </p>
           </div>
 
           <div class="proj">
-            <div class="name">SlashDR &mdash; Digital Health Records</div>
-            <div class="kind">Product Design | Healthcare, India</div>
+            <div class="name">Sabre Schedule Manager</div>
+            <div class="kind">Aviation &middot; Enterprise SaaS</div>
             <p>
-              Unified health interface apps giving Indian clinics and patients
-              one place for digital health records. Shipped the
-              <b>first version of the patient flow</b>, supporting
-              <b>100+ new clinics onboarded</b> and a <b>10% engagement lift</b>.
+              Planning tooling for airline schedulers, where a single slot
+              decision ripples across markets, aircraft and crew.
             </p>
           </div>
+
+          <div class="proj">
+            <div class="name">Light-House Pricebook</div>
+            <div class="kind">Telecom &middot; Sourcing and procurement</div>
+            <p>
+              Buyer-side procurement tooling built so a supplier decision rests
+              on evidence rather than on whoever quoted last.
+            </p>
+          </div>
+
         </section>
 
         <section>
@@ -226,10 +233,10 @@
 
           <div class="entry">
             <div class="role">Senior UX Designer</div>
-            <div class="org">Infogain &mdash; Sabre</div>
+            <div class="org">Infogain</div>
             <div class="meta">
-              Mar 2025 to Dec 2025 &nbsp;·&nbsp; Aviation, Enterprise SaaS
-              &nbsp;·&nbsp; India
+              Mar 2025 to Dec 2025 &nbsp;&middot;&nbsp; Aviation, Enterprise SaaS
+              &nbsp;&middot;&nbsp; India
             </div>
             <ul>
               <li>
@@ -238,24 +245,30 @@
                 product to the web across <b>2 versions released to clients</b>.
               </li>
               <li>
-                Turned reactive scheduling alerts into resolvable workflows, so
-                planners could act on a conflict in place instead of tracking it
-                somewhere else.
+                Turned reactive scheduling alerts into resolvable workflows, and
+                designed the admin side &mdash; configurable booking rules and
+                market-driven demand insights &mdash; with bulk edit and
+                filtering that cut manual error in slot allocation.
               </li>
               <li>
-                Designed the admin side: configurable booking rules and
-                market-driven demand insights, plus bulk edit and filtering that
-                cut manual error in slot allocation.
+                Designed for a Novo Nordisk pilot digitalising diabetes
+                treatment, shaping a clinical care pathway into something
+                patients and their care teams could follow day to day.
               </li>
             </ul>
+            <p class="keyproj">
+              <b>Key projects:</b>
+              <i>Sabre Schedule Manager, Booking Rules Engine, Market Analysis,
+              Novo Nordisk diabetes pilot</i>
+            </p>
           </div>
 
           <div class="entry">
             <div class="role">UX Designer</div>
-            <div class="org">Kipi.bi &mdash; Kipi 360</div>
+            <div class="org">Kipi.bi</div>
             <div class="meta">
-              Jan 2024 to Oct 2024 &nbsp;·&nbsp; Data and Analytics, SaaS
-              &nbsp;·&nbsp; India
+              Jan 2024 to Oct 2024 &nbsp;&middot;&nbsp; Data and Analytics,
+              Healthcare &nbsp;&middot;&nbsp; India
             </div>
             <ul>
               <li>
@@ -264,78 +277,94 @@
                 turning scattered metrics into same-day decisions.
               </li>
               <li>
-                Reduced cognitive load on dense reporting screens by resolving
-                complex data workflows into a small set of repeatable UI
-                patterns.
+                Designed TAC Healthcare's EHR &mdash; appointments and booking,
+                patient records, clinical notes, and admin and access control
+                &mdash; built for everyday clinical work rather than for demos.
               </li>
             </ul>
+            <p class="keyproj">
+              <b>Key projects:</b> <i>Kipi 360, TAC Healthcare (EHR)</i>
+            </p>
           </div>
 
           <div class="entry">
             <div class="role">Senior UX Designer</div>
-            <div class="org">Ericsson Global &mdash; Lighthouse</div>
+            <div class="org">Ericsson Global</div>
             <div class="meta">
-              Nov 2021 to Jan 2024 &nbsp;·&nbsp; Telecom, Sourcing and Sales
-              &nbsp;·&nbsp; India
+              Nov 2021 to Jan 2024 &nbsp;&middot;&nbsp; Telecom, Sourcing and
+              Sales &nbsp;&middot;&nbsp; India
             </div>
             <ul>
               <li>
-                Led UX for the Lighthouse Sourcing Pricebook, saving
+                Led UX for the Light-House Sourcing Pricebook, saving
                 <b>$20K+ in subscription costs</b> and cutting
-                <b>60% of the time</b> to complete a sourcing task.
+                <b>60% of the time</b> to complete a sourcing task, with
+                supplier comparison and price history in place of guesswork.
+              </li>
+              <li>
+                Moved PiWeb, Ericsson's internal database and data-management
+                tool, from legacy desktop to cloud &mdash; the site-data
+                repository project managers work from during a network rollout,
+                and the workflow teams use to verify equipment data.
               </li>
               <li>
                 Ran <b>2 stakeholder workshops</b> that set the scope of the
                 rebuild, and mapped the source-to-agreement journey to show
                 where it actually broke.
               </li>
-              <li>
-                Shipped supplier comparison, search and filtering, and price
-                history, so buyers could read a trend rather than guess at one.
-              </li>
             </ul>
+            <p class="keyproj">
+              <b>Key projects:</b>
+              <i>Light-House (sourcing), Data Analytics Platform, PiWeb</i>
+            </p>
           </div>
 
           <div class="entry">
             <div class="role">UX Designer</div>
-            <div class="org">Infosys Limited &mdash; FinLocker</div>
+            <div class="org">Infosys Limited</div>
             <div class="meta">
-              May 2019 to Aug 2021 &nbsp;·&nbsp; FinTech, Supply Chain
-              &nbsp;·&nbsp; India
+              May 2019 to Aug 2021 &nbsp;&middot;&nbsp; FinTech, Supply Chain
+              &nbsp;&middot;&nbsp; India
             </div>
             <ul>
               <li>
-                Designed FinLocker, a financial fitness app helping consumers
-                build credit and get mortgage-ready.
+                Led design of complex transaction workflows for enterprise and
+                SaaS products, with high-fidelity wireframes and interactive
+                prototypes that cut development rework at handoff.
               </li>
               <li>
-                Built enterprise SaaS workflows across fintech and supply chain
-                systems, with high-fidelity prototypes that cut development
-                rework at handoff.
+                Built and maintained a design system for Apple's Supply Chain,
+                holding consistency across platforms as the work scaled.
               </li>
             </ul>
+            <p class="keyproj">
+              <b>Key projects:</b>
+              <i>Apple Supply Chain, FinLocker (SaaS fintech), AM Bank</i>
+            </p>
           </div>
 
           <div class="entry">
-            <div class="role">UX Designer</div>
-            <div class="org">NFN Labs &mdash; TAC Healthcare</div>
+            <div class="role">UX/UI Designer</div>
+            <div class="org">NFN Labs</div>
             <div class="meta">
-              Aug 2015 to Feb 2019 &nbsp;·&nbsp; Healthcare, SaaS
-              &nbsp;·&nbsp; India
+              Aug 2015 to Feb 2019 &nbsp;&middot;&nbsp; Healthcare, SaaS,
+              Consumer &nbsp;&middot;&nbsp; India
             </div>
             <ul>
               <li>
-                Designed TAC Healthcare's EHR platform &mdash; appointments and
-                booking, patient records, clinical notes, and admin and access
-                control &mdash; built for everyday clinical work rather than
-                for demos.
+                Designed interfaces for in-house and client products across
+                several domains, carrying each from ideation through delivery.
               </li>
               <li>
-                Lifted engagement with clean, consistent UI patterns applied
-                across the product, and designed interfaces across several
-                other domains over the same period.
+                Shipped the <b>first version of the SlashDR patient flow</b>,
+                supporting <b>100+ new clinics onboarded</b> and a
+                <b>10% engagement lift</b>, working with developers through
+                implementation so what shipped matched what was designed.
               </li>
             </ul>
+            <p class="keyproj">
+              <b>Key projects:</b> <i>Hasura, Huetrap, SlashDR (EHR)</i>
+            </p>
           </div>
         </section>
       </div>
