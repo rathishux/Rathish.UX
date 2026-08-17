@@ -71,18 +71,10 @@ export type ExternalProject = {
   featured?: boolean;
 };
 
-export const externalProjects: ExternalProject[] = [
-  {
-    id: "slashdr",
-    name: "SlashDR",
-    headline: "Unified health interface apps for India",
-    subhead: "Your one place for digital health records",
-    domain: "Healthcare",
-    url: "https://www.slashdr.com/",
-    thumbnail: "slashdr.webp",
-    featured: true,
-  },
-];
+// Empty for now: SlashDR was the only entry, and it's credited under NFN Labs
+// where it was actually built. The mechanism stays because it's the only way
+// to surface a product with no employment entry behind it.
+export const externalProjects: ExternalProject[] = [];
 
 // Falls back to the employer name for entries with no named project yet.
 export function projectDisplay(item: Experience): {
