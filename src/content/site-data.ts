@@ -154,18 +154,20 @@ export const experience: Experience[] = [
   },
   {
     id: "kipi-bi",
-    thumbnail: "kipi.webp",
+    thumbnail: "tac-healthcare.webp",
     company: "Kipi.bi",
     role: "UX Designer",
     period: "Jan 2024 – Oct 2024",
-    domain: "Data & Analytics · SaaS",
-    oneLiner: "Turning scattered metrics into same-day decisions",
+    domain: "Healthcare · Data & Analytics",
+    project: { name: "TAC Healthcare", subtitle: "EHR application" },
+    shippedYear: 2024,
+    oneLiner: "An intuitive EHR built for everyday clinical work",
     summary:
-      "Designed data-driven dashboards that turned scattered metrics into decisions teams could act on same-day.",
+      "Designed TAC Healthcare's EHR alongside Kipi 360, an analytics dashboard that turned scattered metrics into decisions teams could act on same-day.",
     highlights: [
-      "Designed data-driven dashboards, improving decision-making speed and clarity.",
+      "Designed the TAC Healthcare EHR — appointments and booking, patient records, clinical notes, and admin and access control.",
+      "Designed Kipi 360, tracking account health, use-case pipelines and employee activity in one place.",
       "Simplified complex data workflows into intuitive UI patterns, reducing cognitive load.",
-      "Worked closely with product and engineering teams to deliver scalable solutions.",
     ],
   },
   {
@@ -208,19 +210,17 @@ export const experience: Experience[] = [
   },
   {
     id: "nfn-labs",
-    thumbnail: "tac-healthcare.webp",
     company: "NFN Labs",
-    role: "UX Designer",
+    role: "UX/UI Designer",
     period: "Aug 2015 – Feb 2019",
-    domain: "Healthcare · SaaS",
-    project: { name: "TAC Healthcare", subtitle: "EHR application" },
-    shippedYear: 2024,
-    oneLiner: "An intuitive EHR built for everyday clinical work",
+    domain: "Healthcare · SaaS · Consumer",
+    oneLiner: "Learning the craft across in-house and client products",
     summary:
-      "Designed intuitive interfaces across healthcare and SaaS products early in a 9-year design practice.",
+      "Designed interfaces for in-house and client products across several domains, carrying each from ideation through delivery — the first three and a half years of a 9-year practice.",
     highlights: [
-      "Designed intuitive interfaces across multiple domains including healthcare and SaaS.",
-      "Improved user engagement through clean and consistent UI design.",
+      "Shipped the first version of the SlashDR patient flow, supporting 100+ new clinics onboarded and a 10% engagement lift.",
+      "Designed across in-house and client products including Hasura and Huetrap.",
+      "Worked directly with developers through implementation, so what shipped matched what was designed.",
     ],
   },
 ];
@@ -235,6 +235,7 @@ export const experience: Experience[] = [
 // have visible attribution without creating an empty Work card for them.
 export const extraDomainProjects: Record<string, string[]> = {
   Healthcare: ["SlashDR"],
+  "Data & Analytics": ["Kipi 360"],
 };
 
 export type DomainStat = { value: string; label: string };
@@ -411,7 +412,12 @@ export const stats = [
     label: "Companies shipped at",
   },
   {
-    value: String(new Set(experience.map((e) => e.domain.split(" · ")[0])).size),
+    value: String(
+      new Set([
+        ...experience.map((e) => e.domain.split(" · ")[0]),
+        ...Object.keys(extraDomainProjects),
+      ]).size,
+    ),
     label: "Industries",
   },
 ];

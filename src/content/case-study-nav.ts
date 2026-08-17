@@ -19,4 +19,7 @@ export const caseStudyImageFolder: Record<string, string> = {
   "infogain-redesign": "infogain",
   "infogain-admin": "infogain",
   "infogain-desktop-web": "infogain",
+  // The TAC Healthcare case study now belongs to the Kipi.bi work item; its
+  // screenshots still sit in the folder named for the id it used to have.
+  "kipi-bi": "nfn-labs",
 };

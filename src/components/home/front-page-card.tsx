@@ -1,7 +1,20 @@
 import { useEffect, useState } from "react";
 import { Compass } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { experience, profile, projectDisplay } from "@/content/site-data";
+import {
+  experience,
+  extraDomainProjects,
+  profile,
+  projectDisplay,
+} from "@/content/site-data";
+
+// Both sources, so an industry that only has extra projects still counts.
+const INDUSTRIES = Array.from(
+  new Set([
+    ...experience.map((e) => e.domain.split(" · ")[0]),
+    ...Object.keys(extraDomainProjects),
+  ]),
+);
 
 const SLIDES = [
   {
@@ -18,10 +31,8 @@ const SLIDES = [
     eyebrow: "Reach",
     // Count the distinct industries actually listed below, not the number of
     // experience entries — several entries share a domain.
-    title: `${new Set(experience.map((e) => e.domain.split(" · ")[0])).size} Industries`,
-    detail: Array.from(new Set(experience.map((e) => e.domain.split(" · ")[0]))).join(
-      ", ",
-    ),
+    title: `${INDUSTRIES.length} Industries`,
+    detail: INDUSTRIES.join(", "),
   },
   {
     eyebrow: "Based in",
