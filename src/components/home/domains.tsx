@@ -23,9 +23,8 @@ function groupByDomain(items: Experience[]): DomainGroup[] {
     projectsByDomain.get(domain)!.push(projectDisplay(item).title);
   }
   // A domain can also exist only in extraDomainProjects — work with no card of
-  // its own. Data & Analytics is one: the Kipi.bi entry now leads with the TAC
-  // Healthcare case study, but Kipi 360 was still real analytics work and the
-  // domain shouldn't disappear along with the card that used to carry it.
+  // its own. Without this, retiring the last card in a domain would silently
+  // delete the whole row, and the industry count with it.
   for (const domain of Object.keys(extraDomainProjects)) {
     if (!projectsByDomain.has(domain)) {
       projectsByDomain.set(domain, []);

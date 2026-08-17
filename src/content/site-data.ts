@@ -150,15 +150,36 @@ export const experience: Experience[] = [
     company: "Kipi.bi",
     role: "UX Designer",
     period: "Jan 2024 – Oct 2024",
-    domain: "Healthcare · Data & Analytics",
+    domain: "Healthcare · SaaS",
     project: { name: "TAC Healthcare", subtitle: "EHR application" },
     shippedYear: 2024,
+    featured: true,
     oneLiner: "An intuitive EHR built for everyday clinical work",
     summary:
-      "Designed TAC Healthcare's EHR alongside Kipi 360, an analytics dashboard that turned scattered metrics into decisions teams could act on same-day.",
+      "Designed an EHR for everyday clinical work — appointments, records, notes and access control in one place, built for the people using it all day rather than for a demo.",
     highlights: [
-      "Designed the TAC Healthcare EHR — appointments and booking, patient records, clinical notes, and admin and access control.",
-      "Designed Kipi 360, tracking account health, use-case pipelines and employee activity in one place.",
+      "Designed appointments and booking, including a To Book queue for referrals and reminders.",
+      "Built patient records, clinical notes and prescriptions into a single patient view.",
+      "Designed admin and access control across clinics.",
+    ],
+  },
+  {
+    // Same employer and window as the entry above — two separate products, so
+    // two cards, the way the three Sabre projects each get their own.
+    id: "kipi-360",
+    thumbnail: "kipi.webp",
+    company: "Kipi.bi",
+    role: "UX Designer",
+    period: "Jan 2024 – Oct 2024",
+    domain: "Data & Analytics · SaaS",
+    project: { name: "Kipi 360", subtitle: "Analytics dashboard" },
+    shippedYear: 2024,
+    oneLiner: "Turning scattered metrics into same-day decisions",
+    summary:
+      "Designed a data analytics dashboard tracking account health, use-case pipelines and employee activity in one place, so teams could act on the numbers the same day rather than waiting on a report.",
+    highlights: [
+      "Designed the KPI scorecard, delivery metrics and conversion views.",
+      "Brought account health, use-case pipelines and employee activity into one dashboard.",
       "Simplified complex data workflows into intuitive UI patterns, reducing cognitive load.",
     ],
   },
@@ -227,7 +248,6 @@ export const experience: Experience[] = [
 // have visible attribution without creating an empty Work card for them.
 export const extraDomainProjects: Record<string, string[]> = {
   Healthcare: ["SlashDR"],
-  "Data & Analytics": ["Kipi 360"],
 };
 
 export type DomainStat = { value: string; label: string };
