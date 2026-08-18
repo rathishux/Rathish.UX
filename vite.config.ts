@@ -3,11 +3,12 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-// Deployed as a GitHub Pages *project* site (rathishux.github.io/Rathish.UX/),
-// so every asset path needs this prefix — change to "/" only if this repo
-// is ever renamed to rathishux.github.io (a root user site).
+// Served from the apex domain rathishux.in, so the site sits at the root and
+// asset paths need no prefix. This must stay in step with public/CNAME: if the
+// custom domain is ever removed, GitHub Pages falls back to
+// rathishux.github.io/Rathish.UX/ and this has to go back to "/Rathish.UX/".
 export default defineConfig({
-  base: "/Rathish.UX/",
+  base: "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
