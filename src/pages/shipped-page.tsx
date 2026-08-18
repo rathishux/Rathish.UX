@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import { sideProject, shippedTools } from "@/content/site-data";
 
 const SCREENSHOTS = [
@@ -7,6 +6,24 @@ const SCREENSHOTS = [
   { file: "nivyou-log-weight.webp", label: "Weight & glucose" },
   { file: "nivyou-progress.webp", label: "Progress over time" },
 ];
+
+function PlayStoreButton({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href={sideProject.playStoreUrl}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center gap-2.5 rounded-full bg-primary px-5 py-2.5 font-mono text-xs text-shell uppercase text-primary-foreground transition-colors hover:bg-primary/90 ${className}`}
+    >
+      {/* Play triangle, drawn rather than Google's official badge — that
+          artwork is trademarked and has its own usage rules. */}
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="size-4 shrink-0">
+        <path fill="currentColor" d="M4 2.5v19a1 1 0 0 0 1.52.85l15.2-9.5a1 1 0 0 0 0-1.7L5.52 1.65A1 1 0 0 0 4 2.5Z" />
+      </svg>
+      Get it on Google Play
+    </a>
+  );
+}
 
 export function ShippedPage() {
   return (
@@ -76,15 +93,18 @@ export function ShippedPage() {
               {sideProject.tagline}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            {sideProject.tracks.map((track) => (
-              <span
-                key={track}
-                className="rounded-full border border-border px-3 py-1 font-mono text-[11px] text-shell uppercase text-muted-foreground"
-              >
-                {track}
-              </span>
-            ))}
+          <div className="flex flex-col items-start gap-4 sm:items-end">
+            <PlayStoreButton />
+            <div className="flex flex-wrap gap-2 sm:justify-end">
+              {sideProject.tracks.map((track) => (
+                <span
+                  key={track}
+                  className="rounded-full border border-border px-3 py-1 font-mono text-[11px] text-shell uppercase text-muted-foreground"
+                >
+                  {track}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -141,15 +161,7 @@ export function ShippedPage() {
               friend&rsquo;s dilemma to a working product.
             </p>
 
-            <a
-              href={sideProject.playStoreUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-mono text-xs text-shell uppercase text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Get it on Play Store
-              <ArrowUpRight className="size-3.5" />
-            </a>
+            <PlayStoreButton className="mt-8" />
           </div>
 
           <div className="grid grid-cols-2 gap-5">
