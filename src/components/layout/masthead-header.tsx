@@ -10,7 +10,8 @@ import { OrnamentDivider } from "@/components/layout/ornament-divider";
 const NAV_ITEMS = [
   { to: "/", label: "Home" },
   { to: "/work", label: "Work" },
-  { to: "/shipped", label: "Shipped" },
+  // Route stays /shipped so existing links keep working.
+  { to: "/shipped", label: "Side Builds" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
@@ -63,9 +64,9 @@ export function MastheadHeader() {
         {/* Date sits at masthead weight; the clock is incidental, so it drops
             back a step rather than competing with it. */}
         <div className="flex items-center gap-1.5 font-mono text-[11px] text-shell uppercase">
-          <span className="text-foreground/75">{day}</span>
-          <span className="text-foreground/40">&middot;</span>
-          <span className="text-foreground/75">{date}</span>
+          <span className="text-foreground">{day}</span>
+          <span className="text-foreground/50">&middot;</span>
+          <span className="text-foreground">{date}</span>
           <span className="text-muted-foreground/50">&middot;</span>
           <span className="text-muted-foreground/70">{time}</span>
         </div>

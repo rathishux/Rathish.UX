@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!--
+      Source for public/nivyou/nivyou-banner.webp. Render with:
+        npx playwright screenshot --viewport-size=1680,720 \
+          scripts/nivyou-banner.html /tmp/nivyou-banner.png
+      then convert to webp. Styled to match the site rather than the Play
+      Store listing, since it sits inside an editorial page.
+    -->
+    <style>
+      :root {
+        --paper: #f5f1e8;
+        --ink: #1c1a17;
+        --primary: #b0342a;
+        --muted: #6f6a62;
+        --border: #d8d2c6;
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        src: url("../node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2")
+          format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Playfair Display";
+        src: url("../node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-italic.woff2")
+          format("woff2");
+        font-weight: 700;
+        font-style: italic;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        width: 1680px;
+        height: 720px;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+        display: grid;
+        grid-template-columns: 1fr 640px;
+        align-items: center;
+        gap: 64px;
+        padding: 0 88px;
+        overflow: hidden;
+        position: relative;
+      }
+      /* Same dotted rule the masthead uses, as a quiet top edge. */
+      body::before {
+        content: "";
+        position: absolute;
+        left: 0; right: 0; top: 0;
+        height: 6px;
+        border-top: 3px solid var(--ink);
+        border-bottom: 2px dotted var(--ink);
+      }
+      .kicker {
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 15px;
+        color: var(--primary);
+        font-weight: 600;
+      }
+      h1 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700;
+        font-size: 104px;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        margin-top: 18px;
+      }
+      h1 em { font-style: italic; color: var(--primary); }
+      .tagline {
+        margin-top: 22px;
+        font-size: 26px;
+        line-height: 1.45;
+        color: var(--muted);
+        max-width: 34ch;
+      }
+      .pills { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .pill {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 9px 18px;
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      /* Two screens, overlapped and tilted, bled off the bottom edge so the
+         banner reads as a crop of something larger. */
+      .screens { position: relative; height: 100%; }
+      .screens img {
+        position: absolute;
+        width: 300px;
+        border-radius: 26px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        box-shadow: 0 30px 60px -20px rgba(28, 26, 23, 0.45);
+      }
+      .screens img.back {
+        left: 18px;
+        top: 92px;
+        transform: rotate(-7deg);
+      }
+      .screens img.front {
+        left: 300px;
+        top: 138px;
+        transform: rotate(5deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="kicker">&#9670; Side build &middot; On the Play Store</div>
+      <h1>Niv<em>You</em></h1>
+      <div class="tagline">
+        A GLP-1 tracker for dose, weight, food, and progress over time.
+      </div>
+      <div class="pills">
+        <span class="pill">Dose &amp; schedule</span>
+        <span class="pill">Weight</span>
+        <span class="pill">Food</span>
+        <span class="pill">Progress</span>
+      </div>
+    </div>
+    <div class="screens">
+      <img class="back" src="../public/nivyou/phone-progress.webp" alt="" />
+      <img class="front" src="../public/nivyou/phone-dashboard.webp" alt="" />
+    </div>
+  </body>
+</html>

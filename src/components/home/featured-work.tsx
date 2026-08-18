@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { WorkCard } from "@/components/work/work-card";
 import { externalProjects, projectDisplay, projectEntries } from "@/content/site-data";
 
 export function FeaturedWork() {
-  const featured = projectEntries().filter((item) => item.featured);
+  // Explicit running order for the homepage — the array in site-data stays in
+  // employment order for the resume timeline, which is a different job.
+  const order = [
+    "infogain-desktop-web",
+    "ericsson",
+    "infogain-redesign",
+    "kipi-bi",
+    "infosys",
+  ];
+  const featured = projectEntries()
+    .filter((item) => item.featured)
+    .sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
   const featuredExternal = externalProjects.filter((item) => item.featured);
 
   return (
@@ -59,10 +70,10 @@ export function FeaturedWork() {
 
         <Link
           to="/work"
-          className="mt-8 inline-flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary hover:underline"
+          className="mt-10 inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 font-mono text-xs text-shell uppercase text-ink transition-colors hover:bg-primary hover:text-primary-foreground"
         >
-          Explore the full archive
-          <ArrowUpRight className="size-3.5" />
+          See every project
+          <ArrowRight className="size-3.5" />
         </Link>
       </div>
     </section>
