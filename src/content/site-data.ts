@@ -119,7 +119,7 @@ export const experience: Experience[] = [
     project: { name: "Redesigning the legacy application", subtitle: "Sabre" },
     shippedYear: 2025,
     featured: true,
-    oneLiner: "Turning reactive scheduling alerts into resolvable workflows",
+    oneLiner: "Alerts a planner can resolve on the spot",
     summary:
       "Redesigned the legacy discrepancy-resolution flow and built a change generator, replacing a manual reactive alert loop with a fast, guided modal.",
     highlights: [
@@ -137,7 +137,7 @@ export const experience: Experience[] = [
     domain: "Aviation · Enterprise SaaS",
     project: { name: "Admin", subtitle: "Sabre" },
     shippedYear: 2025,
-    oneLiner: "Configurable booking rules and market-driven demand insights",
+    oneLiner: "Booking rules and demand, made configurable",
     summary:
       "Designed the admin tooling behind slot booking rules and market demand analysis, giving ops teams configurable rules and clearer demand signals.",
     highlights: [
@@ -156,7 +156,7 @@ export const experience: Experience[] = [
     project: { name: "Desktop application to web app", subtitle: "Sabre" },
     shippedYear: 2025,
     featured: true,
-    oneLiner: "Bringing a legacy desktop scheduler into the browser",
+    oneLiner: "A legacy desktop scheduler, now in the browser",
     summary:
       "Migrated a legacy desktop scheduling tool to the browser, preserving power-user speed while modernizing the underlying experience.",
     highlights: [
@@ -195,7 +195,7 @@ export const experience: Experience[] = [
     domain: "Data & Analytics · SaaS",
     project: { name: "Kipi 360", subtitle: "Analytics dashboard" },
     shippedYear: 2024,
-    oneLiner: "Turning scattered metrics into same-day decisions",
+    oneLiner: "Scattered metrics into same-day decisions",
     summary:
       "Designed a data analytics dashboard tracking account health, use-case pipelines and employee activity in one place, so teams could act on the numbers the same day rather than waiting on a report.",
     highlights: [
@@ -233,7 +233,7 @@ export const experience: Experience[] = [
     project: { name: "FinLocker", subtitle: "Financial fitness app" },
     externalUrl: "https://finlocker.com/",
     featured: true,
-    oneLiner: "Helping consumers build credit and get mortgage-ready",
+    oneLiner: "Helping consumers get mortgage-ready",
     summary:
       "Designed enterprise SaaS workflows spanning fintech and supply-chain systems, cutting rework at the handoff.",
     highlights: [

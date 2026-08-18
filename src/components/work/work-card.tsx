@@ -49,7 +49,10 @@ export function WorkCard({
           <p className="font-mono text-[11px] text-shell uppercase text-primary">
             {eyebrow}
           </p>
-          <h4 className="mt-2 font-serif text-2xl sm:text-3xl">{headline}</h4>
+          {/* One line, always — card heights stay equal across the grid. */}
+          <h4 className="mt-2 truncate font-serif text-xl sm:text-2xl" title={headline}>
+            {headline}
+          </h4>
           <p className={`mt-2 text-sm ${dark ? "text-paper/70" : "text-muted-foreground"}`}>
             {meta}
           </p>
