@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { WorkThumbnail } from "@/components/work/work-thumbnail";
 
 export type WorkCardProps = {
@@ -34,8 +34,17 @@ export function WorkCard({
 
   const inner = (
     <>
-      <WorkThumbnail index={index} src={thumbnail} alt={eyebrow} variant={variant} />
-      <div className="flex flex-1 flex-col justify-between px-5 py-5">
+      <div className="relative">
+        <WorkThumbnail index={index} src={thumbnail} alt={eyebrow} variant={variant} />
+        {/* The action rides the image on hover instead of taking a permanent
+            line under the copy. pointer-events-none so it never intercepts the
+            click meant for the card itself. */}
+        <span className="pointer-events-none absolute bottom-3 right-3 inline-flex translate-y-1.5 items-center gap-2 rounded-full bg-ink/95 px-4 py-2 font-mono text-[11px] text-shell uppercase text-paper opacity-0 shadow-lg backdrop-blur-sm transition duration-200 group-hover:translate-y-0 group-hover:opacity-100 motion-reduce:transition-none motion-reduce:translate-y-0">
+          {cta}
+          <ArrowRight className="size-3.5" />
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col px-5 py-5">
         <div>
           <p className="font-mono text-[11px] text-shell uppercase text-primary">
             {eyebrow}
@@ -44,10 +53,6 @@ export function WorkCard({
           <p className={`mt-2 text-sm ${dark ? "text-paper/70" : "text-muted-foreground"}`}>
             {meta}
           </p>
-        </div>
-        <div className="mt-6 flex items-center gap-1 font-mono text-xs text-shell uppercase text-primary">
-          {cta}
-          <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
     </>
