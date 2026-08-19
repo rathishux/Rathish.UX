@@ -120,15 +120,11 @@ export function ShippedPage() {
           <div className="max-w-[70ch]">
             <h4 className="font-serif text-2xl">Why I built it</h4>
             <p className="mt-4 leading-relaxed text-muted-foreground">
-              A friend of mine was seriously considering going on Wegovy. He
-              spent weeks reading about it, weighing it up &mdash; and then
-              decided to give a paleo diet one honest attempt first, as a last
-              try before starting the drug. Watching him go back and forth,
-              what struck me wasn&rsquo;t the decision itself. It was how
-              little there was to help him actually see what was happening:
-              weight in one place, food in another, no sense of the trend over
-              weeks, nothing that would tell him whether the last try was
-              working.
+              What struck me about the GLP-1 experience was how scattered it
+              is. Dose in one app, weight in a notes file, food logged
+              nowhere at all &mdash; no single place to see how the pieces
+              move together over a few weeks or months, and no easy way to
+              tell whether things are actually working.
             </p>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               I already had some context here &mdash; I&rsquo;d worked on a
@@ -157,8 +153,8 @@ export function ShippedPage() {
             <h4 className="mt-10 font-serif text-2xl">Shipping it</h4>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               NivYou is live on the Play Store today, built and shipped by one
-              person &mdash; design, build, and release &mdash; from a
-              friend&rsquo;s dilemma to a working product.
+              person &mdash; design, build, and release &mdash; from an idea
+              to a working product.
             </p>
 
             <PlayStoreButton className="mt-8" />
