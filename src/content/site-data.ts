@@ -155,7 +155,7 @@ export const experience: Experience[] = [
   },
   {
     id: "infogain-desktop-web",
-    thumbnail: "sabre.webp",
+    thumbnail: "infogain-desktop-web.webp",
     company: "Infogain",
     role: "Senior UX Designer",
     period: "Mar 2025 – Dec 2025",

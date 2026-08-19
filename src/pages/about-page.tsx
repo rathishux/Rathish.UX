@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { DeskIllustration } from "@/components/home/desk-illustration";
 import { BeyondByline } from "@/components/about/beyond-byline";
 import {
   certifications,
@@ -19,10 +18,14 @@ export function AboutPage() {
         About <span className="text-primary">{profile.name.split(" ")[0]}</span>
       </h2>
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[340px_1fr] lg:gap-14">
+      <div className="mt-10 grid gap-10 lg:grid-cols-[420px_1fr] lg:gap-14">
         <div>
-          <div className="aspect-[4/5] overflow-hidden rounded-md border border-border bg-secondary/40 p-6">
-            <DeskIllustration />
+          <div className="aspect-[4/5] overflow-hidden rounded-md border border-border bg-secondary/40">
+            <img
+              src={`${import.meta.env.BASE_URL}rathish-about.webp`}
+              alt={profile.name}
+              className="size-full object-cover"
+            />
           </div>
           <p className="mt-3 font-serif italic">{profile.name}</p>
           <p className="font-mono text-[11px] text-shell uppercase text-muted-foreground">

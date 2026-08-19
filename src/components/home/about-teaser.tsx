@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { profile } from "@/content/site-data";
-import { DeskIllustration } from "@/components/home/desk-illustration";
 
 export function AboutTeaser() {
   const [firstName] = profile.name.split(" ");
@@ -15,12 +14,14 @@ export function AboutTeaser() {
         About <span className="text-primary">{firstName}</span>
       </h3>
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-[240px_1fr]">
+      <div className="mt-10 grid gap-10 lg:grid-cols-[280px_1fr]">
         <div>
-          {/* An illustration instead of a photo — no personal photos on
-              this site. */}
-          <div className="aspect-[4/5] overflow-hidden rounded-md border border-border bg-secondary/40 p-4">
-            <DeskIllustration />
+          <div className="aspect-[4/5] overflow-hidden rounded-md border border-border bg-secondary/40">
+            <img
+              src={`${import.meta.env.BASE_URL}rathish-home-about.webp`}
+              alt={profile.name}
+              className="size-full object-cover object-[63%_center]"
+            />
           </div>
           <p className="mt-3 font-serif italic">{profile.name}</p>
           <p className="font-mono text-[11px] text-shell uppercase text-muted-foreground">
