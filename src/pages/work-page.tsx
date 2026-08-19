@@ -29,6 +29,7 @@ export function WorkPage() {
               cta={item.externalUrl ? "Visit the site" : "Read the case"}
               to={item.externalUrl ? undefined : `/work/${item.id}`}
               href={item.externalUrl}
+              locked={item.locked}
             />
           );
         })}
@@ -42,6 +43,7 @@ export function WorkPage() {
             meta={`${item.domain} · ${item.subhead}`}
             cta="Visit the site"
             href={item.url}
+            locked={item.locked}
           />
         ))}
       </div>

@@ -54,6 +54,9 @@ export type Experience = {
   // Set when the work has no case study here and the card should open the
   // live product instead of a detail page.
   externalUrl?: string;
+  // Set to keep the case study private for now — the card still shows but
+  // is covered by a lock overlay and doesn't navigate anywhere.
+  locked?: boolean;
 };
 
 // Shipped products that aren't tied to an employment entry and have no case
@@ -69,6 +72,9 @@ export type ExternalProject = {
   url: string;
   thumbnail?: string;
   featured?: boolean;
+  // Set to keep the case study private for now — the card still shows but
+  // is covered by a lock overlay and doesn't navigate anywhere.
+  locked?: boolean;
 };
 
 // SlashDR is the NFN Labs-era project, and it's the card that stands in for
@@ -83,6 +89,7 @@ export const externalProjects: ExternalProject[] = [
     url: "https://www.slashdr.com/",
     thumbnail: "slashdr.webp",
     featured: true,
+    locked: true,
   },
 ];
 
@@ -175,6 +182,7 @@ export const experience: Experience[] = [
     project: { name: "TAC Healthcare", subtitle: "EHR application" },
     shippedYear: 2024,
     featured: true,
+    locked: true,
     oneLiner: "An intuitive EHR built for everyday clinical work",
     summary:
       "Designed an EHR for everyday clinical work — appointments, records, notes and access control in one place, built for the people using it all day rather than for a demo.",
@@ -195,6 +203,7 @@ export const experience: Experience[] = [
     domain: "Data & Analytics · SaaS",
     project: { name: "Kipi 360", subtitle: "Analytics dashboard" },
     shippedYear: 2024,
+    locked: true,
     oneLiner: "Scattered metrics into same-day decisions",
     summary:
       "Designed a data analytics dashboard tracking account health, use-case pipelines and employee activity in one place, so teams could act on the numbers the same day rather than waiting on a report.",
@@ -214,6 +223,7 @@ export const experience: Experience[] = [
     project: { name: "Lighthouse", subtitle: "Sourcing platform" },
     shippedYear: 2024,
     featured: true,
+    locked: true,
     oneLiner: "Reshaping sourcing and sales for a global telecom",
     summary:
       "Led UX for the Light-House platform, reshaping user journeys across sourcing and sales for a global telecom.",
@@ -233,6 +243,7 @@ export const experience: Experience[] = [
     project: { name: "FinLocker", subtitle: "Financial fitness app" },
     externalUrl: "https://finlocker.com/",
     featured: true,
+    locked: true,
     oneLiner: "Helping consumers get mortgage-ready",
     summary:
       "Designed enterprise SaaS workflows spanning fintech and supply-chain systems, cutting rework at the handoff.",

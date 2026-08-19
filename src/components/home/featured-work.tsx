@@ -50,6 +50,7 @@ export function FeaturedWork() {
                 cta={item.externalUrl ? "Visit the site" : "Take a peek"}
                 to={item.externalUrl ? undefined : `/work/${item.id}`}
                 href={item.externalUrl}
+                locked={item.locked}
               />
             );
           })}
@@ -64,6 +65,7 @@ export function FeaturedWork() {
               meta={`${item.domain} · ${item.subhead}`}
               cta="Visit the site"
               href={item.url}
+              locked={item.locked}
             />
           ))}
         </div>
