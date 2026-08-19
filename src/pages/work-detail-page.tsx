@@ -54,13 +54,13 @@ export function WorkDetailPage() {
     : [];
   const activeSlug = useActiveSection(["at-a-glance", ...headings.map((h) => h.slug)]);
 
-  if (!item) {
+  if (!item || item.locked) {
     return <Navigate to="/work" replace />;
   }
 
-  // Cycle only through items that have a card, so "Read next" never lands on
-  // an employer-only entry.
-  const cards = projectEntries();
+  // Cycle only through unlocked items that have a card, so "Read next" never
+  // lands on an employer-only entry or a locked case study.
+  const cards = projectEntries().filter((e) => !e.locked);
   const idx = Math.max(cards.findIndex((e) => e.id === id), 0);
   const next = cards[(idx + 1) % cards.length];
   const display = projectDisplay(item);
