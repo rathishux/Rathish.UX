@@ -104,6 +104,36 @@ export const relocationCities = profile.openToCities.filter(
 // the resume timeline but never get a card.
 export const projectEntries = () => experience.filter((item) => item.project);
 
+export type CompanyTimelineEntry = {
+  company: string;
+  role: string;
+  period: string;
+  domains: string[];
+  highlights: string[];
+};
+
+// The homepage timeline tells the resume story — one entry per company and
+// how long you were there — not a project-by-project breakdown, which is
+// what the multiple `experience` entries per employer (e.g. the three Sabre
+// projects at Infogain) exist for on the Work page.
+export function companyTimeline(): CompanyTimelineEntry[] {
+  const order: CompanyTimelineEntry[] = [];
+  const byCompany = new Map<string, CompanyTimelineEntry>();
+  for (const item of experience) {
+    let group = byCompany.get(item.company);
+    if (!group) {
+      group = { company: item.company, role: item.role, period: item.period, domains: [], highlights: [] };
+      byCompany.set(item.company, group);
+      order.push(group);
+    }
+    if (!group.domains.includes(item.domain)) {
+      group.domains.push(item.domain);
+    }
+    group.highlights.push(...item.highlights);
+  }
+  return order;
+}
+
 // Falls back to the employer name for entries with no named project yet.
 export function projectDisplay(item: Experience): {
   title: string;

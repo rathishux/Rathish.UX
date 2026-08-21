@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { education, experience } from "@/content/site-data";
+import { companyTimeline, education } from "@/content/site-data";
 
 export function Timeline() {
   return (
@@ -13,8 +13,8 @@ export function Timeline() {
         </h3>
 
         <ol className="mt-10 space-y-8 border-l border-paper/20 pl-6">
-          {experience.map((item) => (
-            <li key={item.id} className="relative">
+          {companyTimeline().map((item) => (
+            <li key={item.company} className="relative">
               <span className="absolute -left-[29px] top-1.5 size-2.5 rounded-full bg-primary" />
               <p className="font-mono text-[11px] text-shell uppercase text-paper/50">
                 {item.period}
@@ -22,12 +22,17 @@ export function Timeline() {
               <h4 className="mt-1 font-serif text-xl">
                 {item.role} &middot; {item.company}
               </h4>
-              <Badge
-                variant="outline"
-                className="mt-2 border-paper/30 bg-transparent text-paper"
-              >
-                {item.domain}
-              </Badge>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {item.domains.map((domain) => (
+                  <Badge
+                    key={domain}
+                    variant="outline"
+                    className="border-paper/30 bg-transparent text-paper"
+                  >
+                    {domain}
+                  </Badge>
+                ))}
+              </div>
               <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-paper/70">
                 {item.highlights.map((h) => (
                   <li key={h}>{h}</li>
